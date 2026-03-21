@@ -713,6 +713,7 @@
       .product-cards { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr; }
       .trust-numbers { grid-template-columns: repeat(2, 1fr); }
+      .pain-section [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 1.25rem; }
@@ -813,7 +814,7 @@
         Now live &mdash; accepting early clients
       </div>
       <h1>Your business should run<br><span class="gradient-text">even when you can't be there.</span></h1>
-      <p class="hero-sub">ClearPath was born when its founder couldn't be in the shop. Instead of letting the business drift, he built a system that watches the numbers, coaches the team, and catches problems in real time &mdash; whether the owner is in the building or a thousand miles away.</p>
+      <p class="hero-sub">Most shop owners live with the same fear: <em>if I'm not there, things fall apart.</em> ClearPath was built from inside that exact situation &mdash; and it eliminates it.</p>
       <div class="hero-proof">
         <span class="hero-proof-item"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 65+ KPIs tracked</span>
         <span class="hero-proof-item"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 45,000+ event attendees</span>
@@ -852,6 +853,33 @@
         <div class="trust-number" data-count="25">0</div>
         <div class="trust-label">Revenue Leak Types</div>
         <div class="trust-sublabel">Detected automatically</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- THE PROBLEM — Pain section -->
+  <section class="pain-section" style="padding: 7rem 2rem; position: relative;">
+    <div class="section-inner">
+      <div class="section-label fade-up">The Problem</div>
+      <h2 class="section-title fade-up" style="max-width: 700px;">Right now, your shop is leaking money.<br><span style="color: var(--text-muted); font-size: 0.7em;">And nobody's telling you where.</span></h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem;">
+        <div class="fade-up fade-up-delay-1" style="padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,80,80,0.15); background: rgba(255,80,80,0.03);">
+          <div style="font-size: 2.5rem; font-weight: 900; color: #ff6b6b; margin-bottom: 0.5rem;">$47K+</div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Average annual revenue leaked</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;">Declined work that's never followed up on. Discount habits that eat your margins. Bottlenecks nobody notices until the month closes in the red.</div>
+        </div>
+        <div class="fade-up fade-up-delay-2" style="padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,170,80,0.15); background: rgba(255,170,80,0.03);">
+          <div style="font-size: 2.5rem; font-weight: 900; color: #ffa94d; margin-bottom: 0.5rem;">73%</div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Of shops run on gut feeling</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;">No real-time dashboards. No coaching. No guardrails. Just hope that today goes better than yesterday.</div>
+        </div>
+        <div class="fade-up fade-up-delay-3" style="padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,80,80,0.15); background: rgba(255,80,80,0.03);">
+          <div style="font-size: 2.5rem; font-weight: 900; color: #ff6b6b; margin-bottom: 0.5rem;">0</div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Tools built for the independent shop</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;">The big chains have entire departments for this. Independent shops get spreadsheets and a prayer. Until now.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1031,7 +1059,7 @@
   <!-- SOCIAL PROOF -->
   <section class="proof" aria-label="Founding principle">
     <div class="proof-inner fade-up">
-      <div class="proof-quote">Life doesn't wait for your business to be ready. I built ClearPath because I needed my shop to run right even when I couldn't be there. Turns out, every owner feels that same weight &mdash; the fear that without you in the building, things fall apart. They don't have to.</div>
+      <div class="proof-quote">I was sitting in a hospital room while my family's shop bled money I couldn't see. I swore I'd never be that blind again. ClearPath is what came out of that promise.</div>
       <div class="proof-author"><strong>Brad Fournier</strong> &mdash; Founder, ClearPath Holdings</div>
     </div>
   </section>
@@ -1095,9 +1123,12 @@
   <section class="cta-section" aria-label="Call to action">
     <div class="cta-glow" aria-hidden="true"></div>
     <div class="cta-content fade-up">
-      <h2>Your business is worth more<br>than guesswork.</h2>
-      <p>Whether you built it or inherited it, you're the one fighting to grow it. ClearPath gives you the visibility, the guardrails, and the coaching to run your shop like you're always there &mdash; even when life says you can't be.</p>
-      <a href="mailto:info@driveclearpath.com" class="btn-primary">Let's Talk &rarr;</a>
+      <h2>Stop guessing.<br>Start knowing.</h2>
+      <p>Every day without visibility is a day your shop leaks revenue, your team makes avoidable mistakes, and you fall further behind the shops that run on data. ClearPath changes that &mdash; starting today.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <a href="mailto:info@driveclearpath.com" class="btn-primary" style="font-size: 1.15rem; padding: 1.15rem 3rem;">Get ClearPath For Your Shop &rarr;</a>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2rem;">We're only onboarding a handful of shops right now. Spots are limited.</p>
       <div class="cta-trust">
         <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> No long-term contracts</span>
         <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Live in minutes</span>
