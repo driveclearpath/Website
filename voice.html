@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClearPath Voice — AI Phone Receptionist for Auto Repair Shops</title>
+  <meta name="description" content="ClearPath Voice is a 24/7 AI phone receptionist for auto repair shops. Answers calls, books appointments, recovers missed calls, and grades every conversation. Less than $10/day.">
+  <link rel="canonical" href="https://driveclearpath.com/voice.html">
+  <meta property="og:title" content="ClearPath Voice — AI Phone Receptionist for Auto Repair Shops">
+  <meta property="og:description" content="24/7 AI receptionist. Answers calls, books appointments, recovers missed revenue. Less than $10/day vs. a $3,500/mo employee.">
+  <meta property="og:url" content="https://driveclearpath.com/voice.html">
+  <meta property="og:image" content="https://driveclearpath.com/assets/clearpath-holdings.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-glow" id="cursor-glow"></div>
+
+  <!-- NAV -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="ClearPath">
+      <img src="assets/cp-icon-white.png" alt="CP" class="nav-logo-mark">
+      <div class="nav-logo-text"><span class="logo-main">ClearPath</span></div>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">Products <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+        <div class="nav-dropdown-menu">
+          <a href="os.html">ClearPath OS</a>
+          <a href="experience.html">ClearPath Experience</a>
+          <a href="voice.html" class="active">ClearPath Voice</a>
+          <a href="events.html">ClearPath Events</a>
+        </div>
+      </div>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="mailto:info@driveclearpath.com" class="nav-cta">Get Started</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="os.html">ClearPath OS</a>
+    <a href="experience.html">ClearPath Experience</a>
+    <a href="voice.html">ClearPath Voice</a>
+    <a href="events.html">ClearPath Events</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="mailto:info@driveclearpath.com">Get Started</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero hero--subpage">
+    <div class="hero-gradient" aria-hidden="true"></div>
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="section-label section-label--centered">ClearPath Voice</div>
+      <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem);">Your phone answered.<br><span class="gradient-text">Every call. Every time.</span></h1>
+      <p class="hero-sub">A 24/7 AI receptionist that answers calls, books appointments, recovers missed revenue, and grades every conversation. Less than $10/day for an employee that never calls in sick.</p>
+      <div class="hero-buttons">
+        <a href="mailto:info@driveclearpath.com" class="btn-primary">Get ClearPath Voice &rarr;</a>
+        <a href="pricing.html" class="btn-secondary">See Pricing</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- WHAT IT DOES -->
+  <section style="padding: 7rem 2rem;">
+    <div class="section-inner">
+      <div class="section-label fade-up">What It Does</div>
+      <h2 class="section-title fade-up">Every missed call<br>is missed revenue.</h2>
+      <p class="section-subtitle fade-up" style="max-width: 700px;">The average shop misses 20-30% of incoming calls. Every unanswered call is a customer who goes to the next shop on Google. ClearPath Voice makes sure that never happens.</p>
+      <div class="dd-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="dd-item fade-up fade-up-delay-1">
+          <div class="dd-icon">📞</div>
+          <h4>Answers Every Call</h4>
+          <p>24/7 AI receptionist picks up on the first ring. After hours, overflow, lunch breaks &mdash; every call gets answered.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-2">
+          <div class="dd-icon">📅</div>
+          <h4>Books Appointments</h4>
+          <p>Takes customer info, understands what they need, and books them in. No hold music, no voicemail.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-3">
+          <div class="dd-icon">📱</div>
+          <h4>Missed Call Recovery</h4>
+          <p>If a call drops or goes to voicemail, Voice sends an automatic follow-up text within seconds to recover the lead.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-1">
+          <div class="dd-icon">📊</div>
+          <h4>Grades Every Call</h4>
+          <p>Every conversation is recorded, transcribed, and analyzed. You see what was said, what was missed, and where revenue leaked.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-2">
+          <div class="dd-icon">🚨</div>
+          <h4>Flags Missed Revenue</h4>
+          <p>The recovery dashboard shows every missed opportunity with a dollar value. You see exactly how much Voice is saving you.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-3">
+          <div class="dd-icon">🔁</div>
+          <h4>Routes & Escalates</h4>
+          <p>Knows when to handle it and when to transfer. Emergencies go to the right person. Routine calls get booked.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- THE MATH -->
+  <section style="padding: 7rem 2rem;">
+    <div class="section-inner">
+      <div class="section-label fade-up">The Math</div>
+      <h2 class="section-title fade-up">$299/mo vs. $3,500/mo.</h2>
+      <p class="section-subtitle fade-up" style="max-width: 700px;">A full-time receptionist costs $3,500+/month, calls in sick, takes lunch, and goes home at 5. ClearPath Voice costs less than $10/day and never stops working.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem;">
+        <div class="fade-up" style="padding: 2.5rem 2rem; border-radius: 20px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Human Receptionist</div>
+          <div style="font-size: 2.5rem; font-weight: 900; color: #ff6b6b; margin-bottom: 0.5rem;">$3,500+</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">per month</div>
+          <ul style="list-style: none; margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); line-height: 2;">
+            <li>Works 8 hours/day</li>
+            <li>Calls in sick</li>
+            <li>Takes lunch breaks</li>
+            <li>Misses after-hours calls</li>
+            <li>No call analytics</li>
+          </ul>
+        </div>
+        <div class="fade-up fade-up-delay-1" style="padding: 2.5rem 2rem; border-radius: 20px; background: var(--bg-card); border: 2px solid rgba(30,136,229,0.3); box-shadow: 0 0 40px rgba(30,136,229,0.1);">
+          <div style="font-size: 0.75rem; color: var(--cyan-accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">ClearPath Voice</div>
+          <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">$299</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">per month &middot; flat rate</div>
+          <ul style="list-style: none; margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 2;">
+            <li>Works 24/7/365</li>
+            <li>Never calls in sick</li>
+            <li>Never takes a break</li>
+            <li>Answers after hours</li>
+            <li>Grades every conversation</li>
+            <li>Recovers missed calls via SMS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <div class="section-inner">
+      <div class="section-label fade-up">How It Works</div>
+      <h2 class="section-title fade-up">We build your AI receptionist<br>from the ground up.</h2>
+      <p class="section-subtitle fade-up">This isn't a generic phone bot. We train Voice on your shop, your services, and your voice before it goes live.</p>
+      <div class="steps">
+        <div class="step fade-up fade-up-delay-1">
+          <div class="step-number">1</div>
+          <h3>We Learn Your Shop</h3>
+          <p>During onboarding, we learn your services, hours, team, pricing, and how you want calls handled. Voice is trained specifically for your business.</p>
+        </div>
+        <div class="step fade-up fade-up-delay-2">
+          <div class="step-number">2</div>
+          <h3>We Set Up Your Number</h3>
+          <p>Voice gets its own phone number or forwards from your existing line. Callers don't know they're talking to AI &mdash; the voice is natural and fast.</p>
+        </div>
+        <div class="step fade-up fade-up-delay-3">
+          <div class="step-number">3</div>
+          <h3>You Watch the Dashboard</h3>
+          <p>Every call is logged with a transcript, grade, and revenue impact. The recovery dashboard shows missed calls converted to bookings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- WORKS WITH OS -->
+  <section style="padding: 7rem 2rem;">
+    <div class="section-inner">
+      <div class="section-label fade-up">Better With OS</div>
+      <h2 class="section-title fade-up">Standalone or integrated.<br>Your choice.</h2>
+      <p class="section-subtitle fade-up">ClearPath Voice works on its own. But paired with ClearPath OS, it gets smarter.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+        <div class="fade-up" style="padding: 2rem; border-radius: 16px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);">
+          <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.75rem;">Voice Standalone</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;">Answers calls, books appointments, sends recovery texts, grades conversations. Full call analytics dashboard.</p>
+        </div>
+        <div class="fade-up fade-up-delay-1" style="padding: 2rem; border-radius: 16px; border: 1px solid rgba(30,136,229,0.2); background: rgba(30,136,229,0.04);">
+          <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.75rem;">Voice + OS</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;">Everything above plus: caller classified against repair order history, missed call revenue tied to actual customer records, call coaching fed into team performance metrics.</p>
+          <p style="font-size: 0.8rem; color: var(--cyan-accent); font-weight: 600; margin-top: 0.75rem;">Smarter calls. Better data. More revenue recovered.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CTA -->
+  <section class="cta-section" aria-label="Call to action">
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="cta-content fade-up">
+      <h2>Stop losing customers<br>to voicemail.</h2>
+      <p>Every missed call is revenue walking out the door. ClearPath Voice answers every call, recovers every lead, and proves its ROI every month.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <a href="mailto:info@driveclearpath.com" class="btn-primary" style="font-size: 1.15rem; padding: 1.15rem 3rem;">Get ClearPath Voice &rarr;</a>
+      </div>
+      <div class="cta-trust">
+        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> $299/mo flat</span>
+        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Full onboarding included</span>
+        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Works standalone or with OS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="assets/cp-icon-white.png" alt="ClearPath" style="height:28px;width:28px;object-fit:contain;opacity:0.7;filter:drop-shadow(0 0 8px rgba(30,136,229,0.2))">
+        <span>&copy; 2026 ClearPath Holdings, LLC. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:info@driveclearpath.com">Contact</a>
+        <a href="about.html">About</a>
+        <a href="os.html">ClearPath OS</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="events.html">ClearPath Events</a>
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/shared.js" defer></script>
+
+</body>
+</html>
