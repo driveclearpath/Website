@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClearPath Events — Complete Event Operations Platform</title>
+  <meta name="description" content="ClearPath Events is a complete event operations platform — registration, payments, volunteers, merchandise, sponsors, and a mobile staff app. Built for a 45,000+ attendee car show.">
+  <link rel="canonical" href="https://driveclearpath.com/events.html">
+  <meta property="og:title" content="ClearPath Events — Complete Event Operations Platform">
+  <meta property="og:description" content="Registration, payments, volunteers, merchandise, sponsors, and a mobile staff app. Proven at 45,000+ attendees.">
+  <meta property="og:url" content="https://driveclearpath.com/events.html">
+  <meta property="og:image" content="https://driveclearpath.com/assets/clearpath-holdings.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-glow" id="cursor-glow"></div>
+
+  <!-- NAV -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="ClearPath">
+      <img src="assets/cp-icon-white.png" alt="CP" class="nav-logo-mark">
+      <div class="nav-logo-text"><span class="logo-main">ClearPath</span></div>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">Products <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+        <div class="nav-dropdown-menu">
+          <a href="os.html">ClearPath OS</a>
+          <a href="experience.html">ClearPath Experience</a>
+          <a href="events.html" class="active">ClearPath Events</a>
+        </div>
+      </div>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="mailto:info@driveclearpath.com" class="nav-cta">Get Started</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="os.html">ClearPath OS</a>
+    <a href="experience.html">ClearPath Experience</a>
+    <a href="events.html">ClearPath Events</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="mailto:info@driveclearpath.com">Get Started</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero hero--subpage">
+    <div class="hero-gradient" aria-hidden="true"></div>
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="section-label section-label--centered">ClearPath Events</div>
+      <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem);">Run events like<br><span class="gradient-text">a full-time operations team.</span></h1>
+      <p class="hero-sub">Registration, payments, volunteers, merchandise, sponsors, and a mobile staff app &mdash; all in one platform. Built because spreadsheets and cash boxes don't scale.</p>
+      <div class="hero-buttons">
+        <a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener" class="btn-primary">See It Live &rarr;</a>
+        <a href="mailto:info@driveclearpath.com" class="btn-secondary">Talk to Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- WHAT IT DOES -->
+  <section style="padding: 7rem 2rem;">
+    <div class="section-inner">
+      <div class="section-label fade-up">The Platform</div>
+      <h2 class="section-title fade-up">Everything an event needs.<br>Nothing it doesn't.</h2>
+      <p class="section-subtitle fade-up">ClearPath Events replaces the patchwork of tools, spreadsheets, and manual processes that most events run on.</p>
+      <div class="dd-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="dd-item fade-up fade-up-delay-1">
+          <div class="dd-icon">🎫</div>
+          <h4>Online Registration</h4>
+          <p>Custom forms, multiple ticket types, early bird pricing. Attendees register and pay in one flow.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-2">
+          <div class="dd-icon">💳</div>
+          <h4>Stripe Payments</h4>
+          <p>Every dollar tracked by staff member and payment method. Charity gets 100% of the base price.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-3">
+          <div class="dd-icon">👥</div>
+          <h4>Volunteer Management</h4>
+          <p>Scheduling, role assignment, check-in tracking. Know who's where and when.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-1">
+          <div class="dd-icon">🤝</div>
+          <h4>Sponsors & Vendors</h4>
+          <p>Sponsor tier management, vendor applications, booth assignments. All organized, all trackable.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-2">
+          <div class="dd-icon">👕</div>
+          <h4>Merchandise Sales</h4>
+          <p>Inventory tracking, POS for on-site sales, size/variant management. Every shirt accounted for.</p>
+        </div>
+        <div class="dd-item fade-up fade-up-delay-3">
+          <div class="dd-icon">📱</div>
+          <h4>Mobile Staff App</h4>
+          <p>POS, check-in scanning, real-time sales dashboard. Your team runs the event from their phones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- PROOF — CRUISING DOWNTOWN -->
+  <section style="padding: 7rem 2rem;">
+    <div class="section-inner">
+      <div class="section-label fade-up">Proven at Scale</div>
+      <h2 class="section-title fade-up">Built for Cruising Downtown Manchester.</h2>
+      <p class="section-subtitle fade-up" style="max-width: 700px;">ClearPath Events wasn't built in a lab. It was built because New Hampshire's largest car show outgrew paper lists and cash boxes.</p>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem;">
+        <div class="fade-up fade-up-delay-1" style="text-align: center; padding: 2rem 1rem;">
+          <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">45K+</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">Attendees</div>
+        </div>
+        <div class="fade-up fade-up-delay-2" style="text-align: center; padding: 2rem 1rem;">
+          <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">700+</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">Registered Vehicles</div>
+        </div>
+        <div class="fade-up fade-up-delay-3" style="text-align: center; padding: 2rem 1rem;">
+          <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">100%</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">To Charity</div>
+        </div>
+        <div class="fade-up fade-up-delay-4" style="text-align: center; padding: 2rem 1rem;">
+          <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">5%</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">Processing Fee Only</div>
+        </div>
+      </div>
+      <div class="fade-up" style="margin-top: 3rem; padding: 2.5rem; border-radius: 20px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);">
+        <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">Cruising Downtown Manchester is one of the largest car shows in New England. When it outgrew spreadsheets and cash at the gate, we built ClearPath Events to handle everything &mdash; online registration, Stripe payments, sponsor management, volunteer scheduling, merchandise with full POS, and a mobile app for every staff member on the ground.</p>
+        <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">Every dollar is tracked by staff member and payment method. The charity receives 100% of the base registration price &mdash; we only take a 5% processing fee. No hidden costs, no platform cut.</p>
+        <div style="margin-top: 1.5rem;">
+          <a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener" class="btn-primary" style="font-size: 0.95rem; padding: 0.9rem 2rem;">See Cruising Downtown Live &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- NOT JUST CAR SHOWS -->
+  <section style="padding: 7rem 2rem;">
+    <div class="section-inner">
+      <div class="section-label fade-up">Beyond Car Shows</div>
+      <h2 class="section-title fade-up">Built for any event<br>that outgrows spreadsheets.</h2>
+      <p class="section-subtitle fade-up">Car shows, charity events, festivals, community gatherings &mdash; if you need registration, payments, and on-the-ground operations, ClearPath Events handles it.</p>
+      <div class="steps">
+        <div class="step fade-up fade-up-delay-1">
+          <div class="step-number">1</div>
+          <h3>Set Up Your Event</h3>
+          <p>Create your event, configure registration forms, set ticket types and pricing, add sponsors and vendors. Everything in one dashboard.</p>
+        </div>
+        <div class="step fade-up fade-up-delay-2">
+          <div class="step-number">2</div>
+          <h3>Open Registration</h3>
+          <p>Share your event page. Attendees register, pay via Stripe, and get confirmation. You see it all in real time.</p>
+        </div>
+        <div class="step fade-up fade-up-delay-3">
+          <div class="step-number">3</div>
+          <h3>Run the Day</h3>
+          <p>Staff use the mobile app for check-ins, POS sales, and live reporting. You see every dollar and every head count as it happens.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CTA -->
+  <section class="cta-section" aria-label="Call to action">
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="cta-content fade-up">
+      <h2>Your event deserves<br>real operations.</h2>
+      <p>Stop running events on spreadsheets and hope. ClearPath Events gives you a complete operations platform &mdash; from the first registration to the last dollar counted.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <a href="mailto:info@driveclearpath.com" class="btn-primary" style="font-size: 1.15rem; padding: 1.15rem 3rem;">Get ClearPath Events &rarr;</a>
+      </div>
+      <div class="cta-trust">
+        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 100% to charity</span>
+        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Proven at 45K+ attendees</span>
+        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Mobile staff app</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="assets/cp-icon-white.png" alt="ClearPath" style="height:28px;width:28px;object-fit:contain;opacity:0.7;filter:drop-shadow(0 0 8px rgba(30,136,229,0.2))">
+        <span>&copy; 2026 ClearPath Holdings, LLC. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:info@driveclearpath.com">Contact</a>
+        <a href="about.html">About</a>
+        <a href="os.html">ClearPath OS</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="events.html">ClearPath Events</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/shared.js" defer></script>
+
+</body>
+</html>
