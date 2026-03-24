@@ -18,7 +18,7 @@
     constructor() { this.reset(); }
     reset() {
       this.x = Math.random() * canvas.width;
-      this.y = canvas.height * 0.3 + Math.random() * canvas.height * 0.65;
+      this.y = Math.random() * canvas.height;
       this.baseY = this.y;
       this.size = Math.random() * 2.5 + 1;
       this.speedX = (Math.random() - 0.5) * 0.3;
