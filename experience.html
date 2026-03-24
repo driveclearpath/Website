@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClearPath Experience — Shop TV Displays That Run Themselves</title>
+  <meta name="description" content="ClearPath Experience puts ambient intelligence on every TV in your shop. Lobby, counter, floor, and owner office — each screen shows exactly what that audience needs.">
+  <link rel="canonical" href="https://driveclearpath.com/experience.html">
+  <meta property="og:title" content="ClearPath Experience — Shop TV Displays That Run Themselves">
+  <meta property="og:description" content="4 screen types. Zero interaction required. Pair with a QR code and it runs forever.">
+  <meta property="og:url" content="https://driveclearpath.com/experience.html">
+  <meta property="og:image" content="https://driveclearpath.com/assets/clearpath-holdings.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-glow" id="cursor-glow"></div>
+
+  <!-- NAV -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="ClearPath">
+      <img src="assets/cp-icon-white.png" alt="CP" class="nav-logo-mark">
+      <div class="nav-logo-text"><span class="logo-main">ClearPath</span></div>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">Products <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+        <div class="nav-dropdown-menu">
+          <a href="os.html">ClearPath OS</a>
+          <a href="experience.html" class="active">ClearPath Experience</a>
+          <a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener">ClearPath Events</a>
+        </div>
+      </div>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="mailto:info@driveclearpath.com" class="nav-cta">Get Started</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="os.html">ClearPath OS</a>
+    <a href="experience.html">ClearPath Experience</a>
+    <a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener">ClearPath Events</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="mailto:info@driveclearpath.com">Get Started</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero hero--subpage">
+    <div class="hero-gradient" aria-hidden="true"></div>
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="section-label section-label--centered">ClearPath Experience</div>
+      <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem);">Shop TV displays<br><span class="gradient-text">that run themselves.</span></h1>
+      <p class="hero-sub">Mini PCs mount behind TVs and show exactly what each audience needs. No interaction. No login. No training. Pair it once and it runs forever.</p>
+      <div class="hero-buttons">
+        <a href="mailto:info@driveclearpath.com" class="btn-primary">Get Experience &rarr;</a>
+        <a href="pricing.html" class="btn-secondary">See Pricing</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 4 SCREENS -->
+  <section style="padding: 7rem 2rem;">
+    <div class="section-inner">
+      <div class="section-label fade-up">4 Screen Types</div>
+      <h2 class="section-title fade-up">Every audience sees<br>what matters to them.</h2>
+      <p class="section-subtitle fade-up">Each screen is designed for a specific location and viewer in your shop.</p>
+      <div class="exp-grid">
+        <div class="exp-card fade-up fade-up-delay-1">
+          <div class="exp-icon">🛋️</div>
+          <h4>Lobby</h4>
+          <p>Live TV, news ticker, stocks, weather, and real-time vehicle status. Customers see professionalism while they wait &mdash; not a silent TV playing daytime reruns.</p>
+        </div>
+        <div class="exp-card fade-up fade-up-delay-2">
+          <div class="exp-icon">🤝</div>
+          <h4>Counter</h4>
+          <p>Staff bios, certifications, and trust messaging. The counter screen turns every interaction into a confidence-builder. Customers know who they're talking to.</p>
+        </div>
+        <div class="exp-card fade-up fade-up-delay-3">
+          <div class="exp-icon">🔧</div>
+          <h4>Floor</h4>
+          <p>Team ops data, bay status, and daily targets. Techs and advisors see what's moving and what's stuck without opening a single app.</p>
+        </div>
+        <div class="exp-card fade-up fade-up-delay-4">
+          <div class="exp-icon">📈</div>
+          <h4>Owner Office</h4>
+          <p>Full business dashboard from ClearPath OS. Revenue, efficiency, team performance, and AI alerts &mdash; always on, always current.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <div class="section-inner">
+      <div class="section-label fade-up">How It Works</div>
+      <h2 class="section-title fade-up">Set up once.<br>Runs forever.</h2>
+      <div class="steps">
+        <div class="step fade-up fade-up-delay-1">
+          <div class="step-number">1</div>
+          <h3>Mount the Mini PC</h3>
+          <p>A small PC mounts behind any TV with a standard VESA bracket. Plug in power, plug in HDMI. That's the hardware.</p>
+        </div>
+        <div class="step fade-up fade-up-delay-2">
+          <div class="step-number">2</div>
+          <h3>Scan the QR Code</h3>
+          <p>On first boot, scan a QR code to pair the screen to your shop and select the screen type. Lobby, counter, floor, or office.</p>
+        </div>
+        <div class="step fade-up fade-up-delay-3">
+          <div class="step-number">3</div>
+          <h3>Walk Away</h3>
+          <p>The screen auto-updates from Supabase. No maintenance, no logins, no interaction required. It just works.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CTA -->
+  <section class="cta-section" aria-label="Call to action">
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="cta-content fade-up">
+      <h2>Turn every TV into<br>a business asset.</h2>
+      <p>Your lobby TV shouldn't be playing the news. Your floor TV shouldn't be blank. ClearPath Experience makes every screen in your shop work for you.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <a href="mailto:info@driveclearpath.com" class="btn-primary" style="font-size: 1.15rem; padding: 1.15rem 3rem;">Get Experience For Your Shop &rarr;</a>
+      </div>
+      <div class="cta-trust">
+        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Zero maintenance</span>
+        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Pair once, runs forever</span>
+        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> 4 screen types</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="assets/cp-icon-white.png" alt="ClearPath" style="height:28px;width:28px;object-fit:contain;opacity:0.7;filter:drop-shadow(0 0 8px rgba(30,136,229,0.2))">
+        <span>&copy; 2026 ClearPath Holdings, LLC. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:info@driveclearpath.com">Contact</a>
+        <a href="about.html">About</a>
+        <a href="os.html">ClearPath OS</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener">ClearPath Events</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/shared.js" defer></script>
+
+</body>
+</html>
