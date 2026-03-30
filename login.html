@@ -19,32 +19,57 @@
       padding: 8rem 2rem 4rem;
       position: relative;
     }
+    .login-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(30,136,229,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 30% 30%, rgba(77,208,225,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 75% 60%, rgba(30,136,229,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
     .login-container {
-      max-width: 720px;
+      max-width: 960px;
       width: 100%;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
     .login-container h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       font-weight: 900;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       letter-spacing: -0.02em;
+    }
+    .login-container h1 .gradient-text {
+      background: linear-gradient(135deg, #42a5f5, #4dd0e1, #00e5ff, #4dd0e1, #42a5f5);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
     .login-container .login-sub {
       color: var(--text-secondary);
       font-size: 1.1rem;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
     }
     .login-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
     .login-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(15,23,42,0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(30,136,229,0.1);
       border-radius: 20px;
-      padding: 2.5rem 2rem;
+      padding: 2.5rem 1.75rem;
       text-decoration: none;
       color: var(--text-primary);
       transition: all 0.3s;
@@ -56,15 +81,15 @@
       overflow: hidden;
     }
     .login-card:hover {
-      border-color: rgba(30,136,229,0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 40px rgba(30,136,229,0.15);
+      border-color: rgba(30,136,229,0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 50px rgba(30,136,229,0.2), 0 0 80px rgba(77,208,225,0.08);
     }
     .login-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, transparent, rgba(30,136,229,0.04), transparent);
+      background: linear-gradient(135deg, transparent, rgba(30,136,229,0.06), transparent);
       opacity: 0;
       transition: opacity 0.3s;
     }
@@ -72,29 +97,31 @@
       opacity: 1;
     }
     .login-card-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: rgba(30,136,229,0.1);
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: rgba(30,136,229,0.12);
+      border: 1px solid rgba(30,136,229,0.15);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--cyan-accent);
+      box-shadow: 0 0 20px rgba(30,136,229,0.1);
     }
     .login-card h3 {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 800;
     }
     .login-card p {
-      color: var(--text-muted);
+      color: var(--text-secondary);
       font-size: 0.9rem;
       line-height: 1.7;
     }
     .login-card .login-action {
       margin-top: auto;
-      padding-top: 0.5rem;
+      padding-top: 0.75rem;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 1rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -110,11 +137,11 @@
     }
     .login-card.disabled {
       cursor: default;
-      opacity: 0.7;
+      opacity: 0.5;
     }
     .login-card.disabled:hover {
       transform: none;
-      border-color: rgba(255,255,255,0.06);
+      border-color: rgba(30,136,229,0.1);
       box-shadow: none;
     }
     .login-card.disabled:hover::before {
@@ -130,14 +157,22 @@
       border-radius: 100px;
     }
     .login-tag.tag-live {
-      background: rgba(46,204,113,0.1);
+      background: rgba(46,204,113,0.15);
       color: #2ecc71;
-      border: 1px solid rgba(46,204,113,0.2);
+      border: 1px solid rgba(46,204,113,0.25);
+      box-shadow: 0 0 12px rgba(46,204,113,0.1);
     }
     .login-tag.tag-soon {
       background: rgba(255,167,38,0.1);
       color: #ffa726;
       border: 1px solid rgba(255,167,38,0.2);
+    }
+    @media (max-width: 768px) {
+      .login-cards {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
     }
   </style>
 </head>
@@ -189,8 +224,8 @@
   <!-- LOGIN PAGE -->
   <div class="login-page">
     <div class="login-container">
-      <h1>Welcome back.</h1>
-      <p class="login-sub">Select a product to log in.</p>
+      <h1>Welcome back to <span class="gradient-text">ClearPath.</span></h1>
+      <p class="login-sub">Select a product to get started.</p>
 
       <div class="login-cards">
         <!-- ClearPath Experience -->
