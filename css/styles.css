@@ -115,7 +115,8 @@ nav.scrolled {
 /* Mobile menu */
 .hamburger {
   display: none; flex-direction: column; gap: 5px; cursor: pointer;
-  background: none; border: none; padding: 4px;
+  background: none; border: none; padding: 10px;
+  min-width: 44px; min-height: 44px; align-items: center; justify-content: center;
 }
 .hamburger span {
   width: 24px; height: 2px; background: var(--text-secondary);
@@ -712,7 +713,7 @@ footer {
 .footer-left { display: flex; align-items: center; gap: 1.25rem; }
 .footer-left img { height: 28px; opacity: 0.7; }
 .footer-left span { color: var(--text-muted); font-size: 0.8rem; }
-.footer-links { display: flex; gap: 2rem; }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
 .footer-links a {
   color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
   transition: color 0.3s;
@@ -724,7 +725,7 @@ footer {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   z-index: 0; pointer-events: none;
 }
-header, section, footer, .mobile-menu, .trust-bar, .section-divider,
+header, section, footer, .trust-bar, .section-divider,
 .metrics, .deep-dive, .how-it-works {
   position: relative; z-index: 1;
 }
@@ -737,12 +738,18 @@ header, section, footer, .mobile-menu, .trust-bar, .section-divider,
 
 ::selection { background: rgba(30,136,229,0.3); color: #fff; }
 
+/* ===================== INLINE GRID HELPERS ===================== */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 1100px) {
   .pricing-grid { grid-template-columns: repeat(2, 1fr); }
   .dd-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 900px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .product-cards { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .trust-numbers { grid-template-columns: repeat(3, 1fr); }
@@ -755,6 +762,7 @@ header, section, footer, .mobile-menu, .trust-bar, .section-divider,
   nav { padding: 0 1.25rem; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
+  .nav-logo-mark { height: 80px; width: 80px; margin: -24px -12px -24px -16px; }
   .about-grid { grid-template-columns: 1fr; text-align: center; }
   .about-stats { justify-content: center; }
   .about-shield { margin-bottom: 1rem; }
@@ -763,11 +771,34 @@ header, section, footer, .mobile-menu, .trust-bar, .section-divider,
   .hero--subpage { padding: 7rem 1.5rem 3rem; }
   section { padding: 5rem 1.5rem; }
   .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
   .vision-timeline { padding-left: 2.5rem; }
   .scroll-indicator { display: none; }
   .trust-numbers { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   .exp-grid { grid-template-columns: 1fr; }
   .dd-grid { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .hero { padding: 6rem 1rem 4rem; }
+  .hero--subpage { padding: 6rem 1rem 2.5rem; }
+  .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+  .hero-sub { font-size: 1.05rem; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary { width: 100%; text-align: center; }
+  section { padding: 3.5rem 1rem; }
+  .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
+  .section-subtitle { font-size: 0.95rem; }
+  .trust-numbers { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .trust-number { font-size: clamp(2rem, 8vw, 2.5rem); }
+  .product-card { padding: 2rem 1.5rem; }
+  .price-card { padding: 2rem 1.5rem; }
+  .step { padding: 2rem 1.5rem; }
+  .mobile-menu a { font-size: 1.25rem; }
+  .footer-links { gap: 1.25rem; }
+  .cta-section { padding: 5rem 1rem; }
+  .nav-logo-mark { height: 70px; width: 70px; margin: -20px -10px -20px -12px; }
 }
 
 /* ===================== ANIMATIONS ===================== */
