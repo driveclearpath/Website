@@ -1,0 +1,26 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/validate-invite"
+  to = "/.netlify/functions/validate-invite"
+  status = 200
+
+[[redirects]]
+  from = "/api/chat-turn"
+  to = "/.netlify/functions/chat-turn"
+  status = 200
+
+[[redirects]]
+  from = "/api/submit-intake"
+  to = "/.netlify/functions/submit-intake"
+  status = 200
+
+[[redirects]]
+  from = "/intake"
+  to = "/intake.html"
+  status = 200

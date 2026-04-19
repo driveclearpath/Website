@@ -1,0 +1,16 @@
+{
+  "name": "clearpath-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ClearPath Holdings marketing site + intake functions",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "pg": "^8.20.0",
+    "resend": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

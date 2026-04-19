@@ -1,0 +1,20 @@
+# Local Netlify folder
+.netlify
+
+# Secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# Dependencies — rebuild from package-lock.json
+node_modules
+
+# Deno artifact (accidentally created by Netlify dev; not part of this Node project)
+deno.lock
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

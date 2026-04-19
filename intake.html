@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>ClearPath Intake</title>
+  <link rel="icon" href="/assets/cp-icon-white.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/intake.css">
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <div class="intake-shell">
+    <header class="intake-topbar">
+      <a href="/" class="intake-brand" aria-label="ClearPath">
+        <img src="/assets/cp-icon-white.png" alt="" class="intake-brand-mark">
+        <span class="intake-brand-text">ClearPath</span>
+      </a>
+      <span class="intake-subtle">Private intake</span>
+    </header>
+
+    <main class="intake-main">
+      <!-- ============ STATE 1: CODE GATE ============ -->
+      <section class="state state-code active" data-state="code">
+        <div class="card">
+          <h1 class="card-title">Welcome.</h1>
+          <p class="card-lede">This is an invite-only intake. Enter the code you received to continue.</p>
+
+          <form id="code-form" class="code-form" autocomplete="off">
+            <label for="code-input" class="sr-only">Invite code</label>
+            <input
+              id="code-input"
+              name="code"
+              type="text"
+              class="code-input"
+              placeholder="Your code"
+              autocapitalize="characters"
+              autocorrect="off"
+              spellcheck="false"
+              required
+            >
+            <button type="submit" class="btn-primary" id="code-submit">
+              <span class="btn-label">Continue</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+          <p class="form-error" id="code-error" role="alert"></p>
+        </div>
+      </section>
+
+      <!-- ============ STATE 2: CHANNEL CHOICE ============ -->
+      <section class="state state-channel" data-state="channel">
+        <div class="card">
+          <h1 class="card-title" id="channel-greeting">Welcome.</h1>
+          <p class="card-lede">Pick your style. Some folks prefer to type. Some prefer to talk. No wrong answer.</p>
+
+          <div class="channel-grid">
+            <button class="channel-card" data-channel="text" type="button">
+              <div class="channel-icon" aria-hidden="true">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <h3>Chat here</h3>
+              <p>Type with Brad's AI assistant right here in your browser. Answer at your own pace.</p>
+              <span class="channel-go">Start chat &rarr;</span>
+            </button>
+
+            <button class="channel-card" data-channel="voice" type="button">
+              <div class="channel-icon" aria-hidden="true">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <h3>Have it call me</h3>
+              <p>Prefer to talk? Brad's AI assistant will call your phone. Natural voice conversation.</p>
+              <span class="channel-go badge-soon">Coming shortly</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ STATE 3: CHAT ============ -->
+      <section class="state state-chat" data-state="chat">
+        <div class="chat-shell">
+          <header class="chat-header">
+            <div>
+              <div class="chat-title" id="chat-title">Prep conversation</div>
+              <div class="chat-sub" id="chat-sub">Brad's assistant · end anytime — notes go to Brad automatically</div>
+            </div>
+            <button class="chat-end" id="chat-end" type="button" title="Wrap up and send your notes to Brad">End &amp; send</button>
+          </header>
+
+          <div class="chat-stream" id="chat-stream" aria-live="polite" aria-relevant="additions"></div>
+
+          <form id="chat-form" class="chat-form" autocomplete="off">
+            <label for="chat-input" class="sr-only">Your message</label>
+            <textarea
+              id="chat-input"
+              class="chat-input"
+              placeholder="Type your reply. Press Enter to send, Shift+Enter for a new line."
+              rows="1"
+              required
+            ></textarea>
+            <button type="submit" class="chat-send" id="chat-send" aria-label="Send">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ STATE 4: DONE ============ -->
+      <section class="state state-done" data-state="done">
+        <div class="card">
+          <div class="done-mark" aria-hidden="true">
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          </div>
+          <h1 class="card-title">Thank you.</h1>
+          <p class="card-lede" id="done-text">Your notes are with Brad. He'll have what he needs before your meeting. Safe travels.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="intake-footer">
+      <span>&copy; ClearPath Holdings</span>
+      <span class="dot">&bull;</span>
+      <span>Private invite · No tracking</span>
+    </footer>
+  </div>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/intake.js"></script>
+</body>
+</html>
