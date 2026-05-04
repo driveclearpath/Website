@@ -10,162 +10,438 @@
   <meta property="og:description" content="4 screen types. Zero interaction required. Pair with a QR code and it runs forever.">
   <meta property="og:url" content="https://driveclearpath.com/experience.html">
   <meta property="og:image" content="https://driveclearpath.com/assets/clearpath-holdings.png">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/editorial.css">
 </head>
 <body>
 
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
-  <div class="cursor-glow" id="cursor-glow"></div>
+  <!-- ─────────── NAV ─────────── -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="ClearPath Holdings home">
+        <span class="nav-logo-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+        <span class="nav-logo-text">ClearPath <span class="muted">Experience</span></span>
+      </a>
 
-  <!-- NAV -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo" aria-label="ClearPath">
-      <img src="assets/cp-icon-white.png" alt="CP" class="nav-logo-mark">
-      <div class="nav-logo-text"><span class="logo-main">ClearPath</span></div>
-    </a>
-    <div class="nav-links">
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Products <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
-        <div class="nav-dropdown-menu">
-          <a href="os.html">ClearPath OS</a>
-          <a href="experience.html" class="active">ClearPath Experience</a>
-          <a href="voice.html">ClearPath Voice</a>
-          <a href="events.html">ClearPath Events</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html#products" class="nav-link">What we build</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true">
+            Products
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <div class="nav-dropdown-heading">The ClearPath family</div>
+            <a href="os.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath OS</span><span class="nav-dropdown-item-tag">Virtual COO for independent shops</span></span>
+            </a>
+            <a href="experience.html" class="nav-dropdown-item" role="menuitem" style="background: var(--color-blue-bg);">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath Experience</span><span class="nav-dropdown-item-tag">Shop TV displays · here</span></span>
+            </a>
+            <a href="events.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath Events</span><span class="nav-dropdown-item-tag">Event operations</span></span>
+            </a>
+            <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Practice%20—%20Talk%20to%20us" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath Practice</span><span class="nav-dropdown-item-tag">Advisor practice management</span></span>
+            </a>
+          </div>
         </div>
-      </div>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="login.html" class="nav-cta">Login</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </nav>
-  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-    <a href="os.html">ClearPath OS</a>
-    <a href="experience.html">ClearPath Experience</a>
-    <a href="voice.html">ClearPath Voice</a>
-    <a href="events.html">ClearPath Events</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html">Login</a>
-  </div>
+      </nav>
 
-  <!-- HERO -->
-  <header class="hero hero--subpage">
-    <div class="hero-gradient" aria-hidden="true"></div>
-    <div class="hero-fade" aria-hidden="true"></div>
-    <div class="hero-content">
-      <div class="section-label section-label--centered">ClearPath Experience</div>
-      <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem);">Shop TV displays<br><span class="gradient-text">that run themselves.</span></h1>
-      <p class="hero-sub">Mini PCs mount behind TVs and show exactly what each audience needs. No interaction. No login. No training. Pair it once and it runs forever.</p>
-      <div class="hero-buttons">
-        <a href="mailto:info@driveclearpath.com" class="btn-primary">Get Experience &rarr;</a>
-        <a href="pricing.html" class="btn-secondary">See Pricing</a>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-signin">Sign in</a>
+        <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Experience%20—%20Talk%20to%20us" class="btn-primary-dark">
+          Talk to us
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- 4 SCREENS -->
-  <section style="padding: 7rem 2rem;">
-    <div class="section-inner">
-      <div class="section-label fade-up">4 Screen Types</div>
-      <h2 class="section-title fade-up">Every audience sees<br>what matters to them.</h2>
-      <p class="section-subtitle fade-up">Each screen is designed for a specific location and viewer in your shop.</p>
-      <div class="exp-grid">
-        <div class="exp-card fade-up fade-up-delay-1">
-          <div class="exp-icon">🛋️</div>
-          <h4>Lobby</h4>
-          <p>Live TV, news ticker, stocks, weather, and real-time vehicle status. Customers see professionalism while they wait &mdash; not a silent TV playing daytime reruns.</p>
+  <!-- ─────────── HERO (subpage) ─────────── -->
+  <section class="hero hero-subpage" aria-labelledby="hero-headline">
+    <div class="container-wide">
+      <div class="hero-subpage-grid">
+        <div>
+          <div class="hero-eyebrow fade-up fade-up-1">
+            <span class="pulse-emerald" aria-hidden="true"></span>
+            ClearPath Experience
+          </div>
+
+          <h1 id="hero-headline" class="hero-subpage-headline fade-up fade-up-2">
+            The screens<br>
+            <span class="italic">that run themselves.</span>
+          </h1>
+
+          <p class="hero-subpage-sub fade-up fade-up-3">
+            Lobby, counter, floor, owner office. Each screen tuned to what its audience needs to see — not a generic dashboard rotated through four locations. Plugs into the Smart TVs you already own.
+          </p>
+
+          <div class="hero-subpage-buttons fade-up fade-up-4">
+            <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Experience%20—%20Talk%20to%20us" class="btn-primary-large">
+              Talk to us
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+            </a>
+            <a href="#screens" class="btn-secondary-light">See the screens</a>
+          </div>
         </div>
-        <div class="exp-card fade-up fade-up-delay-2">
-          <div class="exp-icon">🤝</div>
-          <h4>Counter</h4>
-          <p>Staff bios, certifications, and trust messaging. The counter screen turns every interaction into a confidence-builder. Customers know who they're talking to.</p>
-        </div>
-        <div class="exp-card fade-up fade-up-delay-3">
-          <div class="exp-icon">🔧</div>
-          <h4>Floor</h4>
-          <p>Team ops data, bay status, and daily targets. Techs and advisors see what's moving and what's stuck without opening a single app.</p>
-        </div>
-        <div class="exp-card fade-up fade-up-delay-4">
-          <div class="exp-icon">📈</div>
-          <h4>Owner Office</h4>
-          <p>Full business dashboard from ClearPath OS. Revenue, efficiency, team performance, and AI alerts &mdash; always on, always current.</p>
+
+        <!-- Hero TV mockup: Owner Office (dark, ambient KPI grid) -->
+        <div class="mock-tv fade-in" aria-hidden="true">
+          <div class="mock-tv-screen dark">
+            <div class="tv-owner">
+              <div class="tv-owner-header">
+                <div>
+                  <div class="tv-owner-eyebrow">Owner office · live</div>
+                  <div class="tv-owner-title">Manchester Auto · Today</div>
+                </div>
+                <div class="tv-owner-time">Updated 12s ago</div>
+              </div>
+              <div class="tv-owner-grid">
+                <div class="tv-owner-cell">
+                  <div class="tv-owner-cell-label">Hours billed</div>
+                  <div>
+                    <div class="tv-owner-cell-value">138</div>
+                    <div class="tv-owner-cell-delta up">+12 vs avg</div>
+                  </div>
+                </div>
+                <div class="tv-owner-cell">
+                  <div class="tv-owner-cell-label">GP%</div>
+                  <div>
+                    <div class="tv-owner-cell-value">52%</div>
+                    <div class="tv-owner-cell-delta neutral">on target</div>
+                  </div>
+                </div>
+                <div class="tv-owner-cell">
+                  <div class="tv-owner-cell-label">Comeback</div>
+                  <div>
+                    <div class="tv-owner-cell-value">3.2%</div>
+                    <div class="tv-owner-cell-delta up">−0.4 vs LW</div>
+                  </div>
+                </div>
+                <div class="tv-owner-cell">
+                  <div class="tv-owner-cell-label">In bay</div>
+                  <div>
+                    <div class="tv-owner-cell-value">9</div>
+                    <div class="tv-owner-cell-delta neutral">5 awaiting</div>
+                  </div>
+                </div>
+                <div class="tv-owner-cell">
+                  <div class="tv-owner-cell-label">Recovery</div>
+                  <div>
+                    <div class="tv-owner-cell-value">14</div>
+                    <div class="tv-owner-cell-delta down">3 hot</div>
+                  </div>
+                </div>
+                <div class="tv-owner-cell">
+                  <div class="tv-owner-cell-label">Tech util.</div>
+                  <div>
+                    <div class="tv-owner-cell-value">87%</div>
+                    <div class="tv-owner-cell-delta up">+4 pts</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- HOW IT WORKS -->
-  <section class="how-it-works">
-    <div class="section-inner">
-      <div class="section-label fade-up">How It Works</div>
-      <h2 class="section-title fade-up">Set up once.<br>Runs forever.</h2>
-      <div class="steps">
-        <div class="step fade-up fade-up-delay-1">
-          <div class="step-number">1</div>
-          <h3>Mount the Mini PC</h3>
-          <p>A small PC mounts behind any TV with a standard VESA bracket. Plug in power, plug in HDMI. That's the hardware.</p>
+  <!-- ─────────── NUMBERS ─────────── -->
+  <section class="section-numbers" aria-label="Platform at a glance">
+    <div class="container-wide">
+      <div class="numbers-grid">
+        <div class="number-cell">
+          <div class="number-value font-serif">4</div>
+          <div class="number-label">Screen contexts — lobby, counter, floor, owner office</div>
         </div>
-        <div class="step fade-up fade-up-delay-2">
-          <div class="step-number">2</div>
-          <h3>Scan the QR Code</h3>
-          <p>On first boot, scan a QR code to pair the screen to your shop and select the screen type. Lobby, counter, floor, or office.</p>
+        <div class="number-cell">
+          <div class="number-value font-serif">0</div>
+          <div class="number-label">Manual content updates required</div>
         </div>
-        <div class="step fade-up fade-up-delay-3">
-          <div class="step-number">3</div>
-          <h3>Walk Away</h3>
-          <p>The screen auto-updates from Supabase. No maintenance, no logins, no interaction required. It just works.</p>
+        <div class="number-cell">
+          <div class="number-value font-serif">$0</div>
+          <div class="number-label">Custom hardware — runs on the Smart TVs you have</div>
+        </div>
+        <div class="number-cell">
+          <div class="number-value font-serif">∞</div>
+          <div class="number-label">Refresh rate. Live data, not slideshows.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- CTA -->
-  <section class="cta-section" aria-label="Call to action">
-    <div class="cta-glow" aria-hidden="true"></div>
-    <div class="cta-content fade-up">
-      <h2>Turn every TV into<br>a business asset.</h2>
-      <p>Your lobby TV shouldn't be playing the news. Your floor TV shouldn't be blank. ClearPath Experience makes every screen in your shop work for you.</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
-        <a href="mailto:info@driveclearpath.com" class="btn-primary" style="font-size: 1.15rem; padding: 1.15rem 3rem;">Get Experience For Your Shop &rarr;</a>
+  <!-- ─────────── FOUR SCREENS ─────────── -->
+  <section id="screens" class="section-editorial" aria-labelledby="screens-headline">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div class="eyebrow">Four screens</div>
+        <h2 id="screens-headline" class="section-headline font-serif">
+          Each tuned to its audience.<br>
+          <span class="italic-emphasis">Not a dashboard rotated through four locations.</span>
+        </h2>
+        <p class="section-lead">
+          Most shop displays are someone's general-purpose dashboard cast to a TV nobody updates. ClearPath Experience treats each screen as its own product — the lobby is for the customer, the counter is for the conversation, the floor is for the work, the owner office is for the picture.
+        </p>
       </div>
-      <div class="cta-trust">
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Zero maintenance</span>
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Pair once, runs forever</span>
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> 4 screen types</span>
+
+      <div class="editorial-entries">
+
+        <!-- 01 — Lobby -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">01</div>
+          <div>
+            <h3 class="editorial-entry-title">Lobby. The screen the customer watches.</h3>
+            <p class="editorial-entry-body">
+              Now-serving status. Vehicle in service. Estimated time. The queue ahead of them. No confusion about how long they've been waiting or what's happening behind the counter — and no shop owner manually updating a whiteboard. The lobby screen turns the wait from a black box into a visible process.
+            </p>
+            <div class="mock-tv" style="margin-top:1.5rem; max-width:32rem;" aria-hidden="true">
+              <div class="mock-tv-screen light">
+                <div class="tv-lobby">
+                  <div>
+                    <div class="tv-lobby-eyebrow">Now in service</div>
+                    <div class="tv-lobby-title">2019 Honda Civic LX</div>
+                    <div class="tv-lobby-vehicle">John D.</div>
+                    <div class="tv-lobby-eta">Est. complete · 45 min remaining</div>
+                    <div class="tv-lobby-progress" aria-hidden="true">
+                      <div class="tv-lobby-progress-fill"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="tv-lobby-queue-eyebrow">Up next</div>
+                    <div class="tv-lobby-queue">
+                      <div class="tv-lobby-queue-row">
+                        <span class="tv-lobby-queue-name">Maria S.</span>
+                        <span class="tv-lobby-queue-eta">~ 23 min</span>
+                      </div>
+                      <div class="tv-lobby-queue-row">
+                        <span class="tv-lobby-queue-name">Chen Family</span>
+                        <span class="tv-lobby-queue-eta">~ 1h 10m</span>
+                      </div>
+                      <div class="tv-lobby-queue-row">
+                        <span class="tv-lobby-queue-name">Robert P.</span>
+                        <span class="tv-lobby-queue-eta">~ 1h 35m</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mock-caption">Lobby screen · representative</div>
+          </div>
+        </article>
+
+        <!-- 02 — Counter -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">02</div>
+          <div>
+            <h3 class="editorial-entry-title">Counter. The screen the service writer reads.</h3>
+            <p class="editorial-entry-body">
+              The customer in front of you, their full history, their last declined recommendation, the upsell that fits today's visit, the warning that flags this household has three vehicles and you're seeing one. Service writers stop hunting through the SMS for context. The conversation moves at the speed of the customer.
+            </p>
+          </div>
+        </article>
+
+        <!-- 03 — Floor -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">03</div>
+          <div>
+            <h3 class="editorial-entry-title">Floor. The screen the techs glance at.</h3>
+            <p class="editorial-entry-body">
+              Assigned ROs. Hours billed today versus yesterday. The leaderboard nobody asks for but everyone watches. Comeback alerts the second they're flagged. The floor screen makes who's printing money visible — and who's leaking it visible — without anyone having to print a report.
+            </p>
+          </div>
+        </article>
+
+        <!-- 04 — Owner office -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">04</div>
+          <div>
+            <h3 class="editorial-entry-title">Owner office. The screen the operator runs the shop on.</h3>
+            <p class="editorial-entry-body">
+              The picture. Hours billed, GP%, comeback rate, recovery queue, technician utilization, what needs your eyes before close. Ambient awareness of the shop without sitting at a desk. The owner office screen replaces the spreadsheet you used to print at end of day with a board that's already current when you walk in tomorrow.
+            </p>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer role="contentinfo">
+  <!-- ─────────── PRICING (soft) ─────────── -->
+  <section class="section-editorial" aria-labelledby="pricing-headline" style="background: var(--color-surface-soft);">
+    <div class="container-narrow">
+      <div class="soft-pricing">
+        <div class="eyebrow">Pricing</div>
+        <h2 id="pricing-headline" class="soft-pricing-headline font-serif" style="margin-top:1rem;">
+          Pricing scales with the number of screens.<br>
+          <span class="italic">Talk to us.</span>
+        </h2>
+        <p class="soft-pricing-body">
+          A single-bay shop with one lobby screen has different needs than a five-location group with twenty. We size pricing to the number of screens you actually run. No proprietary hardware to buy, no leases on display infrastructure — Experience runs on the Smart TVs your shop already has.
+        </p>
+        <div class="soft-pricing-actions">
+          <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Experience%20—%20Pricing" class="btn-primary-large">
+            Talk to us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FAQ ─────────── -->
+  <section class="section-editorial" aria-labelledby="faq-headline">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div class="eyebrow">Shop owner questions</div>
+        <h2 id="faq-headline" class="section-headline font-serif">
+          The objections we hear.<br>
+          <span class="italic-emphasis">Answered straight.</span>
+        </h2>
+      </div>
+
+      <div style="margin-top:3rem;">
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">01</div>
+          <div>
+            <div class="faq-question">What hardware do we need?</div>
+            <p class="faq-answer">Any Smart TV with a browser, Chromecast, Fire Stick, or Apple TV. If a TV in your shop can load a website, it can run ClearPath Experience. No proprietary players, no display servers, no media-PC hidden behind the lobby plant.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">02</div>
+          <div>
+            <div class="faq-question">Who updates the content on the screens?</div>
+            <p class="faq-answer">Nobody. Each screen reads its own data feed and updates itself live. No daily content uploads, no slideshow tools, no "the lobby screen is showing last week's hours again" phone calls. The data on the screen is the data in the shop, in real time.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">03</div>
+          <div>
+            <div class="faq-question">What about the network — does this hammer my shop's wifi?</div>
+            <p class="faq-answer">No. Each screen pulls a small JSON payload every few seconds and renders it locally. Bandwidth is comparable to one person browsing email. We've run four screens off a residential cable connection without a hiccup.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">04</div>
+          <div>
+            <div class="faq-question">Do we need ClearPath OS to use Experience?</div>
+            <p class="faq-answer">For the full picture, yes — Experience reads from the data ClearPath OS already aggregates from your shop management system. If you're not on OS, we can still run lobby and queue displays from your SMS directly. The counter, floor, and owner office screens get richer the more of the stack you're using.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">05</div>
+          <div>
+            <div class="faq-question">Can we customize what's on each screen?</div>
+            <p class="faq-answer">Yes — within the four-context philosophy. Lobby screens stay customer-friendly, counter screens stay conversation-focused, floor screens stay operationally tight, owner office screens stay KPI-dense. We won't let you put declined-work numbers on the lobby screen, because the customer in chair four shouldn't be reading them.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── CTA ─────────── -->
+  <section class="cta" aria-labelledby="cta-headline">
+    <div class="container-wide">
+      <div class="cta-card">
+        <div class="cta-eyebrow">
+          <span class="pulse-emerald" aria-hidden="true"></span>
+          Now accepting pilot shops
+        </div>
+        <h2 id="cta-headline" class="cta-headline font-serif">
+          Make every screen<br>
+          <span class="italic">earn its corner of the wall.</span>
+        </h2>
+        <p class="cta-sub">
+          Tell us how many TVs are in your shop and which corners they live in. We'll show you what each one would display once it's wired into ClearPath — sized to your shop, your team, your customer flow.
+        </p>
+
+        <div class="cta-actions">
+          <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Experience%20—%20Pilot" class="btn-on-dark">
+            Talk to us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
+          <a href="#screens" class="btn-on-dark-outline">See the screens</a>
+        </div>
+
+        <div class="cta-trust">
+          <span>· No proprietary hardware</span>
+          <span>· Runs on Smart TVs you own</span>
+          <span>· Live data, not slideshows</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FOOTER ─────────── -->
+  <footer class="footer" role="contentinfo">
     <div class="footer-inner">
-      <div class="footer-left">
-        <img src="assets/cp-icon-white.png" alt="ClearPath" style="height:28px;width:28px;object-fit:contain;opacity:0.7;filter:drop-shadow(0 0 8px rgba(30,136,229,0.2))">
-        <span>&copy; 2026 ClearPath Holdings, LLC. All rights reserved.</span>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-mark">
+            <span class="nav-logo-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+            <span class="footer-brand-text">ClearPath <span class="muted">Holdings</span></span>
+          </div>
+          <p class="footer-brand-tagline">
+            Operational sophistication for the small operator. Manchester, NH.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">ClearPath family</div>
+          <ul>
+            <li><a href="os.html">ClearPath OS</a></li>
+            <li><a href="experience.html">ClearPath Experience</a></li>
+            <li><a href="events.html">ClearPath Events</a></li>
+            <li><a href="mailto:info@driveclearpath.com?subject=ClearPath%20Practice%20—%20Talk%20to%20us">ClearPath Practice</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">Company</div>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Sign in</a></li>
+            <li><a href="mailto:info@driveclearpath.com">info@driveclearpath.com</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">Legal</div>
+          <ul>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="sms-terms.html">SMS terms</a></li>
+            <li><a href="mailto:info@driveclearpath.com">info@driveclearpath.com</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="mailto:info@driveclearpath.com">Contact</a>
-        <a href="about.html">About</a>
-        <a href="os.html">ClearPath OS</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="events.html">ClearPath Events</a>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
+
+      <div class="footer-fineprint">
+        <div>© 2026 ClearPath Holdings, LLC · Manchester, NH</div>
+        <div>Built for the operator who refuses to sell.</div>
       </div>
     </div>
   </footer>
-
-  <script src="js/shared.js" defer></script>
 
 </body>
 </html>

@@ -32,10 +32,10 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/editorial.css">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -69,196 +69,361 @@
 </head>
 <body>
 
-  <!-- Full-page background particle canvas -->
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <!-- ─────────── NAV ─────────── -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="ClearPath Holdings home">
+        <span class="nav-logo-mark">
+          <img src="assets/cp-icon-white.png" alt="">
+        </span>
+        <span class="nav-logo-text">
+          ClearPath <span class="muted">Holdings</span>
+        </span>
+      </a>
 
-  <!-- Cursor glow -->
-  <div class="cursor-glow" id="cursor-glow"></div>
-
-  <!-- NAV -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo" aria-label="ClearPath">
-      <img src="assets/cp-icon-white.png" alt="CP" class="nav-logo-mark">
-      <div class="nav-logo-text">
-        <span class="logo-main">ClearPath</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Products <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
-        <div class="nav-dropdown-menu">
-          <a href="os.html">ClearPath OS</a>
-          <a href="experience.html">ClearPath Experience</a>
-          <a href="voice.html">ClearPath Voice</a>
-          <a href="events.html">ClearPath Events</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#products" class="nav-link">What we build</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+            Products
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <div class="nav-dropdown-heading">The ClearPath family</div>
+            <a href="os.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span>
+                <span class="nav-dropdown-item-name">ClearPath OS</span>
+                <span class="nav-dropdown-item-tag">Virtual COO for independent shops</span>
+              </span>
+            </a>
+            <a href="experience.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span>
+                <span class="nav-dropdown-item-name">ClearPath Experience</span>
+                <span class="nav-dropdown-item-tag">Shop TV displays</span>
+              </span>
+            </a>
+            <a href="events.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span>
+                <span class="nav-dropdown-item-name">ClearPath Events</span>
+                <span class="nav-dropdown-item-tag">Event operations</span>
+              </span>
+            </a>
+            <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Practice%20—%20Talk%20to%20us" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span>
+                <span class="nav-dropdown-item-name">ClearPath Practice</span>
+                <span class="nav-dropdown-item-tag">Advisor practice management</span>
+              </span>
+            </a>
+          </div>
         </div>
-      </div>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="login.html" class="nav-cta">Login</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+      </nav>
 
-  <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-    <a href="os.html">ClearPath OS</a>
-    <a href="experience.html">ClearPath Experience</a>
-    <a href="voice.html">ClearPath Voice</a>
-    <a href="events.html">ClearPath Events</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html">Login</a>
-  </div>
-
-  <!-- HERO -->
-  <header class="hero" id="hero">
-    <canvas id="hero-canvas" aria-hidden="true"></canvas>
-    <div class="hero-gradient" aria-hidden="true"></div>
-    <div class="hero-fade" aria-hidden="true"></div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="pulse-dot"></span>
-        4 products live &mdash; taking on select clients
+      <div class="nav-actions">
+        <a href="login.html" class="nav-signin">Sign in</a>
+        <a href="mailto:info@driveclearpath.com?subject=ClearPath%20—%20Talk%20to%20us" class="btn-primary-dark">
+          Talk to us
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+        </a>
       </div>
-      <h1>Your business should run<br><span class="gradient-text">even when you can't be there.</span></h1>
-      <p class="hero-sub">Most shop owners live with the same fear: <em>if I'm not there, things fall apart.</em> ClearPath was built from inside that exact situation &mdash; and it eliminates it.</p>
-      <div class="hero-proof">
-        <span class="hero-proof-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> 65+ KPIs tracked</span>
-        <span class="hero-proof-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> 45,000+ event attendees</span>
-        <span class="hero-proof-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> 4 product lines</span>
-        <span class="hero-proof-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> AI-powered coaching</span>
-      </div>
-      <div class="hero-buttons">
-        <a href="contact.html" class="btn-primary">Talk to Us &rarr;</a>
-        <a href="#products" class="btn-secondary">See What We Build</a>
-      </div>
-    </div>
-    <div class="scroll-indicator" aria-hidden="true">
-      <span>Scroll</span>
-      <div class="scroll-arrow"></div>
     </div>
   </header>
 
-  <!-- THE PROBLEM -->
-  <section style="padding: 7rem 2rem; position: relative;">
-    <div class="section-inner">
-      <h2 class="section-title fade-up" style="max-width: 600px;"><span style="color: #ff6b6b;">Right now, your shop is leaking money.</span></h2>
-      <p class="section-subtitle fade-up" style="color: var(--text-muted); font-size: 1.2rem;">And nobody's telling you where.</p>
-      <div class="pain-cards">
-        <div class="pain-card fade-up fade-up-delay-1">
-          <div class="pain-stat" style="color: #ff6b6b;">$47K+</div>
-          <h3>Average annual revenue leaked</h3>
-          <p>Declined work that's never followed up on. Discount habits that eat your margins. Bottlenecks nobody notices until the month closes in the red.</p>
+  <!-- ─────────── HERO ─────────── -->
+  <section class="hero" aria-labelledby="hero-headline">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow fade-up fade-up-1">
+          <span class="pulse-emerald" aria-hidden="true"></span>
+          Built to keep you independent
         </div>
-        <div class="pain-card fade-up fade-up-delay-2">
-          <div class="pain-stat" style="color: #ffa726;">73%</div>
-          <h3>Of shops run on gut feeling</h3>
-          <p>No real-time dashboards. No coaching. No guardrails. Just hope that today goes better than yesterday.</p>
+
+        <h1 id="hero-headline" class="hero-headline fade-up fade-up-2">
+          Run your business with the operational layer<br>
+          <span class="italic">corporate America already has.</span>
+        </h1>
+
+        <p class="hero-sub fade-up fade-up-3">
+          Four products, one mission. Arm the small operator with the same software the firms buying their neighbors use to decide who's next.
+        </p>
+
+        <div class="hero-buttons fade-up fade-up-4">
+          <a href="mailto:info@driveclearpath.com?subject=ClearPath%20—%20Talk%20to%20us" class="btn-primary-large">
+            Talk to us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
+          <a href="#products" class="btn-secondary-light">See what we build</a>
         </div>
-        <div class="pain-card fade-up fade-up-delay-3">
-          <div class="pain-stat" style="color: #ff5252;">Close</div>
-          <h3>Other tools get close. None get it right.</h3>
-          <p>There are dashboards out there. They'll show you numbers. But none of them tell you what those numbers mean, what's costing you money, or exactly what to do about it.</p>
+      </div>
+
+      <div class="hero-mosaic fade-in" aria-hidden="true">
+        <div class="hero-mosaic-card">
+          <div class="hero-mosaic-card-eyebrow">ClearPath OS</div>
+          <div class="hero-mosaic-card-title">Virtual COO</div>
+          <div class="hero-mosaic-card-tag">Independent auto shops</div>
+        </div>
+        <div class="hero-mosaic-card">
+          <div class="hero-mosaic-card-eyebrow">ClearPath Experience</div>
+          <div class="hero-mosaic-card-title">The screens that run themselves</div>
+          <div class="hero-mosaic-card-tag">Lobby · counter · floor · owner</div>
+        </div>
+        <div class="hero-mosaic-card">
+          <div class="hero-mosaic-card-eyebrow">ClearPath Events</div>
+          <div class="hero-mosaic-card-title">Run the show from one panel</div>
+          <div class="hero-mosaic-card-tag">Independent event operators</div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- PRODUCTS -->
-  <section class="products" id="products">
-    <div class="section-inner">
-      <div class="section-label fade-up">Products</div>
-      <h2 class="section-title fade-up">Four products. One ecosystem.</h2>
-      <p class="section-subtitle fade-up">Each product was built to solve a real problem. Together, they give you complete operational intelligence.</p>
-      <div class="product-cards">
-        <a href="os.html" class="product-card fade-up fade-up-delay-1">
-          <div class="product-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
-          <div>
-            <h3>ClearPath OS</h3>
-            <p>Your Virtual COO. 10 modules, 12 diagnostic engines, 65+ KPIs, AI coaching. It doesn't just show you numbers &mdash; it tells your team what to do about them.</p>
-            <span class="product-tag tag-live">Live</span>
-            <span class="learn-more">Learn more &rarr;</span>
-          </div>
-        </a>
-        <a href="experience.html" class="product-card fade-up fade-up-delay-2">
-          <div class="product-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-          <div>
-            <h3>ClearPath Experience</h3>
-            <p>Shop TV displays that run themselves. Lobby, counter, floor, and owner office &mdash; each screen shows exactly what that audience needs to see.</p>
-            <span class="product-tag tag-live">Live</span>
-            <span class="learn-more">Learn more &rarr;</span>
-          </div>
-        </a>
-        <a href="events.html" class="product-card fade-up fade-up-delay-3">
-          <div class="product-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div>
-            <h3>ClearPath Events</h3>
-            <p>Complete event operations &mdash; registration, payments, volunteers, merchandise, and a mobile staff app. Built for a 45,000+ attendee car show.</p>
-            <span class="product-tag tag-live">Live</span>
-            <span class="learn-more">Learn more &rarr;</span>
-          </div>
-        </a>
-        <a href="voice.html" class="product-card fade-up fade-up-delay-4">
-          <div class="product-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3"/></svg></div>
-          <div>
-            <h3>ClearPath Voice</h3>
-            <p>24/7 AI phone receptionist. Answers calls, books appointments, recovers missed revenue, grades every conversation. $299/mo flat.</p>
-            <span class="product-tag tag-live">Live</span>
-            <span class="learn-more">Learn more &rarr;</span>
-          </div>
-        </a>
+  <!-- ─────────── NUMBERS ─────────── -->
+  <section class="section-numbers" aria-label="ClearPath at a glance">
+    <div class="container-wide">
+      <div class="numbers-grid">
+        <div class="number-cell">
+          <div class="number-value font-serif">4</div>
+          <div class="number-label">Products in the family</div>
+        </div>
+        <div class="number-cell">
+          <div class="number-value font-serif">65+</div>
+          <div class="number-label">Operational KPIs across the stack</div>
+        </div>
+        <div class="number-cell">
+          <div class="number-value font-serif">100%</div>
+          <div class="number-label">Independent — no outside capital</div>
+        </div>
+        <div class="number-cell">
+          <div class="number-value font-serif">$0</div>
+          <div class="number-label">Vendor integration required to deploy</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- CTA -->
-  <section class="cta-section" aria-label="Call to action">
-    <div class="cta-glow" aria-hidden="true"></div>
-    <div class="cta-content fade-up">
-      <h2>Stop guessing.<br>Start knowing.</h2>
-      <p>Every day without visibility is a day your shop leaks revenue, your team makes avoidable mistakes, and you fall further behind. ClearPath changes that &mdash; starting today.</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
-        <a href="contact.html" class="btn-primary" style="font-size: 1.15rem; padding: 1.15rem 3rem;">Get ClearPath For Your Shop &rarr;</a>
+  <!-- ─────────── WHAT WE BUILD ─────────── -->
+  <section id="products" class="section-editorial" aria-labelledby="products-headline">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div class="eyebrow">What we build</div>
+        <h2 id="products-headline" class="section-headline font-serif">
+          Four products.<br>
+          <span class="italic-emphasis">One mission.</span>
+        </h2>
+        <p class="section-lead">
+          Different industries. Same thesis: the small operator deserves the same operational layer corporate America runs on. We build that layer, sized for the operator who refuses to sell.
+        </p>
       </div>
-      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2rem;">We're only onboarding a handful of shops right now. Spots are limited.</p>
-      <div class="cta-trust">
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> No long-term contracts</span>
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Live in minutes</span>
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Real results, real data</span>
+
+      <div class="editorial-entries">
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">01</div>
+          <div>
+            <h3 class="editorial-entry-title">ClearPath OS</h3>
+            <p class="editorial-entry-body">
+              The virtual COO for independent auto shops. Real-time KPIs, diagnostic engines, AI coaching, recovery pipeline — the operational layer Caliber, Driven Brands, and Christian Brothers use to evaluate which shop to acquire next, pointed instead at keeping yours out of their portfolio. Lives outside Tekmetric, Mitchell, and Shop-Ware.
+            </p>
+            <a href="os.html" class="editorial-entry-link">
+              Learn more
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">02</div>
+          <div>
+            <h3 class="editorial-entry-title">ClearPath Experience</h3>
+            <p class="editorial-entry-body">
+              Shop TV displays for the lobby, counter, floor, and owner office. The screens that run themselves — each tuned to what its audience needs to see, not a generic dashboard rotated through four locations. Enterprise display infrastructure for operators who don't have an enterprise display budget.
+            </p>
+            <a href="experience.html" class="editorial-entry-link">
+              Learn more
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">03</div>
+          <div>
+            <h3 class="editorial-entry-title">ClearPath Events</h3>
+            <p class="editorial-entry-body">
+              The event operations platform. Public registration, sponsor tiers, vendor placement on a real map, volunteer self-coordination, security gate, multi-stage entertainment scheduling — every stakeholder at your event has a polished interface. Independent event operators run shows the managed-services firms charge tens of thousands a year for less.
+            </p>
+            <a href="events.html" class="editorial-entry-link">
+              Learn more
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">04</div>
+          <div>
+            <h3 class="editorial-entry-title">ClearPath Practice</h3>
+            <p class="editorial-entry-body">
+              Practice management for independent financial advisors. Every call, every callback, every life-event follow-up — tracked, delegated, resolved. The operational layer the RIA aggregators (Mariner, Creative Planning, Mercer) already use to evaluate which independent advisor to roll up next, given to the advisor instead. Lives at its own home.
+            </p>
+            <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Practice%20—%20Talk%20to%20us" class="editorial-entry-link">
+              Talk to us about Practice
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <!-- ─── In the field — Cruisin' Downtown ─── -->
+      <aside class="in-the-field" aria-labelledby="field-heading">
+        <div class="eyebrow eyebrow-coral">In the field</div>
+        <div id="field-heading" class="in-the-field-heading font-serif">
+          Cruisin' Downtown.<br>
+          <span class="secondary">25 years independent.</span>
+        </div>
+        <div class="in-the-field-body">
+          <p>
+            Twenty-five years of running this show. Eighty thousand dollars raised every year for local children's and family charities — routed through registration nights, vendor placement, sponsor checks, t-shirt sales, donations, the volunteer schedule, the security gate. Every year the spreadsheets fell further behind the show.
+          </p>
+          <p>
+            A managed-services firm would charge tens of thousands a year to administer an event at this scale. ClearPath put it all on one panel — and the volunteer team still runs the show themselves.
+          </p>
+          <p class="quiet">
+            That's the whole point.
+          </p>
+        </div>
+        <div class="in-the-field-attr">
+          Manchester Rotary Club · Cruisin' Downtown · 25 years and counting
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ─────────── FOUNDER'S NOTE ─────────── -->
+  <section class="section-editorial founders-note" aria-labelledby="founders-eyebrow">
+    <div class="container-prose">
+      <div id="founders-eyebrow" class="eyebrow">A note from the founder</div>
+
+      <div class="founders-note-body">
+        <p class="lede">
+          There's a reason small family businesses keep getting bought up by corporate America.
+        </p>
+        <p>
+          It isn't that they're bad businesses. It's that they don't have the operational sophistication to compete with the firms doing the buying. The roll-up wins because the family-owned shop can't see what the corporate playbook sees — the leaks, the patterns, the relationships quietly slipping.
+        </p>
+        <p>
+          I started ClearPath to flip that. To give the independent shop, the family practice, the local operator the same operational layer the corporations have. Not as a luxury. As a defense.
+        </p>
+        <p>
+          Four products in the family now. OS for independent auto shops. Practice for financial advisors. Experience for the floor of the shop. Events for the operators running independent shows. Different industries, same thesis: the operational layer corporate America runs on, sized for the operator who refuses to sell.
+        </p>
+        <p>
+          You stay independent. You stay family-owned. You run your business like a corporation — and corporate America never gets the chance to roll you up.
+        </p>
+        <p class="closer">
+          That's the whole point.
+        </p>
+      </div>
+
+      <div class="founders-signature">
+        <div class="founders-avatar" aria-hidden="true">BF</div>
+        <div>
+          <div class="founders-name">Brad Fournier</div>
+          <div class="founders-role">Founder, ClearPath Holdings · Manchester, NH</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer role="contentinfo">
+  <!-- ─────────── CTA ─────────── -->
+  <section class="cta" aria-labelledby="cta-headline">
+    <div class="container-wide">
+      <div class="cta-card">
+        <div class="cta-eyebrow">
+          <span class="pulse-emerald" aria-hidden="true"></span>
+          Now accepting pilot shops, screens, and events
+        </div>
+        <h2 id="cta-headline" class="cta-headline font-serif">
+          Independence is the point.<br>
+          <span class="italic">Operating like a corporation is how you keep it.</span>
+        </h2>
+        <p class="cta-sub">
+          Tell us how your business runs today. We'll show you what the first 30 days inside ClearPath looks like, sized to your operation — and we'll sign your NDA before any of it moves.
+        </p>
+
+        <div class="cta-actions">
+          <a href="mailto:info@driveclearpath.com?subject=ClearPath%20—%20Talk%20to%20us" class="btn-on-dark">
+            Talk to us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
+          <a href="#products" class="btn-on-dark-outline">See what we build</a>
+        </div>
+
+        <div class="cta-trust">
+          <span>· No vendor integration</span>
+          <span>· NDA-first</span>
+          <span>· Right solution, no artificial clock</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FOOTER ─────────── -->
+  <footer class="footer" role="contentinfo">
     <div class="footer-inner">
-      <div class="footer-left">
-        <img src="assets/cp-icon-white.png" alt="ClearPath" style="height:28px;width:28px;object-fit:contain;opacity:0.7;filter:drop-shadow(0 0 8px rgba(30,136,229,0.2))">
-        <span>&copy; 2026 ClearPath Holdings, LLC. All rights reserved.</span>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-mark">
+            <span class="nav-logo-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+            <span class="footer-brand-text">
+              ClearPath <span class="muted">Holdings</span>
+            </span>
+          </div>
+          <p class="footer-brand-tagline">
+            Operational sophistication for the small operator. Manchester, NH.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">ClearPath family</div>
+          <ul>
+            <li><a href="os.html">ClearPath OS</a></li>
+            <li><a href="experience.html">ClearPath Experience</a></li>
+            <li><a href="events.html">ClearPath Events</a></li>
+            <li><a href="mailto:info@driveclearpath.com?subject=ClearPath%20Practice%20—%20Talk%20to%20us">ClearPath Practice</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">Company</div>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Sign in</a></li>
+            <li><a href="mailto:info@driveclearpath.com">info@driveclearpath.com</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">Legal</div>
+          <ul>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="sms-terms.html">SMS terms</a></li>
+            <li><a href="mailto:info@driveclearpath.com">info@driveclearpath.com</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="mailto:info@driveclearpath.com">Contact</a>
-        <a href="about.html">About</a>
-        <a href="os.html">ClearPath OS</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="events.html">ClearPath Events</a>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
+
+      <div class="footer-fineprint">
+        <div>© 2026 ClearPath Holdings, LLC · Manchester, NH</div>
+        <div>Built for the operator who refuses to sell.</div>
       </div>
     </div>
   </footer>
-
-  <script src="js/shared.js" defer></script>
-  <script src="js/hero-particles.js" defer></script>
 
 </body>
 </html>

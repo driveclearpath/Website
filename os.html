@@ -10,165 +10,629 @@
   <meta property="og:description" content="10 modules, 12 diagnostic engines, 65+ KPIs, AI coaching. It doesn't just show you numbers — it tells your team what to do about them.">
   <meta property="og:url" content="https://driveclearpath.com/os.html">
   <meta property="og:image" content="https://driveclearpath.com/assets/clearpath-holdings.png">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/editorial.css">
 </head>
 <body>
 
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
-  <div class="cursor-glow" id="cursor-glow"></div>
+  <!-- ─────────── NAV ─────────── -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="ClearPath Holdings home">
+        <span class="nav-logo-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+        <span class="nav-logo-text">ClearPath <span class="muted">OS</span></span>
+      </a>
 
-  <!-- NAV -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo" aria-label="ClearPath">
-      <img src="assets/cp-icon-white.png" alt="CP" class="nav-logo-mark">
-      <div class="nav-logo-text"><span class="logo-main">ClearPath</span></div>
-    </a>
-    <div class="nav-links">
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Products <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
-        <div class="nav-dropdown-menu">
-          <a href="os.html" class="active">ClearPath OS</a>
-          <a href="experience.html">ClearPath Experience</a>
-          <a href="voice.html">ClearPath Voice</a>
-          <a href="events.html">ClearPath Events</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html#products" class="nav-link">What we build</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true">
+            Products
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <div class="nav-dropdown-heading">The ClearPath family</div>
+            <a href="os.html" class="nav-dropdown-item" role="menuitem" style="background: var(--color-blue-bg);">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath OS</span><span class="nav-dropdown-item-tag">Virtual COO · here</span></span>
+            </a>
+            <a href="experience.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath Experience</span><span class="nav-dropdown-item-tag">Shop TV displays</span></span>
+            </a>
+            <a href="events.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath Events</span><span class="nav-dropdown-item-tag">Event operations</span></span>
+            </a>
+            <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Practice%20—%20Talk%20to%20us" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath Practice</span><span class="nav-dropdown-item-tag">Advisor practice management</span></span>
+            </a>
+          </div>
         </div>
-      </div>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="login.html" class="nav-cta">Login</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </nav>
-  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-    <a href="os.html">ClearPath OS</a>
-    <a href="experience.html">ClearPath Experience</a>
-    <a href="voice.html">ClearPath Voice</a>
-    <a href="events.html">ClearPath Events</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html">Login</a>
-  </div>
+      </nav>
 
-  <!-- HERO -->
-  <header class="hero hero--subpage">
-    <div class="hero-gradient" aria-hidden="true"></div>
-    <div class="hero-fade" aria-hidden="true"></div>
-    <div class="hero-content">
-      <div class="section-label section-label--centered">ClearPath OS</div>
-      <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem);">The Virtual COO<br><span class="gradient-text">for auto repair shops.</span></h1>
-      <p class="hero-sub">10 modules. 12 diagnostic engines. 65+ KPIs. AI coaching. It doesn't just show you numbers &mdash; it tells your team what to do about them.</p>
-      <div class="hero-buttons">
-        <a href="mailto:info@driveclearpath.com" class="btn-primary">Get ClearPath OS &rarr;</a>
-        <a href="pricing.html" class="btn-secondary">See Pricing</a>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-signin">Sign in</a>
+        <a href="mailto:info@driveclearpath.com?subject=ClearPath%20OS%20—%20Talk%20to%20us" class="btn-primary-dark">
+          Talk to us
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- 10 MODULES -->
-  <section class="deep-dive">
-    <div class="section-inner">
-      <div class="section-label fade-up">10 Modules</div>
-      <h2 class="section-title fade-up">Everything your shop needs.<br>Nothing it doesn't.</h2>
-      <p class="section-subtitle fade-up">Each module is purpose-built for a specific part of your operation.</p>
-      <div class="dd-grid">
-        <div class="dd-item fade-up fade-up-delay-1"><div class="dd-icon">🎯</div><h4>Command Center</h4><p>Morning briefing. Today's priorities. Dollar-specific actions.</p></div>
-        <div class="dd-item fade-up fade-up-delay-2"><div class="dd-icon">🏢</div><h4>Departments</h4><p>Parts, service, body. Each runs its own numbers.</p></div>
-        <div class="dd-item fade-up fade-up-delay-3"><div class="dd-icon">🧠</div><h4>Decision Engine</h4><p>12 diagnostic engines analyze every angle of performance.</p></div>
-        <div class="dd-item fade-up fade-up-delay-4"><div class="dd-icon">👥</div><h4>Team</h4><p>Individual scorecards. Performance trends. Coaching targets.</p></div>
-        <div class="dd-item fade-up"><div class="dd-icon">🤖</div><h4>AI Coaching</h4><p>Claude-powered advisor that speaks in plain English.</p></div>
-        <div class="dd-item fade-up fade-up-delay-1"><div class="dd-icon">📊</div><h4>Reports</h4><p>Daily, weekly, monthly. Auto-generated. Share-ready.</p></div>
-        <div class="dd-item fade-up fade-up-delay-2"><div class="dd-icon">💓</div><h4>Customer Pulse</h4><p>Satisfaction signals before the review hits Google.</p></div>
-        <div class="dd-item fade-up fade-up-delay-3"><div class="dd-icon">💬</div><h4>Messages</h4><p>Automated follow-ups, reminders, and recovery campaigns.</p></div>
-        <div class="dd-item fade-up fade-up-delay-4"><div class="dd-icon">📁</div><h4>Portfolio</h4><p>Multi-location roll-up. One dashboard for every shop.</p></div>
-        <div class="dd-item fade-up"><div class="dd-icon">⚙️</div><h4>Setup</h4><p>Connect Tekmetric. Set targets. Go live in minutes.</p></div>
+  <!-- ─────────── HERO (subpage) ─────────── -->
+  <section class="hero hero-subpage" aria-labelledby="hero-headline">
+    <div class="container-wide">
+      <div class="hero-subpage-grid">
+        <div>
+          <div class="hero-eyebrow fade-up fade-up-1">
+            <span class="pulse-emerald" aria-hidden="true"></span>
+            ClearPath OS
+          </div>
+
+          <h1 id="hero-headline" class="hero-subpage-headline fade-up fade-up-2">
+            Run your shop with the operational layer<br>
+            <span class="italic">the roll-ups already use to value it.</span>
+          </h1>
+
+          <p class="hero-subpage-sub fade-up fade-up-3">
+            ClearPath OS reads your KPIs the way Caliber, Driven Brands, and Christian Brothers read them when they're deciding which independent shop to acquire next — so you can fix what they'd find before they find it.
+          </p>
+
+          <div class="hero-subpage-buttons fade-up fade-up-4">
+            <a href="mailto:info@driveclearpath.com?subject=ClearPath%20OS%20—%20Talk%20to%20us" class="btn-primary-large">
+              Talk to us
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+            </a>
+            <a href="#features" class="btn-secondary-light">See how it works</a>
+          </div>
+        </div>
+
+        <!-- Hero mockup: shop admin dashboard miniature -->
+        <div class="mock-frame fade-in" aria-hidden="true">
+          <div class="mock-admin">
+            <div class="mock-admin-sidebar">
+              <div class="mock-admin-sidebar-brand">
+                <span class="mock-admin-sidebar-brand-mark"></span>
+                Shop OS
+              </div>
+              <div class="mock-admin-sidebar-section">Today</div>
+              <div class="mock-admin-sidebar-item active">Dashboard</div>
+              <div class="mock-admin-sidebar-item">Diagnostics</div>
+              <div class="mock-admin-sidebar-item">Recovery</div>
+              <div class="mock-admin-sidebar-item">Coaching</div>
+              <div class="mock-admin-sidebar-section">Measure</div>
+              <div class="mock-admin-sidebar-item">KPIs</div>
+              <div class="mock-admin-sidebar-item">Per-tech</div>
+              <div class="mock-admin-sidebar-item">Reports</div>
+            </div>
+            <div class="mock-admin-content">
+              <div class="mock-admin-welcome">Today's playbook is loaded.</div>
+              <div class="mock-admin-sub">3 things need your eyes before lunch.</div>
+              <div class="mock-kpi-grid">
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon"></div>
+                  <div class="mock-kpi-label">Hours billed</div>
+                  <div class="mock-kpi-value">138</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#DCFCE7;"></div>
+                  <div class="mock-kpi-label">GP%</div>
+                  <div class="mock-kpi-value">52%</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#FEF3C7;"></div>
+                  <div class="mock-kpi-label">Comeback</div>
+                  <div class="mock-kpi-value">3.2%</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#FEE2E2;"></div>
+                  <div class="mock-kpi-label">Declined</div>
+                  <div class="mock-kpi-value">23</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#F3E8FF;"></div>
+                  <div class="mock-kpi-label">Open commits</div>
+                  <div class="mock-kpi-value">14</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#DBEAFE;"></div>
+                  <div class="mock-kpi-label">Tech util.</div>
+                  <div class="mock-kpi-value">87%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- HOW IT WORKS -->
-  <section class="how-it-works" aria-label="How ClearPath works">
-    <div class="section-inner">
-      <div class="section-label fade-up">How It Works</div>
-      <h2 class="section-title fade-up">From data to decisions<br>in minutes</h2>
-      <div class="steps">
-        <div class="step fade-up fade-up-delay-1">
-          <div class="step-number">1</div>
-          <h3>Connect Your Shop</h3>
-          <p>ClearPath plugs directly into Tekmetric and starts pulling your real data automatically. No manual entry. No spreadsheets. You're live in minutes.</p>
+  <!-- ─────────── NUMBERS ─────────── -->
+  <section class="section-numbers" aria-label="Platform at a glance">
+    <div class="container-wide">
+      <div class="numbers-grid">
+        <div class="number-cell">
+          <div class="number-value font-serif">65+</div>
+          <div class="number-label">Shop KPIs the corporate playbook tracks</div>
         </div>
-        <div class="step fade-up fade-up-delay-2">
-          <div class="step-number">2</div>
-          <h3>See What Matters</h3>
-          <p>Instant visibility into 65+ KPIs, revenue leaks, team performance, and operational bottlenecks. Every person gets exactly the view they need.</p>
+        <div class="number-cell">
+          <div class="number-value font-serif">12</div>
+          <div class="number-label">Diagnostic engines — not dashboards</div>
         </div>
-        <div class="step fade-up fade-up-delay-3">
-          <div class="step-number">3</div>
-          <h3>Act With Confidence</h3>
-          <p>Your team gets AI coaching, prioritized game plans, and dollar-value impact on every fix. Stop the leaks. Hit the targets. Grow the business.</p>
+        <div class="number-cell">
+          <div class="number-value font-serif">0</div>
+          <div class="number-label">Shop management systems replaced</div>
         </div>
-      </div>
-      <!-- Integrations -->
-      <div style="text-align: center; margin-top: 3.5rem;">
-        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; margin-bottom: 1.25rem;">Integrations</div>
-        <div class="integrations-bar">
-          <span class="integration-item"><span class="integration-dot dot-live"></span> Tekmetric</span>
-          <span class="integration-item"><span class="integration-dot dot-live"></span> Claude AI</span>
-          <span class="integration-item"><span class="integration-dot dot-live"></span> Retell AI</span>
-          <span class="integration-item"><span class="integration-dot dot-live"></span> Stripe</span>
-          <span class="integration-item"><span class="integration-dot dot-ready"></span> Google Business</span>
-          <span class="integration-item"><span class="integration-dot dot-ready"></span> Twilio</span>
-          <span class="integration-item"><span class="integration-dot dot-ready"></span> Resend</span>
+        <div class="number-cell">
+          <div class="number-value font-serif">0</div>
+          <div class="number-label">Hours of shop downtime to deploy</div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- CTA -->
-  <section class="cta-section" aria-label="Call to action">
-    <div class="cta-glow" aria-hidden="true"></div>
-    <div class="cta-content fade-up">
-      <h2>Your shop deserves<br>a Virtual COO.</h2>
-      <p>ClearPath OS replaces guesswork with guardrails. Every KPI tracked. Every leak flagged. Every team member coached.</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
-        <a href="mailto:info@driveclearpath.com" class="btn-primary" style="font-size: 1.15rem; padding: 1.15rem 3rem;">Get ClearPath OS &rarr;</a>
+  <!-- ─────────── WHAT IT DOES ─────────── -->
+  <section id="features" class="section-editorial" aria-labelledby="features-headline">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div class="eyebrow">What it does</div>
+        <h2 id="features-headline" class="section-headline font-serif">
+          Diagnose your shop the way<br>
+          <span class="italic-emphasis">the corporations diagnosing it for acquisition do.</span>
+        </h2>
+        <p class="section-lead">
+          The roll-ups have a playbook. They walk into every independent shop in your zip code and read the same six metrics. They know exactly which shops to buy and which to walk past. ClearPath OS gives you their playbook — pointed at fixing your shop instead of pricing it.
+        </p>
       </div>
-      <div class="cta-trust">
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> No long-term contracts</span>
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Live in minutes</span>
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Real results, real data</span>
+
+      <div class="editorial-entries">
+
+        <!-- 01 — KPIs that read like a corporate playbook -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">01</div>
+          <div>
+            <h3 class="editorial-entry-title">KPIs that read like a corporate playbook.</h3>
+            <p class="editorial-entry-body">
+              ARO, GP%, hours billed, comeback rate, declined-work value, technician utilization, parts margin, AOV, ticket count by service category — the same sixty-five metrics the chains use to evaluate every independent shop they're considering. Not a dashboard. A diagnosis.
+            </p>
+          </div>
+        </article>
+
+        <!-- 02 — Twelve diagnostic engines -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">02</div>
+          <div>
+            <h3 class="editorial-entry-title">Twelve diagnostic engines, not dashboards.</h3>
+            <p class="editorial-entry-body">
+              Most shop dashboards show you a number and stop. ClearPath's engines show you <em>why</em> the number is what it is — what changed, who drove it, what to do today. When ARO drops six dollars, you don't get a chart. You get a list of the three causes and the one tech driving them.
+            </p>
+            <div class="mock-frame" style="margin-top:1.5rem; max-width:24rem;" aria-hidden="true">
+              <div class="mock-diag">
+                <div class="mock-diag-row">
+                  <div>
+                    <div class="mock-diag-label">ARO this week</div>
+                    <div class="mock-diag-value font-serif">$394</div>
+                  </div>
+                  <div class="mock-diag-delta">−$18 vs LW</div>
+                </div>
+                <div class="mock-buyer-form-section" style="margin-top:1rem;">Why</div>
+                <div class="mock-chip-row">
+                  <span class="mock-chip mock-chip-strong">Declined upsell · 14 ROs</span>
+                  <span class="mock-chip">Mike R · 9 of 14</span>
+                  <span class="mock-chip">Brake pad MAP cut</span>
+                  <span class="mock-chip">Tire mix down 6%</span>
+                </div>
+              </div>
+            </div>
+            <div class="mock-caption">Diagnostic engine · ARO breakdown</div>
+          </div>
+        </article>
+
+        <!-- 03 — Recovery pipeline -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">03</div>
+          <div>
+            <h3 class="editorial-entry-title">A recovery pipeline for the silent leaks.</h3>
+            <p class="editorial-entry-body">
+              Every "no" today is potential revenue tomorrow if your team remembers it. Declined work, lapsed maintenance, customers who haven't been in for eighteen months — ClearPath surfaces them tiered by recovery probability, with one-click AI-drafted outreach in your service writer's voice. The leaks are no longer silent.
+            </p>
+            <div class="mock-frame" style="margin-top:1.5rem; max-width:26rem;" aria-hidden="true">
+              <div class="mock-recovery">
+                <div class="mock-buyer-form-section">Recovery queue · 14 to review</div>
+                <div class="mock-recovery-row">
+                  <div>
+                    <div class="mock-recovery-name">Margaret O.</div>
+                    <div class="mock-recovery-meta">Declined brake job · LOF overdue</div>
+                  </div>
+                  <span class="mock-pill mock-pill-pending">Hot</span>
+                  <div class="mock-recovery-days">42d silent</div>
+                </div>
+                <div class="mock-recovery-row">
+                  <div>
+                    <div class="mock-recovery-name">James K.</div>
+                    <div class="mock-recovery-meta">Estimate $1,840 · no follow-up</div>
+                  </div>
+                  <span class="mock-pill mock-pill-awaiting">Warm</span>
+                  <div class="mock-recovery-days">11d silent</div>
+                </div>
+                <div class="mock-recovery-row">
+                  <div>
+                    <div class="mock-recovery-name">Tracy V.</div>
+                    <div class="mock-recovery-meta">Annual service · last 2024</div>
+                  </div>
+                  <span class="mock-pill mock-pill-pending">Cold</span>
+                  <div class="mock-recovery-days">512d silent</div>
+                </div>
+                <div class="mock-recovery-row">
+                  <div>
+                    <div class="mock-recovery-name">Diaz Family</div>
+                    <div class="mock-recovery-meta">3 vehicles · 1 active</div>
+                  </div>
+                  <span class="mock-pill mock-pill-awaiting">Warm</span>
+                  <div class="mock-recovery-days">63d silent</div>
+                </div>
+              </div>
+            </div>
+            <div class="mock-caption">Recovery pipeline · tiered by silence</div>
+          </div>
+        </article>
+
+        <!-- 04 — AI coaching -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">04</div>
+          <div>
+            <h3 class="editorial-entry-title">Coaching at the service writer.</h3>
+            <p class="editorial-entry-body">
+              Claude reads your live RO, your customer's history, and your shop's KPI patterns — then suggests the upsell, the bundle, the warning to flag. Not a script. A second pair of eyes that already knows your numbers and the customer in front of you. Service writers stop guessing and start closing.
+            </p>
+          </div>
+        </article>
+
+        <!-- 05 — Lives outside your stack -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">05</div>
+          <div>
+            <h3 class="editorial-entry-title">Lives alongside the SMS you already pay for.</h3>
+            <p class="editorial-entry-body">
+              Your shop management system stays your shop management system. ClearPath reads from the SMS API rather than replacing it — no double-entry, no migration, no "rip out and replace" sales pitch. <strong>Tekmetric integration is live today.</strong> Mitchell, Shop-Ware, and ProDemand are on the roadmap — added one system at a time and certified before we claim support. We won't put logos on the marketing for integrations we haven't built.
+            </p>
+          </div>
+        </article>
+
+        <!-- 06 — Data dignity -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">06</div>
+          <div>
+            <h3 class="editorial-entry-title">Your data trains nothing.</h3>
+            <p class="editorial-entry-body">
+              Section 18 of the Tekmetric API license forbids using shop data to train AI models. That's the contractual standard we operate on today, and the architectural floor we'll hold as we extend to other shop management systems. Your customer histories, your tech performance, your margins — none of it goes into training, none of it gets aggregated and sold. Your shop's data stays your shop's data. We can put that in writing.
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Between the work orders — short callout strip -->
+      <div style="margin-top:5rem;">
+        <div class="eyebrow">Between the work orders</div>
+        <h3 class="section-headline font-serif" style="margin-top:0.75rem;">
+          The work between the ROs<br>
+          <span class="italic-emphasis">is where the margin is.</span>
+        </h3>
+        <div class="beyond-grid">
+          <div class="beyond-card">
+            <div class="beyond-card-eyebrow">Declined-work follow-up</div>
+            <div class="beyond-card-title">Every "no" is a future yes.</div>
+            <p class="beyond-card-body">Brake pads declined today are recovery candidates in ninety days. ClearPath surfaces every declined recommendation tied to its expected wear window — and reminds your service writer when the timer's up.</p>
+          </div>
+          <div class="beyond-card">
+            <div class="beyond-card-eyebrow">Per-tech profitability</div>
+            <div class="beyond-card-title">Which tech is printing money.</div>
+            <p class="beyond-card-body">Per-tech ARO, comeback rate, hours billed, parts mix, gross profit per hour. Coaching opportunities surface themselves — Mike's comebacks are 3× the shop average, Tom's hours billed beat everyone — instead of waiting for the quarterly review.</p>
+          </div>
+          <div class="beyond-card">
+            <div class="beyond-card-eyebrow">Margin attrition watch</div>
+            <div class="beyond-card-title">Catch the slow drift.</div>
+            <p class="beyond-card-body">Parts margin slips one percent a month for six months and nobody notices until the quarter closes red. ClearPath flags slope changes the second they show up — not after the damage is done.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer role="contentinfo">
+  <!-- ─────────── INTEGRATION BAND ─────────── -->
+  <section id="integration" class="section-editorial" style="background: var(--color-surface-soft);" aria-labelledby="integration-headline">
+    <div class="container-wide">
+      <div class="integration-grid">
+        <div>
+          <div class="eyebrow">Built for the shop you already run</div>
+          <h2 id="integration-headline" class="section-headline font-serif">
+            Lives outside your stack.<br>
+            <span class="italic-emphasis">Works alongside your tools.</span>
+          </h2>
+          <p class="section-lead" style="max-width:34rem;">
+            Your shop management system stays your shop management system. <strong>Tekmetric integration is live today.</strong> Mitchell, Shop-Ware, and ProDemand are on a rolling roadmap — added one system at a time, certified before we claim support. ClearPath reads from whichever SMS API you've authorized, runs the diagnoses, and feeds the outputs back to the systems and people who already act on them.
+          </p>
+
+          <div class="integration-pills">
+            <div class="integration-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              No SMS replacement required
+            </div>
+            <div class="integration-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Read-mostly · writes nothing back
+            </div>
+            <div class="integration-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              NDA-first onboarding
+            </div>
+            <div class="integration-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Section 18 enforced contractually
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-card">
+          <div class="flow-card-eyebrow">Data flow</div>
+          <div class="flow-rows">
+            <div class="flow-row">
+              <span class="flow-dot amber"></span>
+              <span class="flow-row-label">Your Tekmetric account · authorized API</span>
+              <span class="flow-row-status">In</span>
+            </div>
+            <div class="flow-connector">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </div>
+            <div class="flow-row highlight">
+              <span class="flow-dot blue"></span>
+              <span class="flow-row-label">ClearPath OS · diagnose, score, alert</span>
+              <span class="flow-row-status">Process</span>
+            </div>
+            <div class="flow-connector">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </div>
+            <div class="flow-row">
+              <span class="flow-dot navy"></span>
+              <span class="flow-row-label">Service writer · screen + alert</span>
+              <span class="flow-row-status">Out</span>
+            </div>
+            <div class="flow-connector">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </div>
+            <div class="flow-row">
+              <span class="flow-dot coral"></span>
+              <span class="flow-row-label">Recovery email + SMS · drafted, you send</span>
+              <span class="flow-row-status">You</span>
+            </div>
+          </div>
+          <div class="flow-footer-card">
+            <div class="flow-footer-headline">Same workflow your team already uses.</div>
+            <div class="flow-footer-body">If your service writer is already glancing at the SMS screen during the customer conversation, you already know the workflow. We don't change it. We sharpen it.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FOUNDER'S NOTE ─────────── -->
+  <section class="section-editorial founders-note" aria-labelledby="founders-eyebrow">
+    <div class="container-prose">
+      <div id="founders-eyebrow" class="eyebrow">A note from the founder</div>
+
+      <div class="founders-note-body">
+        <p class="lede">
+          There's a reason small auto shops keep getting bought up by corporate America.
+        </p>
+        <p>
+          It isn't that they're bad shops. It's that they don't have the operational sophistication to compete with Caliber, Driven Brands, Christian Brothers — the chains scanning every independent shop in their zip code for the next acquisition. The roll-up wins because the family-owned shop can't see what the corporate playbook sees: the leaks, the patterns, the customers quietly drifting.
+        </p>
+        <p>
+          I built ClearPath OS because I owned a shop and couldn't always be at the shop. I needed the same operational layer those firms use to evaluate which shop to buy next, but pointed at running mine instead — so I could see what was leaking, what was leaving, what to fix before it cost me.
+        </p>
+        <p>
+          That's still what it does. Every shop gets the corporate diagnosis without the corporate consequences. You see what they'd see. You fix what they'd find. You keep your shop.
+        </p>
+        <p>
+          You stay independent. You stay family-owned. You run your business like a corporation — and corporate America never gets the chance to roll you up.
+        </p>
+        <p class="closer">
+          That's the whole point.
+        </p>
+      </div>
+
+      <div class="founders-signature">
+        <div class="founders-avatar" aria-hidden="true">BF</div>
+        <div>
+          <div class="founders-name">Brad Fournier</div>
+          <div class="founders-role">Founder, ClearPath Holdings · Built it for his own shop first · Manchester, NH</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── PRICING (soft) ─────────── -->
+  <section class="section-editorial" aria-labelledby="pricing-headline" style="background: var(--color-surface-soft);">
+    <div class="container-narrow">
+      <div class="soft-pricing">
+        <div class="eyebrow">Pricing</div>
+        <h2 id="pricing-headline" class="soft-pricing-headline font-serif" style="margin-top:1rem;">
+          Pricing scales with the size of your shop.<br>
+          <span class="italic">Talk to us.</span>
+        </h2>
+        <p class="soft-pricing-body">
+          A two-bay independent has different needs than a five-location group. We size pricing to the shop you actually run. No vendor lock-in. No per-RO skim. No "we have to charge enterprise rates because we built it for enterprise" — we built it for the operator who refuses to sell.
+        </p>
+        <div class="soft-pricing-actions">
+          <a href="mailto:info@driveclearpath.com?subject=ClearPath%20OS%20—%20Pricing" class="btn-primary-large">
+            Talk to us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FAQ ─────────── -->
+  <section class="section-editorial" aria-labelledby="faq-headline">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div class="eyebrow">Shop owner questions</div>
+        <h2 id="faq-headline" class="section-headline font-serif">
+          The objections we hear.<br>
+          <span class="italic-emphasis">Answered straight.</span>
+        </h2>
+      </div>
+
+      <div style="margin-top:3rem;">
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">01</div>
+          <div>
+            <div class="faq-question">We use Tekmetric. What does ClearPath replace?</div>
+            <p class="faq-answer">Nothing. ClearPath reads from your authorized Tekmetric API connection and lives alongside it. Your service writers keep using the same screen they're using today. The diagnosis surfaces wherever your team already looks — email, screen, SMS overlay. Migration is zero hours of bay downtime because there's nothing to migrate.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">02</div>
+          <div>
+            <div class="faq-question">We're on Mitchell, Shop-Ware, or ProDemand. Can we use ClearPath?</div>
+            <p class="faq-answer">Not today, but those integrations are on the roadmap. We add SMS systems one at a time and certify each one before we claim support — no marketing checklists for integrations we haven't built. Tell us what you're on and we'll tell you our timeline. Early-pilot slots open up as each integration is certified.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">03</div>
+          <div>
+            <div class="faq-question">How accurate are the KPIs?</div>
+            <p class="faq-answer">As accurate as your SMS data. ClearPath doesn't invent numbers — it reads them, aggregates them with the rules the chains use, and shows you the same picture they'd see. If your data has gaps, ClearPath flags them. If your data is clean, the diagnoses are.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">04</div>
+          <div>
+            <div class="faq-question">How long is training?</div>
+            <p class="faq-answer">For owners and managers, less than an hour. For service writers, the system surfaces inside the workflow they already use — there's nothing new to learn beyond "look at this when the badge is red." We built it for shop floors, not classrooms.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">05</div>
+          <div>
+            <div class="faq-question">Will my service writers actually use it?</div>
+            <p class="faq-answer">If a service writer can read the SMS screen during a customer conversation, they can use ClearPath. The recommendation appears next to the customer record they're already looking at. No app, no login, no second tab. Adoption is the workflow.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">06</div>
+          <div>
+            <div class="faq-question">What about my customer data — does it train AI?</div>
+            <p class="faq-answer">No. Section 18 of the Tekmetric API license explicitly forbids using shop data to train models. We treat that as the floor across every integration. Your data isn't used to train, isn't sold in aggregate, isn't shared with other shops. We sign that into the contract.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── CTA ─────────── -->
+  <section class="cta" aria-labelledby="cta-headline">
+    <div class="container-wide">
+      <div class="cta-card">
+        <div class="cta-eyebrow">
+          <span class="pulse-emerald" aria-hidden="true"></span>
+          Now accepting pilot shops · Tekmetric only at this time
+        </div>
+        <h2 id="cta-headline" class="cta-headline font-serif">
+          See your shop the way the chains see it.<br>
+          <span class="italic">Then keep your shop.</span>
+        </h2>
+        <p class="cta-sub">
+          Tell us what your shop runs on today — your SMS, your team, your monthly revenue, the things that keep you up. We'll show you what the first thirty days inside ClearPath OS would surface, sized to your operation. Pilot shops on Tekmetric today; Mitchell, Shop-Ware, and ProDemand pilots open as each integration is certified.
+        </p>
+
+        <div class="cta-actions">
+          <a href="mailto:info@driveclearpath.com?subject=ClearPath%20OS%20—%20Pilot" class="btn-on-dark">
+            Talk to us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
+          <a href="#features" class="btn-on-dark-outline">See how it works</a>
+        </div>
+
+        <div class="cta-trust">
+          <span>· Tekmetric integration today</span>
+          <span>· No SMS replacement</span>
+          <span>· NDA-first</span>
+          <span>· Section 18 enforced</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FOOTER ─────────── -->
+  <footer class="footer" role="contentinfo">
     <div class="footer-inner">
-      <div class="footer-left">
-        <img src="assets/cp-icon-white.png" alt="ClearPath" style="height:28px;width:28px;object-fit:contain;opacity:0.7;filter:drop-shadow(0 0 8px rgba(30,136,229,0.2))">
-        <span>&copy; 2026 ClearPath Holdings, LLC. All rights reserved.</span>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-mark">
+            <span class="nav-logo-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+            <span class="footer-brand-text">ClearPath <span class="muted">Holdings</span></span>
+          </div>
+          <p class="footer-brand-tagline">
+            Operational sophistication for the small operator. Manchester, NH.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">ClearPath family</div>
+          <ul>
+            <li><a href="os.html">ClearPath OS</a></li>
+            <li><a href="experience.html">ClearPath Experience</a></li>
+            <li><a href="events.html">ClearPath Events</a></li>
+            <li><a href="mailto:info@driveclearpath.com?subject=ClearPath%20Practice%20—%20Talk%20to%20us">ClearPath Practice</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">Company</div>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Sign in</a></li>
+            <li><a href="mailto:info@driveclearpath.com">info@driveclearpath.com</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">Legal</div>
+          <ul>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="sms-terms.html">SMS terms</a></li>
+            <li><a href="mailto:info@driveclearpath.com">info@driveclearpath.com</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="mailto:info@driveclearpath.com">Contact</a>
-        <a href="about.html">About</a>
-        <a href="os.html">ClearPath OS</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="events.html">ClearPath Events</a>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
+
+      <div class="footer-fineprint">
+        <div>© 2026 ClearPath Holdings, LLC · Manchester, NH</div>
+        <div>Built for the operator who refuses to sell.</div>
       </div>
     </div>
   </footer>
-
-  <script src="js/shared.js" defer></script>
 
 </body>
 </html>

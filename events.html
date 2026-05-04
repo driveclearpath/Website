@@ -10,209 +10,645 @@
   <meta property="og:description" content="Registration, payments, volunteers, merchandise, sponsors, and a mobile staff app. Proven at 45,000+ attendees.">
   <meta property="og:url" content="https://driveclearpath.com/events.html">
   <meta property="og:image" content="https://driveclearpath.com/assets/clearpath-holdings.png">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+
+  <!-- Leaflet (vendor map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/editorial.css">
 </head>
 <body>
 
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
-  <div class="cursor-glow" id="cursor-glow"></div>
+  <!-- ─────────── NAV ─────────── -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="ClearPath Holdings home">
+        <span class="nav-logo-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+        <span class="nav-logo-text">ClearPath <span class="muted">Events</span></span>
+      </a>
 
-  <!-- NAV -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo" aria-label="ClearPath">
-      <img src="assets/cp-icon-white.png" alt="CP" class="nav-logo-mark">
-      <div class="nav-logo-text"><span class="logo-main">ClearPath</span></div>
-    </a>
-    <div class="nav-links">
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Products <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
-        <div class="nav-dropdown-menu">
-          <a href="os.html">ClearPath OS</a>
-          <a href="experience.html">ClearPath Experience</a>
-          <a href="voice.html">ClearPath Voice</a>
-          <a href="events.html" class="active">ClearPath Events</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html#products" class="nav-link">What we build</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true">
+            Products
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <div class="nav-dropdown-heading">The ClearPath family</div>
+            <a href="os.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath OS</span><span class="nav-dropdown-item-tag">Virtual COO for independent shops</span></span>
+            </a>
+            <a href="experience.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath Experience</span><span class="nav-dropdown-item-tag">Shop TV displays</span></span>
+            </a>
+            <a href="events.html" class="nav-dropdown-item" role="menuitem" style="background: var(--color-blue-bg);">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath Events</span><span class="nav-dropdown-item-tag">Event operations · here</span></span>
+            </a>
+            <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Practice%20—%20Talk%20to%20us" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+              <span><span class="nav-dropdown-item-name">ClearPath Practice</span><span class="nav-dropdown-item-tag">Advisor practice management</span></span>
+            </a>
+          </div>
         </div>
-      </div>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="login.html" class="nav-cta">Login</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </nav>
-  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-    <a href="os.html">ClearPath OS</a>
-    <a href="experience.html">ClearPath Experience</a>
-    <a href="voice.html">ClearPath Voice</a>
-    <a href="events.html">ClearPath Events</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html">Login</a>
-  </div>
+      </nav>
 
-  <!-- HERO -->
-  <header class="hero hero--subpage">
-    <div class="hero-gradient" aria-hidden="true"></div>
-    <div class="hero-fade" aria-hidden="true"></div>
-    <div class="hero-content">
-      <div class="section-label section-label--centered">ClearPath Events</div>
-      <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem);">Run events like<br><span class="gradient-text">a full-time operations team.</span></h1>
-      <p class="hero-sub">Registration, payments, volunteers, merchandise, sponsors, and a mobile staff app &mdash; all in one platform. Built because spreadsheets and cash boxes don't scale.</p>
-      <div class="hero-buttons">
-        <a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener" class="btn-primary">See It Live &rarr;</a>
-        <a href="mailto:info@driveclearpath.com" class="btn-secondary">Talk to Us</a>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-signin">Sign in</a>
+        <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Events%20—%20Talk%20to%20us" class="btn-primary-dark">
+          Talk to us
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- WHAT IT DOES -->
-  <section style="padding: 7rem 2rem;">
-    <div class="section-inner">
-      <div class="section-label fade-up">The Platform</div>
-      <h2 class="section-title fade-up">Everything an event needs.<br>Nothing it doesn't.</h2>
-      <p class="section-subtitle fade-up">ClearPath Events replaces the patchwork of tools, spreadsheets, and manual processes that most events run on.</p>
-      <div class="dd-grid grid-3">
-        <div class="dd-item fade-up fade-up-delay-1">
-          <div class="dd-icon">🎫</div>
-          <h4>Online Registration</h4>
-          <p>Custom forms, multiple ticket types, early bird pricing. Attendees register and pay in one flow.</p>
+  <!-- ─────────── HERO (subpage) ─────────── -->
+  <section class="hero hero-subpage" aria-labelledby="hero-headline">
+    <div class="container-wide">
+      <div class="hero-subpage-grid">
+        <div>
+          <div class="hero-eyebrow fade-up fade-up-1">
+            <span class="pulse-emerald" aria-hidden="true"></span>
+            ClearPath Events
+          </div>
+
+          <h1 id="hero-headline" class="hero-subpage-headline fade-up fade-up-2">
+            Run an event the way<br>
+            <span class="italic">managed-services firms run yours.</span>
+          </h1>
+
+          <p class="hero-subpage-sub fade-up fade-up-3">
+            One operations platform. Every stakeholder at your event has a polished interface — operator, attendee, volunteer, vendor — and the day-of math runs on real numbers, not spreadsheets.
+          </p>
+
+          <div class="hero-subpage-buttons fade-up fade-up-4">
+            <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Events%20—%20Talk%20to%20us" class="btn-primary-large">
+              Talk to us
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+            </a>
+            <a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener" class="btn-secondary-light">
+              See it live
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+            </a>
+          </div>
         </div>
-        <div class="dd-item fade-up fade-up-delay-2">
-          <div class="dd-icon">💳</div>
-          <h4>Stripe Payments</h4>
-          <p>Every dollar tracked by staff member and payment method. Charity gets 100% of the base price.</p>
-        </div>
-        <div class="dd-item fade-up fade-up-delay-3">
-          <div class="dd-icon">👥</div>
-          <h4>Volunteer Management</h4>
-          <p>Scheduling, role assignment, check-in tracking. Know who's where and when.</p>
-        </div>
-        <div class="dd-item fade-up fade-up-delay-1">
-          <div class="dd-icon">🤝</div>
-          <h4>Sponsors & Vendors</h4>
-          <p>Sponsor tier management, vendor applications, booth assignments. All organized, all trackable.</p>
-        </div>
-        <div class="dd-item fade-up fade-up-delay-2">
-          <div class="dd-icon">👕</div>
-          <h4>Merchandise Sales</h4>
-          <p>Inventory tracking, POS for on-site sales, size/variant management. Every shirt accounted for.</p>
-        </div>
-        <div class="dd-item fade-up fade-up-delay-3">
-          <div class="dd-icon">📱</div>
-          <h4>Mobile Staff App</h4>
-          <p>POS, check-in scanning, real-time sales dashboard. Your team runs the event from their phones.</p>
+
+        <!-- Hero mockup: admin dashboard miniature -->
+        <div class="mock-frame fade-in" aria-hidden="true">
+          <div class="mock-admin">
+            <div class="mock-admin-sidebar">
+              <div class="mock-admin-sidebar-brand">
+                <span class="mock-admin-sidebar-brand-mark"></span>
+                Admin
+              </div>
+              <div class="mock-admin-sidebar-section">Show day</div>
+              <div class="mock-admin-sidebar-item active">Dashboard</div>
+              <div class="mock-admin-sidebar-item">Event Day</div>
+              <div class="mock-admin-sidebar-item">Security Gate</div>
+              <div class="mock-admin-sidebar-section">Manage</div>
+              <div class="mock-admin-sidebar-item">Registrations</div>
+              <div class="mock-admin-sidebar-item">Sponsors</div>
+              <div class="mock-admin-sidebar-item">Vendors</div>
+              <div class="mock-admin-sidebar-item">Volunteers</div>
+            </div>
+            <div class="mock-admin-content">
+              <div class="mock-admin-welcome">Welcome back. Let's build a show.</div>
+              <div class="mock-admin-sub">Manchester Summer Cruise — registration open</div>
+              <div class="mock-kpi-grid">
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon"></div>
+                  <div class="mock-kpi-label">Cars registered</div>
+                  <div class="mock-kpi-value">247</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#FEF3C7;"></div>
+                  <div class="mock-kpi-label">Sponsors</div>
+                  <div class="mock-kpi-value">18</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#DCFCE7;"></div>
+                  <div class="mock-kpi-label">Vendors</div>
+                  <div class="mock-kpi-value">64</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#F3E8FF;"></div>
+                  <div class="mock-kpi-label">Volunteers</div>
+                  <div class="mock-kpi-value">42</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#FEE2E2;"></div>
+                  <div class="mock-kpi-label">Pending pay</div>
+                  <div class="mock-kpi-value">7</div>
+                </div>
+                <div class="mock-kpi-card">
+                  <div class="mock-kpi-icon" style="background:#DBEAFE;"></div>
+                  <div class="mock-kpi-label">Tickets sold</div>
+                  <div class="mock-kpi-value">1,247</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- PROOF — CRUISING DOWNTOWN -->
-  <section style="padding: 7rem 2rem;">
-    <div class="section-inner">
-      <div class="section-label fade-up">Proven at Scale</div>
-      <h2 class="section-title fade-up">Built for Cruising Downtown Manchester.</h2>
-      <p class="section-subtitle fade-up" style="max-width: 700px;">ClearPath Events wasn't built in a lab. It was built because New Hampshire's largest car show outgrew paper lists and cash boxes.</p>
-      <div class="grid-4" style="margin-top: 2rem;">
-        <div class="fade-up fade-up-delay-1" style="text-align: center; padding: 2rem 1rem;">
-          <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">45K+</div>
-          <div style="font-size: 0.85rem; color: var(--text-secondary);">Attendees</div>
+  <!-- ─────────── NUMBERS ─────────── -->
+  <section class="section-numbers" aria-label="Platform at a glance">
+    <div class="container-wide">
+      <div class="numbers-grid">
+        <div class="number-cell">
+          <div class="number-value font-serif">4</div>
+          <div class="number-label">Stakeholder surfaces — operator, attendee, volunteer, vendor</div>
         </div>
-        <div class="fade-up fade-up-delay-2" style="text-align: center; padding: 2rem 1rem;">
-          <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">700+</div>
-          <div style="font-size: 0.85rem; color: var(--text-secondary);">Registered Vehicles</div>
+        <div class="number-cell">
+          <div class="number-value font-serif">20+</div>
+          <div class="number-label">Admin views from registration through day-of</div>
         </div>
-        <div class="fade-up fade-up-delay-3" style="text-align: center; padding: 2rem 1rem;">
-          <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">100%</div>
-          <div style="font-size: 0.85rem; color: var(--text-secondary);">To Charity</div>
+        <div class="number-cell">
+          <div class="number-value font-serif">0</div>
+          <div class="number-label">Spreadsheets required to run the show</div>
         </div>
-        <div class="fade-up fade-up-delay-4" style="text-align: center; padding: 2rem 1rem;">
-          <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">5%</div>
-          <div style="font-size: 0.85rem; color: var(--text-secondary);">Processing Fee Only</div>
-        </div>
-      </div>
-      <div class="fade-up" style="margin-top: 3rem; padding: 2.5rem; border-radius: 20px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);">
-        <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">Cruising Downtown Manchester is one of the largest car shows in New England. When it outgrew spreadsheets and cash at the gate, we built ClearPath Events to handle everything &mdash; online registration, Stripe payments, sponsor management, volunteer scheduling, merchandise with full POS, and a mobile app for every staff member on the ground.</p>
-        <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">Every dollar is tracked by staff member and payment method. The charity receives 100% of the base registration price &mdash; we only take a 5% processing fee. No hidden costs, no platform cut.</p>
-        <div style="margin-top: 1.5rem;">
-          <a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener" class="btn-primary" style="font-size: 0.95rem; padding: 0.9rem 2rem;">See Cruising Downtown Live &rarr;</a>
+        <div class="number-cell">
+          <div class="number-value font-serif">$0</div>
+          <div class="number-label">Vendor integration fees</div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <!-- ─────────── WHAT WE BUILT ─────────── -->
+  <section id="features" class="section-editorial" aria-labelledby="features-headline">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div class="eyebrow">What we built</div>
+        <h2 id="features-headline" class="section-headline font-serif">
+          Every stakeholder<br>
+          <span class="italic-emphasis">has a polished interface.</span>
+        </h2>
+        <p class="section-lead">
+          Most event software stops at registration. ClearPath keeps going — to the vendor map, the volunteer mobile sign-in, the security gate, the sponsor payment tracker. Every person involved in your event sees a surface that respects their time.
+        </p>
+      </div>
 
-  <!-- NOT JUST CAR SHOWS -->
-  <section style="padding: 7rem 2rem;">
-    <div class="section-inner">
-      <div class="section-label fade-up">Beyond Car Shows</div>
-      <h2 class="section-title fade-up">Built for any event<br>that outgrows spreadsheets.</h2>
-      <p class="section-subtitle fade-up">Car shows, charity events, festivals, community gatherings &mdash; if you need registration, payments, and on-the-ground operations, ClearPath Events handles it.</p>
-      <div class="steps">
-        <div class="step fade-up fade-up-delay-1">
-          <div class="step-number">1</div>
-          <h3>Set Up Your Event</h3>
-          <p>Create your event, configure registration forms, set ticket types and pricing, add sponsors and vendors. Everything in one dashboard.</p>
+      <div class="editorial-entries">
+
+        <!-- 01 — Registration that closes itself -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">01</div>
+          <div>
+            <h3 class="editorial-entry-title">A registration page that closes itself.</h3>
+            <p class="editorial-entry-body">
+              Public-facing, branded, mobile-first. The sidebar pre-empts every common question — staging location, deadlines, fee structure, fraud warnings, contact for the human running the show. Every entrant pays through Stripe and walks away with a QR-coded ticket. The detail on this page is what separates an event that fills from one that bleeds applicants at the form.
+            </p>
+            <div class="mock-frame" style="margin-top:1.5rem; max-width:22rem;" aria-hidden="true">
+              <div class="mock-buyer">
+                <div class="mock-buyer-hero">
+                  <div class="mock-buyer-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 00-.84-.99L16 11l-2.7-3.6a1 1 0 00-.8-.4H5.24a2 2 0 00-1.8 1.1l-.8 1.63A6 6 0 002 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+                  </div>
+                  <div class="mock-buyer-pill">25TH ANNUAL CAR SHOW</div>
+                  <div class="mock-buyer-title">Register Your Car</div>
+                  <div class="mock-buyer-sub">Secure your spot. Pre-registration $20, $25 day-of.</div>
+                </div>
+                <div class="mock-buyer-form">
+                  <div class="mock-buyer-form-section">Owner information</div>
+                  <div class="mock-buyer-field"></div>
+                  <div class="mock-buyer-field-row">
+                    <div class="mock-buyer-field"></div>
+                    <div class="mock-buyer-field"></div>
+                  </div>
+                  <div class="mock-buyer-form-section" style="margin-top:0.85rem;">Vehicle</div>
+                  <div class="mock-buyer-field-row">
+                    <div class="mock-buyer-field"></div>
+                    <div class="mock-buyer-field"></div>
+                  </div>
+                  <div class="mock-buyer-cta"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mock-caption">Public buyer flow · representative</div>
+          </div>
+        </article>
+
+        <!-- 02 — Volunteers self-organize -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">02</div>
+          <div>
+            <h3 class="editorial-entry-title">Volunteers self-organize.</h3>
+            <p class="editorial-entry-body">
+              A signup page with the actual roles, the actual shifts, and the actual capacity remaining — visible to the volunteer before they commit. No more "do we have enough hands at registration?" group-chat panic. The roster fills itself, and the operator sees who's where in real time.
+            </p>
+            <div class="mock-frame" style="margin-top:1.5rem; max-width:24rem;" aria-hidden="true">
+              <div class="mock-volunteer">
+                <div class="mock-buyer-form-section">Where we need help</div>
+                <div class="mock-volunteer-row">
+                  <div>
+                    <div class="mock-volunteer-role">Show setup &amp; breakdown</div>
+                    <div class="mock-volunteer-tag">5:30 AM – 4:00 PM</div>
+                  </div>
+                  <div class="mock-volunteer-count">12 of 12 open</div>
+                </div>
+                <div class="mock-volunteer-row">
+                  <div>
+                    <div class="mock-volunteer-role">Registration · North Elm</div>
+                    <div class="mock-volunteer-tag">5:00 – 11:00 AM</div>
+                  </div>
+                  <div class="mock-volunteer-count">4 of 4 open</div>
+                </div>
+                <div class="mock-volunteer-row">
+                  <div>
+                    <div class="mock-volunteer-role">Parking assistants</div>
+                    <div class="mock-volunteer-tag">6:00 AM – 3:00 PM</div>
+                  </div>
+                  <div class="mock-volunteer-count">36 of 36 open</div>
+                </div>
+                <div class="mock-volunteer-row">
+                  <div>
+                    <div class="mock-volunteer-role">Donations &amp; t-shirts</div>
+                    <div class="mock-volunteer-tag">8:00 AM – 3:00 PM</div>
+                  </div>
+                  <div class="mock-volunteer-count">32 of 32 open</div>
+                </div>
+                <div class="mock-volunteer-row">
+                  <div>
+                    <div class="mock-volunteer-role">Standby / flexible</div>
+                    <div class="mock-volunteer-tag">All day</div>
+                  </div>
+                  <div class="mock-volunteer-count full">6 of 8 filled</div>
+                </div>
+              </div>
+            </div>
+            <div class="mock-caption">Volunteer signup · live capacity</div>
+          </div>
+        </article>
+
+        <!-- 03 — A map that knows where everyone is -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">03</div>
+          <div>
+            <h3 class="editorial-entry-title">A map that knows where everyone is.</h3>
+            <p class="editorial-entry-body">
+              Every approved vendor gets dropped onto an interactive map of your event footprint. Drag-and-drop placement, color-coded by package tier, real-time check-in status on event day. The kind of operational picture managed-services firms charge $20K for — built into the platform you're already using.
+            </p>
+            <div class="mock-frame" style="margin-top:1.5rem; max-width:36rem;" aria-hidden="true">
+              <div id="vendor-map" class="vendor-map-live" role="img" aria-label="Vendor placements on a satellite view of downtown Manchester, NH">
+                <div class="vendor-map-legend">
+                  <div class="vendor-map-legend-row"><span class="vendor-map-legend-swatch" style="background:var(--color-amber);"></span> Veterans Park</div>
+                  <div class="vendor-map-legend-row"><span class="vendor-map-legend-swatch" style="background:var(--color-emerald);"></span> Elm Street</div>
+                  <div class="vendor-map-legend-row"><span class="vendor-map-legend-swatch" style="background:var(--color-blue);"></span> Notre Dame Bridge</div>
+                  <div class="vendor-map-legend-row"><span class="vendor-map-legend-swatch" style="background:var(--color-coral);"></span> Entrance</div>
+                </div>
+              </div>
+            </div>
+            <div class="mock-caption">Vendor map · live satellite view of downtown Manchester</div>
+          </div>
+        </article>
+
+        <!-- 04 — One panel, every operation -->
+        <article class="editorial-entry">
+          <div class="editorial-entry-numeral font-serif">04</div>
+          <div>
+            <h3 class="editorial-entry-title">One panel, every operation.</h3>
+            <p class="editorial-entry-body">
+              Real-time KPIs across registrations, sponsor tiers, vendor packages, volunteer roster, t-shirts, donations. Status pills tell you who's paid, who's awaiting check, who's complimentary. Pending-payment alerts surface before they become collection problems. The day-of revenue line updates as each Stripe charge clears.
+            </p>
+            <div class="mock-frame" style="margin-top:1.5rem;" aria-hidden="true">
+              <div style="padding:1.25rem 1.5rem; background:var(--color-surface);">
+                <div class="mock-buyer-form-section">Vendor applications · 15 total</div>
+                <div class="mock-vendor-row">
+                  <div>
+                    <div class="mock-vendor-name">Slush King</div>
+                    <div class="mock-vendor-tag">Elm Street vendor</div>
+                  </div>
+                  <span class="mock-pill mock-pill-paid">Paid</span>
+                </div>
+                <div class="mock-vendor-row">
+                  <div>
+                    <div class="mock-vendor-name">Dirt Away Carpet Cleaning</div>
+                    <div class="mock-vendor-tag">Elm Street vendor</div>
+                  </div>
+                  <span class="mock-pill mock-pill-paid">Paid</span>
+                </div>
+                <div class="mock-vendor-row">
+                  <div>
+                    <div class="mock-vendor-name">Turf Depot</div>
+                    <div class="mock-vendor-tag">Veterans Park vendor</div>
+                  </div>
+                  <span class="mock-pill mock-pill-awaiting">Awaiting Check</span>
+                </div>
+                <div class="mock-vendor-row">
+                  <div>
+                    <div class="mock-vendor-name">NH Auto Dealers Association</div>
+                    <div class="mock-vendor-tag">Notre Dame Bridge vendor</div>
+                  </div>
+                  <span class="mock-pill mock-pill-comp">Complimentary</span>
+                </div>
+                <div class="mock-vendor-row">
+                  <div>
+                    <div class="mock-vendor-name">Kadyn Berry Motorsports</div>
+                    <div class="mock-vendor-tag">Notre Dame Bridge vendor</div>
+                  </div>
+                  <span class="mock-pill mock-pill-comp">Complimentary</span>
+                </div>
+              </div>
+            </div>
+            <div class="mock-caption">Admin · vendor applications view</div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Beyond the gate — short callout strip -->
+      <div style="margin-top:5rem;">
+        <div class="eyebrow">Beyond the gate</div>
+        <h3 class="section-headline font-serif" style="margin-top:0.75rem;">
+          The depth nobody else builds.
+        </h3>
+        <div class="beyond-grid">
+          <div class="beyond-card">
+            <div class="beyond-card-eyebrow">Security gate</div>
+            <div class="beyond-card-title">Scan QR codes or search by name.</div>
+            <p class="beyond-card-body">Every ticket carries a QR. Every gate volunteer scans them on a phone. No paper rosters, no "is this person on the list?" lookup loops. Manual fallback by name when phones die.</p>
+          </div>
+          <div class="beyond-card">
+            <div class="beyond-card-eyebrow">Volunteer mobile</div>
+            <div class="beyond-card-title">Volunteers sign in by QR.</div>
+            <p class="beyond-card-body">Print one QR code, hand it out at the briefing. Volunteers scan it, enter a PIN and their name, and they're in the event-day app — assignment, instructions, contacts. Kill all sessions in one click when the show closes.</p>
+          </div>
+          <div class="beyond-card">
+            <div class="beyond-card-eyebrow">Multi-stage entertainment</div>
+            <div class="beyond-card-title">Bands schedule themselves.</div>
+            <p class="beyond-card-body">Add a stage, add a band, set genres and set times. Bands invited via email, schedule auto-publishes to the public site. Active toggle so cancellations don't strand attendees with stale info.</p>
+          </div>
         </div>
-        <div class="step fade-up fade-up-delay-2">
-          <div class="step-number">2</div>
-          <h3>Open Registration</h3>
-          <p>Share your event page. Attendees register, pay via Stripe, and get confirmation. You see it all in real time.</p>
+      </div>
+
+      <!-- ─── In the field — Cruisin' Downtown ─── -->
+      <aside class="in-the-field" aria-labelledby="field-heading">
+        <div class="eyebrow eyebrow-coral">In the field</div>
+        <div id="field-heading" class="in-the-field-heading font-serif">
+          Cruisin' Downtown.<br>
+          <span class="secondary">25 years independent · $80K raised every year.</span>
         </div>
-        <div class="step fade-up fade-up-delay-3">
-          <div class="step-number">3</div>
-          <h3>Run the Day</h3>
-          <p>Staff use the mobile app for check-ins, POS sales, and live reporting. You see every dollar and every head count as it happens.</p>
+        <div class="in-the-field-body">
+          <p>
+            Manchester Rotary Club has been running Cruisin' Downtown for twenty-five years. Eighty thousand dollars raised every year for local children's and family charities — every dollar routed through registration nights, vendor placement, sponsor checks, t-shirt sales, donations, the volunteer schedule, the security gate.
+          </p>
+          <p>
+            Year by year, the operational complexity got further ahead of the spreadsheets. A managed-services firm would charge tens of thousands a year to administer an event at this scale. The Rotary Club declined.
+          </p>
+          <p>
+            ClearPath put it all on one panel. Same volunteer team. Same hours. More time on the parts of the show that actually matter — the cars, the music, the people walking the strip on a long Saturday afternoon.
+          </p>
+          <p class="quiet">
+            That's the whole point.
+          </p>
+        </div>
+        <div class="in-the-field-attr">
+          Manchester Rotary Club · Cruisin' Downtown · 25 years and counting · cruisingdowntownnh.com
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ─────────── PRICING (soft) ─────────── -->
+  <section class="section-editorial" aria-labelledby="pricing-headline" style="background: var(--color-surface-soft);">
+    <div class="container-narrow">
+      <div class="soft-pricing">
+        <div class="eyebrow">Pricing</div>
+        <h2 id="pricing-headline" class="soft-pricing-headline font-serif" style="margin-top:1rem;">
+          Pricing scales with the size of your event.<br>
+          <span class="italic">Talk to us.</span>
+        </h2>
+        <p class="soft-pricing-body">
+          Every event is different. A 200-car local cruise has different needs than a 45,000-attendee regional show. We size pricing to what you actually run — and we don't charge integration fees, vendor lock-in, or hidden per-transaction skim. Tell us what your event looks like and we'll come back with a number.
+        </p>
+        <div class="soft-pricing-actions">
+          <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Events%20—%20Pricing" class="btn-primary-large">
+            Talk to us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- CTA -->
-  <section class="cta-section" aria-label="Call to action">
-    <div class="cta-glow" aria-hidden="true"></div>
-    <div class="cta-content fade-up">
-      <h2>Your event deserves<br>real operations.</h2>
-      <p>Stop running events on spreadsheets and hope. ClearPath Events gives you a complete operations platform &mdash; from the first registration to the last dollar counted.</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
-        <a href="mailto:info@driveclearpath.com" class="btn-primary" style="font-size: 1.15rem; padding: 1.15rem 3rem;">Get ClearPath Events &rarr;</a>
+  <!-- ─────────── FAQ ─────────── -->
+  <section class="section-editorial" aria-labelledby="faq-headline">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div class="eyebrow">Operator questions</div>
+        <h2 id="faq-headline" class="section-headline font-serif">
+          The objections we hear.<br>
+          <span class="italic-emphasis">Answered straight.</span>
+        </h2>
       </div>
-      <div class="cta-trust">
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 100% to charity</span>
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Proven at 45K+ attendees</span>
-        <span class="cta-trust-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Mobile staff app</span>
+
+      <div style="margin-top:3rem;">
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">01</div>
+          <div>
+            <div class="faq-question">We already use Eventbrite / a custom site / spreadsheets. What's the cost of switching?</div>
+            <p class="faq-answer">Nothing structural. ClearPath imports prior years' rosters, vendor lists, and sponsor histories. Your first event is the migration — not a parallel run. If we can't make the switch boring, we'll tell you on the first call.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">02</div>
+          <div>
+            <div class="faq-question">What happens on event day if your platform goes down?</div>
+            <p class="faq-answer">Two answers. First, the platform is read-mostly on event day and cached on every device — gate scanning and lookup keep working through brief network blips. Second, every screen has a manual fallback (search by name, paper roster export) so a worst-case outage doesn't strand the gate.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">03</div>
+          <div>
+            <div class="faq-question">Do we own our data?</div>
+            <p class="faq-answer">Yes. Registrants, vendors, sponsors, volunteers — all exportable as CSV any time, no friction. We don't sell aggregated event data. We don't train models on it. If you leave, you leave with everything.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">04</div>
+          <div>
+            <div class="faq-question">Can vendors and sponsors apply without creating ClearPath accounts?</div>
+            <p class="faq-answer">Yes. Public application forms live on your event's domain. Vendors fill them out, pay through Stripe, get a confirmation email. They never see "ClearPath" until you place them on the map. The platform runs quietly behind your event's brand.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">05</div>
+          <div>
+            <div class="faq-question">Will my volunteer team actually use it?</div>
+            <p class="faq-answer">The volunteer signup is a public web page — no app install, no login. The event-day mobile portal is QR-and-PIN access on whatever phone they brought. We've watched seventy-year-old Rotarians sign in faster than the kid running the merch table. If your volunteers can scan a parking-meter QR, they can use this.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer role="contentinfo">
+  <!-- ─────────── CTA ─────────── -->
+  <section class="cta" aria-labelledby="cta-headline">
+    <div class="container-wide">
+      <div class="cta-card">
+        <div class="cta-eyebrow">
+          <span class="pulse-emerald" aria-hidden="true"></span>
+          Now accepting pilot events
+        </div>
+        <h2 id="cta-headline" class="cta-headline font-serif">
+          Run the show yourself.<br>
+          <span class="italic">Without running it on spreadsheets.</span>
+        </h2>
+        <p class="cta-sub">
+          Tell us how your event runs today — registration, sponsors, vendors, volunteers, day-of operations. We'll show you what the first 90 days inside ClearPath looks like, sized to your event.
+        </p>
+
+        <div class="cta-actions">
+          <a href="mailto:info@driveclearpath.com?subject=ClearPath%20Events%20—%20Pilot" class="btn-on-dark">
+            Talk to us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
+          <a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener" class="btn-on-dark-outline">
+            See it live
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </a>
+        </div>
+
+        <div class="cta-trust">
+          <span>· No vendor lock-in</span>
+          <span>· Your data exports as CSV</span>
+          <span>· Stripe payments, your account</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── FOOTER ─────────── -->
+  <footer class="footer" role="contentinfo">
     <div class="footer-inner">
-      <div class="footer-left">
-        <img src="assets/cp-icon-white.png" alt="ClearPath" style="height:28px;width:28px;object-fit:contain;opacity:0.7;filter:drop-shadow(0 0 8px rgba(30,136,229,0.2))">
-        <span>&copy; 2026 ClearPath Holdings, LLC. All rights reserved.</span>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-mark">
+            <span class="nav-logo-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+            <span class="footer-brand-text">ClearPath <span class="muted">Holdings</span></span>
+          </div>
+          <p class="footer-brand-tagline">
+            Operational sophistication for the small operator. Manchester, NH.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">ClearPath family</div>
+          <ul>
+            <li><a href="os.html">ClearPath OS</a></li>
+            <li><a href="experience.html">ClearPath Experience</a></li>
+            <li><a href="events.html">ClearPath Events</a></li>
+            <li><a href="mailto:info@driveclearpath.com?subject=ClearPath%20Practice%20—%20Talk%20to%20us">ClearPath Practice</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">Company</div>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Sign in</a></li>
+            <li><a href="mailto:info@driveclearpath.com">info@driveclearpath.com</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-heading">Legal</div>
+          <ul>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="sms-terms.html">SMS terms</a></li>
+            <li><a href="https://cruisingdowntownnh.com" target="_blank" rel="noopener">See it live ↗</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="mailto:info@driveclearpath.com">Contact</a>
-        <a href="about.html">About</a>
-        <a href="os.html">ClearPath OS</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="events.html">ClearPath Events</a>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
+
+      <div class="footer-fineprint">
+        <div>© 2026 ClearPath Holdings, LLC · Manchester, NH</div>
+        <div>Built for the operator who refuses to sell.</div>
       </div>
     </div>
   </footer>
 
-  <script src="js/shared.js" defer></script>
+  <!-- Leaflet vendor map (entry 03) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    (function () {
+      var el = document.getElementById('vendor-map');
+      if (!el || typeof L === 'undefined') return;
+
+      // Center on Veterans Park / Elm Street, downtown Manchester NH
+      var center = [42.99230, -71.45920];
+      var map = L.map(el, {
+        center: center,
+        zoom: 17,
+        zoomControl: false,
+        attributionControl: true,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        dragging: false,
+        touchZoom: false,
+        tap: false
+      });
+
+      // ESRI World Imagery — free satellite tiles, no API key required
+      L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        {
+          maxZoom: 19,
+          attribution: 'Tiles © Esri'
+        }
+      ).addTo(map);
+
+      function pin(lat, lng, color) {
+        var icon = L.divIcon({
+          className: '',
+          html: '<span class="vendor-map-pin ' + color + '"></span>',
+          iconSize: [14, 14],
+          iconAnchor: [7, 7]
+        });
+        L.marker([lat, lng], { icon: icon, interactive: false, keyboard: false }).addTo(map);
+      }
+
+      // Veterans Park cluster (amber)
+      pin(42.99290, -71.45875, 'amber');
+      pin(42.99275, -71.45855, 'amber');
+      pin(42.99258, -71.45895, 'amber');
+      pin(42.99245, -71.45915, 'amber');
+
+      // Elm Street corridor (emerald)
+      pin(42.99205, -71.45955, 'emerald');
+      pin(42.99165, -71.45945, 'emerald');
+      pin(42.99125, -71.45935, 'emerald');
+
+      // Notre Dame Bridge area (blue)
+      pin(42.99320, -71.46035, 'blue');
+      pin(42.99285, -71.46065, 'blue');
+
+      // Entrance (coral)
+      pin(42.99090, -71.45920, 'coral');
+    })();
+  </script>
 
 </body>
 </html>
