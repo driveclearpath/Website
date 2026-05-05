@@ -1,56 +1,73 @@
-/* Public intake — entry-form-specific styles. Layered on top of /css/intake.css. */
+/* Public intake — editorial-themed components.
+   Standalone — no dependency on /css/intake.css. Layered on top of /css/editorial.css. */
 
-.entry-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-.entry-fields {
+.intake-page {
+  min-height: calc(100vh - 80px);
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4rem 0 5rem;
 }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.state { display: none; width: 100%; }
+.state.active { display: block; }
+
+/* ============ ENTRY ============ */
+.intake-entry-shell {
+  text-align: left;
+  padding-top: 2rem;
 }
 
-.field-label {
-  font-size: 0.82rem;
+.intake-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--text-secondary);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: var(--color-text-dim);
+  margin-bottom: 1.25rem;
 }
 
-.field input {
-  padding: 14px 16px;
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  background: rgba(6, 10, 20, 0.6);
-  border: 1px solid var(--border-mid);
-  border-radius: 10px;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+.intake-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  margin: 0 0 1.25rem;
 }
 
-.field input::placeholder {
-  color: var(--text-muted);
-  font-weight: 400;
+.intake-headline .italic {
+  font-style: italic;
+  color: var(--color-navy);
 }
 
-.field input:focus {
-  border-color: var(--blue-primary);
-  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+.intake-sub {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 56ch;
+  margin: 0 0 2.5rem;
 }
 
-/* Honeypot — visually hidden, accessibility-hidden, but real bots that auto-fill
-   every input will still set a value here. We check for that server-side. */
+/* Entry form */
+.intake-entry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Honeypot — visually hidden but in DOM */
 .honeypot {
   position: absolute !important;
   width: 1px;
@@ -63,49 +80,280 @@
   padding: 0;
 }
 
-.turnstile-mount {
+.intake-turnstile-mount {
   display: flex;
-  justify-content: center;
-  min-height: 65px;       /* prevents layout shift while widget loads */
-  margin-top: 4px;
+  justify-content: flex-start;
 }
+.intake-turnstile-mount:empty { display: none; }
 
-.entry-submit {
-  width: 100%;
-  margin-top: 4px;
+.intake-submit {
+  align-self: flex-start;
+  position: relative;
+  margin-top: 0.5rem;
 }
+.intake-submit .btn-arrow {
+  transition: transform 0.15s ease;
+}
+.intake-submit:hover .btn-arrow {
+  transform: translateX(3px);
+}
+.intake-submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.intake-submit .btn-spinner { display: none; }
+.intake-submit.loading .btn-label { opacity: 0.55; }
+.intake-submit.loading .btn-arrow { display: none; }
+.intake-submit.loading .btn-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
-.entry-fallback {
-  text-align: center;
-  margin-top: 22px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border-soft);
-  color: var(--text-muted);
+.form-error {
+  margin: 0;
+  color: var(--color-coral);
   font-size: 0.92rem;
+  min-height: 1.3em;
 }
 
-.entry-fallback a {
-  color: var(--text-secondary);
+.intake-fallback {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+.intake-fallback a {
+  color: var(--color-text-muted);
   text-decoration: underline;
-  text-decoration-color: var(--border-mid);
+  text-decoration-color: var(--color-border-strong);
   text-underline-offset: 3px;
-  transition: color 0.2s, text-decoration-color 0.2s;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.intake-fallback a:hover {
+  color: var(--color-ink);
+  text-decoration-color: var(--color-ink);
 }
 
-.entry-fallback a:hover {
-  color: var(--cyan-accent);
-  text-decoration-color: var(--cyan-accent);
+/* ============ CHAT ============ */
+.intake-chat-wrap {
+  padding-top: 1rem;
 }
 
-/* Done-mark icon used by the post-conversation states */
-.done-mark {
+.intake-chat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  box-shadow: 0 24px 48px -16px rgba(15, 23, 42, 0.10);
+  display: flex;
+  flex-direction: column;
+  height: min(78vh, 720px);
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .intake-chat-card {
+    height: calc(100vh - 200px);
+    border-radius: 14px;
+  }
+}
+
+.intake-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-soft);
+  gap: 1rem;
+}
+
+.intake-chat-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+}
+.intake-chat-sub {
+  font-size: 0.78rem;
+  color: var(--color-text-dim);
+  margin-top: 2px;
+}
+
+.intake-chat-end {
+  padding: 0.5rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.intake-chat-end:hover {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: #fff;
+}
+
+.intake-chat-stream {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  scroll-behavior: smooth;
+  background: var(--color-surface);
+}
+.intake-chat-stream::-webkit-scrollbar { width: 6px; }
+.intake-chat-stream::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 3px;
+}
+
+.bubble {
+  max-width: 82%;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  font-size: 0.97rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  animation: rise 0.25s ease-out;
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.bubble.assistant {
+  align-self: flex-start;
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-top-left-radius: 4px;
+}
+
+.bubble.user {
+  align-self: flex-end;
+  background: var(--color-ink);
+  color: #fff;
+  border-top-right-radius: 4px;
+}
+
+/* Typing indicator (3 dots) */
+.bubble.typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.85rem 1rem;
+}
+.bubble.typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-text-faint);
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+.bubble.typing span:nth-child(2) { animation-delay: 0.15s; }
+.bubble.typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+.intake-chat-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-soft);
+}
+
+.intake-chat-input {
+  flex: 1;
+  resize: none;
+  font-family: var(--font-sans);
+  font-size: 0.97rem;
+  line-height: 1.5;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  max-height: 160px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.intake-chat-input:focus {
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.intake-chat-input::placeholder { color: var(--color-text-faint); }
+
+.intake-chat-send {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: rgba(77, 208, 225, 0.12);
-  color: var(--cyan-accent);
-  margin-bottom: 18px;
+  width: 42px;
+  height: 42px;
+  background: var(--color-ink);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.intake-chat-send:hover { background: var(--color-navy-deep); }
+.intake-chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ============ STATUS CARDS (pending-confirm / confirmed / error) ============ */
+.intake-status-shell {
+  text-align: left;
+  padding-top: 3rem;
+  max-width: 520px;
+}
+
+.intake-status-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+}
+.intake-status-mark-blue {
+  background: var(--color-blue-bg);
+  color: var(--color-blue);
+}
+.intake-status-mark-emerald {
+  background: rgba(16, 185, 129, 0.10);
+  color: var(--color-emerald);
+}
+
+.intake-status-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 4.2vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  margin: 0 0 1rem;
+}
+
+.intake-status-sub {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0;
 }

@@ -66,13 +66,10 @@ function mountTurnstile() {
   const mount = document.getElementById('turnstile-mount');
   if (!mount) return;
 
-  // If the placeholder hasn't been replaced with a real key, render a soft warning
-  // (visible only to whoever is QAing the page) and continue without Turnstile —
-  // the server will fail closed in production but pass in dev (see _lib/turnstile.js).
+  // No site key configured → render nothing. The server bypasses verification when
+  // TURNSTILE_SECRET_KEY is also unset, so the form submits cleanly. The mount has
+  // `display: none` when empty (CSS :empty rule), so no layout space is wasted.
   if (!siteKey || siteKey.includes('__TURNSTILE_SITE_KEY__')) {
-    mount.innerHTML =
-      '<div style="font-size:12px;color:var(--text-muted);text-align:center">' +
-      '(Turnstile not configured — set TURNSTILE site key in intake-public.html)</div>';
     return;
   }
 
