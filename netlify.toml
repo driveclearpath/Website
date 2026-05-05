@@ -51,6 +51,11 @@
   to = "/intake-public.html"
   status = 200
 
+[[redirects]]
+  from = "/intake-public"
+  to = "/intake-public.html"
+  status = 200
+
 # Block the intake-public/ spec folder from public access. These are internal-only
 # (objectives, system prompt, setup notes) — not secrets, but no reason to publish them.
 [[redirects]]
