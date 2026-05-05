@@ -114,7 +114,11 @@ entryForm?.addEventListener('submit', async (e) => {
 
   const name = entryName.value.trim();
   const email = entryEmail.value.trim();
+  // Snapshot the honeypot value, then immediately clear it. Real users with aggressive
+  // autofill extensions can have hidden fields filled silently — clearing on submit means
+  // we only catch bots that are submitting programmatically without going through the form.
   const honeypot = entryHoneypot.value.trim();
+  entryHoneypot.value = '';
 
   if (!name || name.length < 2) {
     showEntryError('Tell me your name (2 or more characters).');
@@ -147,7 +151,7 @@ entryForm?.addEventListener('submit', async (e) => {
       body: JSON.stringify({
         name,
         email,
-        company_website: honeypot,        // server checks honeypot
+        cp_field_b: honeypot,             // server checks honeypot under this key
         turnstile_token: state.turnstileToken,
       }),
     });
@@ -156,6 +160,14 @@ entryForm?.addEventListener('submit', async (e) => {
     if (!resp.ok) {
       showEntryError(data.error || 'Could not start. Please try again.');
       resetTurnstile();
+      return;
+    }
+
+    // Honeypot trip → fake-success path: route to the "confirmed" state without
+    // starting a chat. Bots think they submitted; real humans (rare with the JS
+    // clear) at least see a coherent end state instead of an error.
+    if (data.bot_likely) {
+      go('confirmed');
       return;
     }
 

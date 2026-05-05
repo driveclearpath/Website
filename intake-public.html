@@ -88,11 +88,13 @@
             >
           </div>
 
-          <!-- Honeypot — hidden from real users via CSS+aria. Bots that auto-fill all fields trip it. -->
-          <label class="honeypot" aria-hidden="true">
-            Company website
-            <input id="entry-honeypot" name="company_website" type="text" tabindex="-1" autocomplete="off">
-          </label>
+          <!-- Honeypot — hidden from real users via CSS+aria. Field name is intentionally non-semantic
+               so browser/password-manager autofill ignores it. The JS also clears it on submit as a
+               second line of defense in case any extension does fill it anyway. -->
+          <div class="honeypot" aria-hidden="true">
+            <label for="entry-honeypot">Leave this field blank</label>
+            <input id="entry-honeypot" name="cp_field_b" type="text" tabindex="-1" autocomplete="new-password">
+          </div>
 
           <!-- Cloudflare Turnstile — site key wired by /js/intake-public.js from the meta tag below.
                When the placeholder is unreplaced, the JS renders nothing and the server bypasses verification. -->

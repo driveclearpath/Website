@@ -33,14 +33,23 @@ export async function handler(event) {
   const db = supabase();
 
   // -------- Layer 1a: honeypot --------
-  // If the hidden bot-trap field is filled, this is almost certainly a bot.
-  // Return a fake-success response to avoid signalling that we caught them.
-  if (payload.company_website && String(payload.company_website).trim().length > 0) {
+  // The frontend JS clears the honeypot on submit, so any non-empty value here means
+  // either a non-JS bot OR an autofill extension that survived the JS clear. Either
+  // way, it's almost certainly not a real user. Return a fake-success response to
+  // avoid signalling that we caught them — but DO NOT return a fake session token
+  // (a token of "0000…" causes the next chat-turn call to 404 with "Session not
+  // found", which surfaces the honeypot to whoever tripped it). Instead, return a
+  // marker the frontend can route on.
+  //
+  // Field name `cp_field_b` is intentionally non-semantic so password managers and
+  // browser autofill don't try to fill it from address/url profiles.
+  const honeypotValue = payload.cp_field_b || payload.company_website; // accept both during deploy rollover
+  if (honeypotValue && String(honeypotValue).trim().length > 0) {
     await logAttempt(db, { ipAddress, userAgent, outcome: 'honeypot_tripped' });
     return json(200, {
       ok: true,
-      session_token: '00000000-0000-0000-0000-000000000000',
-      opening_message: buildPublicOpeningMessage(null),
+      bot_likely: true,
+      opening_message: 'Thanks — Brad will be in touch.',
       visitor_name: payload.name || 'there',
     });
   }
