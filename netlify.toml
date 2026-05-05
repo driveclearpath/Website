@@ -20,10 +20,44 @@
   to = "/.netlify/functions/submit-intake"
   status = 200
 
+# Public "Talk to Brad" intake (driveclearpath.com /contact.html → /intake-public.html)
+[[redirects]]
+  from = "/api/public-validate-entry"
+  to = "/.netlify/functions/public-validate-entry"
+  status = 200
+
+[[redirects]]
+  from = "/api/public-chat-turn"
+  to = "/.netlify/functions/public-chat-turn"
+  status = 200
+
+[[redirects]]
+  from = "/api/public-submit-intake"
+  to = "/.netlify/functions/public-submit-intake"
+  status = 200
+
+[[redirects]]
+  from = "/api/confirm-intake"
+  to = "/.netlify/functions/confirm-intake"
+  status = 200
+
 [[redirects]]
   from = "/intake"
   to = "/intake.html"
   status = 200
+
+[[redirects]]
+  from = "/talk"
+  to = "/intake-public.html"
+  status = 200
+
+# Block the intake-public/ spec folder from public access. These are internal-only
+# (objectives, system prompt, setup notes) — not secrets, but no reason to publish them.
+[[redirects]]
+  from = "/intake-public/*"
+  to = "/404.html"
+  status = 404
+  force = true
 
 # ClearPath Voice was folded into OS and Practice as a capability,
 # rather than a standalone marketed product. Redirect any inbound

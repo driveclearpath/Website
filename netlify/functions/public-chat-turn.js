@@ -1,0 +1,265 @@
+// Chat turn handler for the public "Talk to us" AI intake.
+// Mirrors chat-turn.js but uses session_token (not invite codes), the public
+// system prompt, and the public tool set. Magic-link confirmation happens at
+// conclude time — Brad is NOT notified here.
+
+import Anthropic from '@anthropic-ai/sdk';
+import { randomUUID } from 'crypto';
+import { supabase } from './_lib/supabase.js';
+import { buildPublicSystemPrompt, buildPublicOpeningMessage } from './_lib/publicPrompt.js';
+import { PUBLIC_TOOLS } from './_lib/publicTools.js';
+import { sendVisitorConfirmation } from './_lib/publicEmail.js';
+import { evaluateQuality } from './_lib/quality.js';
+import { MODELS } from './_lib/aiModels.js';
+
+const MAX_TOOL_LOOPS = 5;
+const MAX_TURNS = Number(process.env.PUBLIC_MAX_INTAKE_TURNS || 30);
+
+const json = (statusCode, body) => ({
+  statusCode,
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(body),
+});
+
+function extractText(blocks) {
+  return blocks
+    .filter((b) => b.type === 'text')
+    .map((b) => b.text)
+    .join('\n')
+    .trim();
+}
+
+function extractToolUses(blocks) {
+  return blocks.filter((b) => b.type === 'tool_use');
+}
+
+function buildTranscript(messages, visitorName) {
+  const userLabel = (visitorName?.split(/\s+/)[0] || 'VISITOR').toUpperCase();
+  const lines = [];
+  for (const m of messages) {
+    if (m.role === 'user') {
+      const text = typeof m.content === 'string'
+        ? m.content
+        : (m.content || []).filter((b) => b.type !== 'tool_result').map((b) => b.text || '').join(' ');
+      if (text.trim()) lines.push(`${userLabel}: ${text.trim()}`);
+    } else if (m.role === 'assistant') {
+      const blocks = Array.isArray(m.content) ? m.content : [{ type: 'text', text: m.content }];
+      const text = blocks.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
+      if (text) lines.push(`ASSISTANT: ${text}`);
+    }
+  }
+  return lines.join('\n\n');
+}
+
+function applyToolCall(toolUse, agg) {
+  const { name, input } = toolUse;
+
+  if (name === 'capture_answer') {
+    const key = `${input.objective_id}.${input.field}`;
+    agg.answers[key] = {
+      value: input.value,
+      confidence: input.confidence,
+      notes: input.notes || null,
+      captured_at: new Date().toISOString(),
+    };
+    return { result: 'ok', concluded: false };
+  }
+
+  if (name === 'flag_for_brad') {
+    agg.flags.push({
+      reason: input.reason,
+      content: input.content,
+      context: input.context || null,
+      flagged_at: new Date().toISOString(),
+    });
+    return { result: 'flagged', concluded: false };
+  }
+
+  if (name === 'skip_topic') {
+    agg.skipped.push({
+      objective_id: input.objective_id,
+      reason: input.reason,
+      skipped_at: new Date().toISOString(),
+    });
+    return { result: 'skipped', concluded: false };
+  }
+
+  if (name === 'conclude_intake') {
+    agg.conclusion_reason = input.reason;
+    agg.conclusion_summary = input.summary;
+    agg.fit_read = input.fit_read;
+    return { result: 'concluded', concluded: true };
+  }
+
+  return { result: 'unknown_tool', concluded: false };
+}
+
+export async function handler(event) {
+  if (event.httpMethod !== 'POST') return json(405, { error: 'Method not allowed' });
+
+  let payload;
+  try {
+    payload = JSON.parse(event.body || '{}');
+  } catch {
+    return json(400, { error: 'Invalid JSON' });
+  }
+
+  const { session_token, user_message } = payload;
+  if (!session_token) return json(400, { error: 'Missing session_token' });
+  if (!user_message || typeof user_message !== 'string') {
+    return json(400, { error: 'Missing user_message' });
+  }
+
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) return json(500, { error: 'Server missing ANTHROPIC_API_KEY' });
+
+  const db = supabase();
+
+  const { data: row, error: rowErr } = await db
+    .from('public_intake_responses')
+    .select('*')
+    .eq('session_token', session_token)
+    .maybeSingle();
+
+  if (rowErr || !row) return json(404, { error: 'Session not found' });
+  if (row.submitted_at) {
+    return json(409, { error: 'This session is already complete.', done: true });
+  }
+  if ((row.turn_count || 0) >= MAX_TURNS) {
+    return json(429, { error: 'Conversation length cap reached.' });
+  }
+
+  // Build messages — seed opener if first turn
+  let messages = Array.isArray(row.messages) ? [...row.messages] : [];
+  if (messages.length === 0) {
+    messages.push({
+      role: 'assistant',
+      content: buildPublicOpeningMessage(row.visitor_name),
+    });
+  }
+  messages.push({ role: 'user', content: user_message });
+
+  const client = new Anthropic({ apiKey });
+  const system = buildPublicSystemPrompt({ visitorName: row.visitor_name });
+
+  const agg = {
+    answers: { ...(row.answers || {}) },
+    flags: [...(row.flags || [])],
+    skipped: [...(row.skipped || [])],
+    conclusion_reason: null,
+    conclusion_summary: null,
+    fit_read: null,
+  };
+  let concluded = false;
+  let finalText = '';
+
+  for (let loop = 0; loop < MAX_TOOL_LOOPS; loop++) {
+    let resp;
+    try {
+      resp = await client.messages.create({
+        model: process.env.PUBLIC_INTAKE_MODEL || MODELS.OPUS,
+        max_tokens: 1024,
+        system,
+        tools: PUBLIC_TOOLS,
+        messages,
+      });
+    } catch (err) {
+      console.error('Claude API error:', err);
+      return json(502, { error: 'AI service error', detail: err.message });
+    }
+
+    const blocks = resp.content || [];
+    const toolUses = extractToolUses(blocks);
+    const text = extractText(blocks);
+
+    messages.push({ role: 'assistant', content: blocks });
+    if (text) finalText += (finalText ? '\n\n' : '') + text;
+
+    if (toolUses.length === 0) break;
+
+    const toolResultBlocks = [];
+    for (const tu of toolUses) {
+      const { result, concluded: toolConcluded } = applyToolCall(tu, agg);
+      if (toolConcluded) concluded = true;
+      toolResultBlocks.push({
+        type: 'tool_result',
+        tool_use_id: tu.id,
+        content: result,
+      });
+    }
+
+    messages.push({ role: 'user', content: toolResultBlocks });
+    if (concluded) break;
+  }
+
+  const transcript = buildTranscript(messages, row.visitor_name);
+  const nextTurnCount = (row.turn_count || 0) + 1;
+
+  const patch = {
+    messages,
+    answers: agg.answers,
+    flags: agg.flags,
+    skipped: agg.skipped,
+    turn_count: nextTurnCount,
+    transcript,
+  };
+
+  // -------- Concluded path --------
+  let confirmationRequired = false;
+  let silentDrop = false;
+
+  if (concluded) {
+    patch.conclusion_reason = agg.conclusion_reason;
+    patch.conclusion_summary = agg.conclusion_summary;
+    patch.fit_read = agg.fit_read;
+    patch.submitted_at = new Date().toISOString();
+
+    // Evaluate quality on the post-conclusion row shape
+    const quality = evaluateQuality({
+      ...row,
+      ...patch,
+    });
+    patch.quality_passed = quality.passed;
+    patch.quality_reasons = quality.reasons;
+
+    if (agg.conclusion_reason === 'not_legitimate') {
+      // Silent drop — no email, no confirmation, no Brad notification
+      silentDrop = true;
+    } else if (quality.passed) {
+      // Generate magic-link token + send visitor confirmation
+      const token = randomUUID();
+      patch.confirmation_token = token;
+      patch.confirmation_sent_at = new Date().toISOString();
+      confirmationRequired = true;
+
+      try {
+        await sendVisitorConfirmation({
+          visitorName: row.visitor_name,
+          visitorEmail: row.visitor_email,
+          confirmationToken: token,
+        });
+      } catch (err) {
+        console.error('Visitor confirmation send failed:', err);
+        // Don't block conclusion — the row will still be saved with the token,
+        // and Brad's admin surface can re-send if needed.
+      }
+    }
+    // else: quality_passed=false, no email sent, just sits in Supabase
+  }
+
+  const { error: updateErr } = await db
+    .from('public_intake_responses')
+    .update(patch)
+    .eq('id', row.id);
+
+  if (updateErr) console.error('Failed to update public_intake_responses row:', updateErr);
+
+  return json(200, {
+    ok: true,
+    text: finalText,
+    done: concluded,
+    turn_count: nextTurnCount,
+    confirmation_required: confirmationRequired,
+    silent_drop: silentDrop,
+  });
+}

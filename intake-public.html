@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Talk to Brad — ClearPath</title>
+  <link rel="icon" href="/assets/cp-icon-white.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/intake.css">
+  <link rel="stylesheet" href="/css/intake-public.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <div class="intake-shell">
+    <header class="intake-topbar">
+      <a href="/" class="intake-brand" aria-label="ClearPath">
+        <img src="/assets/cp-icon-white.png" alt="" class="intake-brand-mark">
+        <span class="intake-brand-text">ClearPath</span>
+      </a>
+      <span class="intake-subtle">Talk to Brad</span>
+    </header>
+
+    <main class="intake-main">
+
+      <!-- ============ STATE 1: ENTRY ============ -->
+      <section class="state state-entry active" data-state="entry">
+        <div class="card">
+          <h1 class="card-title">Talk to Brad's AI first.</h1>
+          <p class="card-lede">
+            Five minutes here, and Brad shows up to your follow-up already knowing your situation —
+            no repeating yourself.
+          </p>
+
+          <form id="entry-form" class="entry-form" autocomplete="on" novalidate>
+            <div class="entry-fields">
+              <label class="field">
+                <span class="field-label">Your name</span>
+                <input
+                  id="entry-name"
+                  name="name"
+                  type="text"
+                  required
+                  autocomplete="given-name"
+                  minlength="2"
+                  maxlength="80"
+                  placeholder="First and last is fine"
+                  spellcheck="false"
+                >
+              </label>
+
+              <label class="field">
+                <span class="field-label">Email Brad should reach back at</span>
+                <input
+                  id="entry-email"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  maxlength="254"
+                  placeholder="you@yourbusiness.com"
+                  spellcheck="false"
+                >
+              </label>
+
+              <!-- Honeypot field — hidden from real users via CSS+aria. Bots that auto-fill all fields trip it. -->
+              <label class="honeypot" aria-hidden="true">
+                Company website
+                <input
+                  id="entry-honeypot"
+                  name="company_website"
+                  type="text"
+                  tabindex="-1"
+                  autocomplete="off"
+                >
+              </label>
+            </div>
+
+            <!-- Cloudflare Turnstile — site key is wired in by /js/intake-public.js from the meta tag below -->
+            <meta id="cp-turnstile-sitekey" content="__TURNSTILE_SITE_KEY__">
+            <div id="turnstile-mount" class="turnstile-mount"></div>
+
+            <button type="submit" class="btn-primary entry-submit" id="entry-submit">
+              <span class="btn-label">Start the conversation</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+
+            <p class="form-error" id="entry-error" role="alert"></p>
+          </form>
+
+          <p class="entry-fallback">
+            Or just <a href="mailto:info@driveclearpath.com?subject=ClearPath%20%E2%80%94%20Talk%20to%20Brad">email me directly</a> —
+            no hard feelings.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ STATE 2: CHAT ============ -->
+      <section class="state state-chat" data-state="chat">
+        <div class="chat-shell">
+          <header class="chat-header">
+            <div>
+              <div class="chat-title">Brad's assistant</div>
+              <div class="chat-sub">end anytime — Brad only sees this after you confirm your email</div>
+            </div>
+            <button class="chat-end" id="chat-end" type="button" title="End and send your notes">End &amp; send</button>
+          </header>
+
+          <div class="chat-stream" id="chat-stream" aria-live="polite" aria-relevant="additions"></div>
+
+          <form id="chat-form" class="chat-form" autocomplete="off">
+            <label for="chat-input" class="sr-only">Your message</label>
+            <textarea
+              id="chat-input"
+              class="chat-input"
+              placeholder="Type your reply. Enter to send, Shift+Enter for a new line."
+              rows="1"
+              required
+            ></textarea>
+            <button type="submit" class="chat-send" id="chat-send" aria-label="Send">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ STATE 3: CHECK YOUR EMAIL (after AI wraps) ============ -->
+      <section class="state state-pending-confirm" data-state="pending-confirm">
+        <div class="card">
+          <div class="done-mark" aria-hidden="true">
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h1 class="card-title">Check your inbox.</h1>
+          <p class="card-lede" id="pending-confirm-text">
+            I just sent a one-click confirmation to your email. Click the link and Brad gets your notes —
+            usually within seconds. Without that click, no one sees what you wrote.
+          </p>
+          <p class="entry-fallback" style="margin-top: 24px;">
+            Don't see it? Check spam, or <a href="mailto:info@driveclearpath.com">email me directly</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ STATE 4: CONFIRMED (after magic-link click) ============ -->
+      <section class="state state-confirmed" data-state="confirmed">
+        <div class="card">
+          <div class="done-mark" aria-hidden="true">
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          </div>
+          <h1 class="card-title">Brad has your notes.</h1>
+          <p class="card-lede">
+            He'll reach out personally — usually within a few days, sometimes faster if it's a fit
+            he's been looking for. Talk soon.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ STATE 5: ERROR (bad/expired magic link, etc.) ============ -->
+      <section class="state state-error" data-state="error">
+        <div class="card">
+          <h1 class="card-title">Something's off.</h1>
+          <p class="card-lede" id="error-text">
+            That confirmation link didn't work. It may have expired or already been used.
+          </p>
+          <p class="entry-fallback" style="margin-top: 24px;">
+            <a href="/contact.html">Start over</a> or <a href="mailto:info@driveclearpath.com">email me directly</a>.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="intake-footer">
+      <span>&copy; ClearPath Holdings</span>
+      <span class="dot">&bull;</span>
+      <span>No tracking · No newsletter</span>
+    </footer>
+  </div>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/intake-public.js"></script>
+</body>
+</html>
