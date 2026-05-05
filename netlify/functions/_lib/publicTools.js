@@ -108,7 +108,7 @@ export const PUBLIC_TOOLS = [
             'not_legitimate',
           ],
           description:
-            "Why the conversation ended. 'not_legitimate' = clear spam/bot/vendor pitching at us — dropped silently. 'low_engagement' = real human, shallow answers — stored but does not notify Brad. Other reasons proceed to the quality gate.",
+            "Why the conversation ended. Default to 'objectives_covered' or 'visitor_ready_to_end' for any real conversation that produced real signal — even if the visitor admitted to testing, is a friend of Brad's, or revealed at the end they're not the actual operator. 'low_engagement' = real person but answers were too thin to be useful (one-word replies, no business detail). 'not_legitimate' = ONLY use for: obvious spam, bot submissions, vendors pitching their services AT us, recruiter outreach, or hostile/abusive content. NEVER use 'not_legitimate' for visitors who admit to testing or who turn out to be Brad himself — those are valid intakes that produced valid signal.",
         },
         summary: {
           type: 'string',
