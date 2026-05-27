@@ -49,6 +49,12 @@
 
 html { -webkit-text-size-adjust: 100%; }
 
+/* Global guard: no element should be able to push the page wider than the
+   viewport. Without this, a single overshooting child gives the whole page a
+   horizontal scrollbar — which on phones reads as "the headline overflows and
+   the nav button is cut off." Per-section overflow:hidden isn't enough. */
+html, body { overflow-x: hidden; max-width: 100%; }
+
 body {
   margin: 0;
   background: var(--color-bg);
@@ -413,13 +419,21 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-family: var(--font-serif);
   font-feature-settings: "ss01", "liga";
   letter-spacing: -0.02em;
-  font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-  line-height: 1.05;
+  /* Floor lowered from 2.4rem → 1.9rem: ~38px was too tall for 320–375px
+     phones and forced the long first line to clip. */
+  font-size: clamp(1.9rem, 5.5vw, 4.5rem);
+  line-height: 1.08;
   font-weight: 600;
   color: var(--color-ink);
   margin-top: 1.5rem;
   text-wrap: balance;
 }
+
+/* Responsive line break: collapses on phones (let text rebalance naturally),
+   restores the intended two-line composition from 640px up. Use in place of a
+   hard <br> inside display headlines. */
+.brk-md { display: none; }
+@media (min-width: 640px) { .brk-md { display: inline; } }
 .hero-headline .italic { font-style: italic; color: var(--color-navy); }
 
 .hero-sub {
