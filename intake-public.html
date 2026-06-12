@@ -129,6 +129,13 @@
             <button class="intake-chat-end" id="chat-end" type="button" title="End and send your notes">End &amp; send</button>
           </header>
 
+          <ol class="intake-progress" id="chat-progress" aria-label="Conversation progress">
+            <li data-section="who">Who you are</li>
+            <li data-section="whats_broken">What's broken</li>
+            <li data-section="vision">Vision</li>
+            <li data-section="stakes">Stakes</li>
+          </ol>
+
           <div class="intake-chat-stream" id="chat-stream" aria-live="polite" aria-relevant="additions"></div>
 
           <div class="intake-attach-row" id="attach-row" hidden>
@@ -169,6 +176,10 @@
           I just sent a one-click confirmation to your email. Click the link and Brad gets your notes —
           usually within seconds. Without that click, no one sees what you wrote.
         </p>
+        <div class="intake-recap" id="confirm-recap" hidden>
+          <div class="intake-recap-label">What Brad will see</div>
+          <p class="intake-recap-text" id="confirm-recap-text"></p>
+        </div>
         <p class="intake-fallback">
           Don't see it? Check spam, or <a href="mailto:info@driveclearpath.com">email me directly</a>.
         </p>
@@ -186,6 +197,21 @@
           He'll reach out personally — usually within a few days, sometimes faster if it's a fit
           he's been looking for. Talk soon.
         </p>
+        <div class="intake-next-step">
+          <div class="intake-recap-label">Want to skip ahead?</div>
+          <p class="intake-next-step-text">
+            Every engagement starts with a <strong>$249 working session</strong> — you and Brad map your
+            design plan, integrations, and first 30 days. Credited in full toward your first month if you
+            move forward. He'll already have your notes in front of him.
+          </p>
+          <a href="mailto:info@driveclearpath.com?subject=Working%20Session%20—%20%24249" class="btn-primary-large" style="margin-top: 1rem;">
+            Book the working session
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
+          <p class="intake-fallback" style="border-top: 0; padding-top: 0.75rem; margin-top: 0.75rem;">
+            Or read <a href="/pricing.html#working-session">how the session works</a> first.
+          </p>
+        </div>
       </div>
     </section>
 

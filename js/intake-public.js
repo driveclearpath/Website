@@ -222,9 +222,9 @@ entryForm?.addEventListener('submit', async (e) => {
     state.visitorName = data.visitor_name || name;
     state.openingMessage = data.opening_message;
 
-    addBubble('assistant', state.openingMessage);
     recordBubble('assistant', state.openingMessage);
     go('chat');
+    typewriterBubble(state.openingMessage);
   } catch (err) {
     console.error(err);
     showEntryError('Network error. Check your connection and try again.');
@@ -338,6 +338,36 @@ chatInput?.addEventListener('paste', (e) => {
 
 attachRemove?.addEventListener('click', () => setAttachment(null));
 
+// Typewriter render for assistant replies — the response is already complete,
+// but revealing it at reading pace makes the agent feel alive. Total animation
+// is capped at ~2.2s so long replies never make the visitor wait on theatrics.
+function typewriterBubble(text) {
+  const div = addBubble('assistant', '');
+  const totalMs = Math.min(2200, Math.max(500, text.length * 9));
+  const ticks = Math.max(1, Math.round(totalMs / 24));
+  const step = Math.max(1, Math.ceil(text.length / ticks));
+  let i = 0;
+  return new Promise((resolve) => {
+    const timer = setInterval(() => {
+      i = Math.min(text.length, i + step);
+      div.textContent = text.slice(0, i);
+      chatStream.scrollTop = chatStream.scrollHeight;
+      if (i >= text.length) {
+        clearInterval(timer);
+        resolve(div);
+      }
+    }, 24);
+  });
+}
+
+// Progress breadcrumb — server reports which objective sections have signal.
+function updateProgress(sections) {
+  if (!Array.isArray(sections)) return;
+  document.querySelectorAll('#chat-progress li').forEach((li) => {
+    li.classList.toggle('done', sections.includes(li.dataset.section));
+  });
+}
+
 function addTyping() {
   const div = document.createElement('div');
   div.className = 'bubble assistant typing';
@@ -410,9 +440,11 @@ chatForm?.addEventListener('submit', async (e) => {
       return;
     }
 
+    updateProgress(data.progress);
+
     if (data.text) {
-      addBubble('assistant', data.text);
       recordBubble('assistant', data.text);
+      await typewriterBubble(data.text);
     }
 
     if (data.done) {
@@ -420,6 +452,15 @@ chatForm?.addEventListener('submit', async (e) => {
       chatSend.disabled = true;
       chatInput.disabled = true;
       clearSession();
+      // Fill the "what Brad will see" recap on the check-your-inbox screen.
+      if (data.confirmation_required && data.summary) {
+        const recap = document.getElementById('confirm-recap');
+        const recapText = document.getElementById('confirm-recap-text');
+        if (recap && recapText) {
+          recapText.textContent = data.summary;
+          recap.hidden = false;
+        }
+      }
       // If a confirmation was sent, route to "check your email."
       // If silent_drop, just show the confirmed page (don't tell them they were dropped).
       const next = data.confirmation_required ? 'pending-confirm' : 'confirmed';

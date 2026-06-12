@@ -39,6 +39,18 @@ const json = (statusCode, body) => ({
   body: JSON.stringify(body),
 });
 
+// Progress sections for the client breadcrumb, keyed by objective_id prefix
+// (see intake-public/OBJECTIVES.md: who_*, whats_broken_*, vision_*, stakes_*).
+const SECTION_PREFIXES = ['who', 'whats_broken', 'vision', 'stakes'];
+
+function coveredSections(answers = {}, skipped = []) {
+  const ids = [
+    ...Object.keys(answers).map((k) => k.split('.')[0]),
+    ...skipped.map((s) => s.objective_id || ''),
+  ];
+  return SECTION_PREFIXES.filter((p) => ids.some((id) => id === p || id.startsWith(p + '_')));
+}
+
 function extractText(blocks) {
   return blocks
     .filter((b) => b.type === 'text')
@@ -194,7 +206,14 @@ export async function handler(event) {
   storedMessages.push({ role: 'user', content: storedUserContent });
 
   const client = new Anthropic({ apiKey });
-  const system = buildPublicSystemPrompt({ visitorName: row.visitor_name });
+  let system = buildPublicSystemPrompt({ visitorName: row.visitor_name });
+
+  // Graceful tapering: near the turn cap, tell the AI to land the plane instead
+  // of getting cut off mid-question by the hard MAX_TURNS limit.
+  const remainingTurns = MAX_TURNS - (row.turn_count || 0);
+  if (remainingTurns <= 5) {
+    system += `\n\n---\n\n# Time pressure — wrap up now\n\nOnly ${remainingTurns} exchange${remainingTurns === 1 ? '' : 's'} remain before this conversation hits its hard length cap. Do NOT open new topics. This turn or the next, reflect what you've heard, ask the single "anything I should have asked?" closer if you haven't, and call conclude_intake. Ending warmly on time beats getting cut off mid-question.`;
+  }
 
   const agg = {
     answers: { ...(row.answers || {}) },
@@ -317,5 +336,11 @@ export async function handler(event) {
     turn_count: nextTurnCount,
     confirmation_required: confirmationRequired,
     silent_drop: silentDrop,
+    progress: coveredSections(agg.answers, agg.skipped),
+    // The recap shown on the "check your inbox" screen — only when a real
+    // confirmation is in flight (never on silent drops or quality fails).
+    ...(concluded && confirmationRequired && agg.conclusion_summary
+      ? { summary: agg.conclusion_summary }
+      : {}),
   });
 }

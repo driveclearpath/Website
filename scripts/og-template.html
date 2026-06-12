@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: linear-gradient(135deg, #082968 0%, #0B3D91 55%, #11489f 100%);
+    font-family: 'Inter', sans-serif; color: #fff; position: relative;
+  }
+  .dots {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.10) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(115deg, transparent 45%, black 100%);
+    -webkit-mask-image: linear-gradient(115deg, transparent 45%, black 100%);
+  }
+  .frame { position: relative; height: 100%; padding: 64px 72px; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand img { width: 52px; height: 52px; object-fit: contain; }
+  .brand-name { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; }
+  .brand-name .muted { color: rgba(255,255,255,0.55); font-weight: 400; }
+  .mid { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .eyebrow {
+    font-size: 19px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #9DBDF7; margin-bottom: 26px;
+  }
+  .headline {
+    font-family: 'Source Serif 4', serif; font-size: 78px; font-weight: 600;
+    line-height: 1.06; letter-spacing: -0.015em; max-width: 950px;
+  }
+  .headline .italic { font-style: italic; color: #BFD5FA; }
+  .tagline { font-size: 26px; color: rgba(255,255,255,0.72); margin-top: 28px; max-width: 880px; line-height: 1.4; }
+  .foot { display: flex; justify-content: space-between; align-items: flex-end; font-size: 21px; color: rgba(255,255,255,0.55); }
+</style>
+</head>
+<body>
+  <div class="dots"></div>
+  <div class="frame">
+    <div class="brand">
+      <img src="../assets/cp-icon-white.png" alt="">
+      <div class="brand-name">ClearPath <span class="muted">Holdings</span></div>
+    </div>
+    <div class="mid">
+      <div class="eyebrow" id="eyebrow"></div>
+      <div class="headline" id="headline"></div>
+      <div class="tagline" id="tagline"></div>
+    </div>
+    <div class="foot">
+      <div>driveclearpath.com</div>
+      <div id="foot-right"></div>
+    </div>
+  </div>
+  <script>
+    const cards = {
+      os: {
+        eyebrow: 'ClearPath OS',
+        headline: 'A virtual COO<br><span class="italic">for your shop.</span>',
+        tagline: 'The same playbook the roll-ups read your shop with — pointed at fixing it instead of pricing it.',
+        foot: 'For independent auto repair shops',
+      },
+      experience: {
+        eyebrow: 'ClearPath Experience',
+        headline: 'Every screen in the shop,<br><span class="italic">earning its keep.</span>',
+        tagline: 'Lobby, counter, floor, owner office — each TV tuned to exactly its audience.',
+        foot: 'Shop TV displays',
+      },
+      events: {
+        eyebrow: 'ClearPath Events',
+        headline: 'The whole show<br><span class="italic">on one panel.</span>',
+        tagline: 'Registration, vendors, sponsors, volunteers, the gate. Proven at 45,000+ attendees.',
+        foot: 'Event operations',
+      },
+      practice: {
+        eyebrow: 'ClearPath Practice',
+        headline: 'Free your phone.<br><span class="italic">Free your team.</span>',
+        tagline: 'AI intake, live callback queue, and follow-up automation for independent advisor practices.',
+        foot: 'Advisor practice management',
+      },
+      pricing: {
+        eyebrow: 'Pricing',
+        headline: 'Starting prices.<br><span class="italic">Sized to your operation.</span>',
+        tagline: 'Every engagement starts with a $249 working session — credited toward your first month.',
+        foot: 'No long-term contracts',
+      },
+    };
+    const key = new URLSearchParams(location.search).get('p') || 'os';
+    const c = cards[key];
+    document.getElementById('eyebrow').textContent = c.eyebrow;
+    document.getElementById('headline').innerHTML = c.headline;
+    document.getElementById('tagline').textContent = c.tagline;
+    document.getElementById('foot-right').textContent = c.foot;
+  </script>
+</body>
+</html>

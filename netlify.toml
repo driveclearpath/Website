@@ -5,6 +5,10 @@
 [functions]
   node_bundler = "esbuild"
 
+# Weekly intake digest — Mondays 12:00 UTC (~8am ET)
+[functions."intake-digest"]
+  schedule = "0 12 * * 1"
+
 # Security headers. CSP allowances: Google Fonts (all pages), Cloudflare Turnstile
 # (intake-public), Leaflet from unpkg + ArcGIS tiles (events.html vendor map),
 # data:/blob: images (intake screenshot previews). Inline scripts/styles are used

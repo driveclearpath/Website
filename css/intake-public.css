@@ -202,6 +202,54 @@
   color: #fff;
 }
 
+/* Progress breadcrumb */
+.intake-progress {
+  display: flex;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.55rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-soft);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+.intake-progress li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+.intake-progress li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-border-strong);
+  transition: background 0.3s;
+}
+.intake-progress li:not(:last-child)::after {
+  content: '';
+  width: 14px;
+  height: 1px;
+  background: var(--color-border);
+  margin-left: 0.35rem;
+}
+.intake-progress li.done {
+  color: var(--color-emerald);
+}
+.intake-progress li.done::before {
+  background: var(--color-emerald);
+}
+@media (max-width: 520px) {
+  .intake-progress { gap: 0.3rem; padding: 0.5rem 0.85rem; font-size: 0.6rem; }
+  .intake-progress li:not(:last-child)::after { width: 8px; }
+}
+
 .intake-chat-stream {
   flex: 1;
   overflow-y: auto;
@@ -443,4 +491,42 @@
   line-height: 1.6;
   color: var(--color-text-muted);
   margin: 0;
+}
+
+/* "What Brad will see" recap on the check-your-inbox screen */
+.intake-recap {
+  margin-top: 1.75rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+.intake-recap-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+  margin-bottom: 0.6rem;
+}
+.intake-recap-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+/* Working-session next step on the confirmed screen */
+.intake-next-step {
+  margin-top: 2rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+.intake-next-step-text {
+  margin: 0;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: var(--color-text);
 }
