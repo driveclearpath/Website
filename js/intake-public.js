@@ -127,7 +127,7 @@ function mountTurnstile() {
     }
     state.turnstileWidgetId = window.turnstile.render(mount, {
       sitekey: siteKey,
-      theme: 'dark',
+      theme: 'light',
       callback: (token) => { state.turnstileToken = token; },
       'expired-callback': () => { state.turnstileToken = null; },
       'error-callback': () => { state.turnstileToken = null; },
