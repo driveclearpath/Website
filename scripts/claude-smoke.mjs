@@ -5,6 +5,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@supabase/supabase-js';
 import { buildSystemPrompt, buildOpeningMessage } from '../netlify/functions/_lib/prompt.js';
 import { TOOLS } from '../netlify/functions/_lib/tools.js';
+import { MODELS } from '../netlify/functions/_lib/aiModels.js';
 
 const apiKey = process.env.ANTHROPIC_API_KEY;
 const supaUrl = process.env.SUPABASE_URL;
@@ -41,13 +42,13 @@ const messages = [
 console.log('=== USER MESSAGE ===');
 console.log(messages[1].content + '\n');
 
-console.log('=== CALLING CLAUDE (model: ' + (template.model_id || 'claude-opus-4-7') + ') ===');
+console.log('=== CALLING CLAUDE (model: ' + (template.model_id || MODELS.OPUS) + ') ===');
 const t0 = Date.now();
 
 let resp;
 try {
   resp = await client.messages.create({
-    model: template.model_id || 'claude-opus-4-7',
+    model: template.model_id || MODELS.OPUS,
     max_tokens: 1024,
     system,
     tools: TOOLS,
@@ -57,7 +58,7 @@ try {
   console.error('\u2717 Claude API error:', err.status, err.message);
   if (err.message?.includes('model')) {
     console.error('\nLikely fix: the model id is wrong or your key lacks access.');
-    console.error('Try: update expert_intake_templates.model_id to claude-sonnet-4-6');
+    console.error(`Try: update expert_intake_templates.model_id to ${MODELS.SONNET}`);
   }
   process.exit(1);
 }

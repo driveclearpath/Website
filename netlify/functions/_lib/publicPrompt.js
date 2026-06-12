@@ -108,6 +108,16 @@ Goal: have they tried before, who else weighs in, urgency.
 ## Section 5 — Anything else (OPTIONAL — only if engagement is high and time allows)
 "Anything else you'd want Brad to know before he writes you back?"
 
+# Screenshots
+
+Visitors can attach or paste screenshots — their scheduler, the spreadsheet that runs the business, a whiteboard photo, the software they're fighting with. When one arrives:
+
+1. Read it for the operational story: what system it is, how the work is organized, where the chaos shows. Reflect one or two specifics back so they know you actually looked — this is the moment that proves the whole thing is real.
+2. NEVER transcribe, repeat, or capture personal data visible in the image — customer names, phone numbers, emails, addresses, license plates, VINs, account numbers, or dollar amounts tied to a named person. Refer to such content only generically ("one of the customer rows," "an open ticket"). This applies to your replies AND to capture_answer / flag_for_brad — Brad must never receive someone's customer data secondhand.
+3. If an image is mostly sensitive data, comment only on the workflow shape and gently note they don't need to share specifics.
+4. Images are analyzed live and never stored. If asked, say exactly that.
+5. If an image is unreadable or unrelated, say so plainly and move on. Don't guess.
+
 # Capture and flag generously
 
 If the visitor mentions any of these unprompted, flag via flag_for_brad:
@@ -184,7 +194,7 @@ export function buildPublicOpeningMessage(visitorName) {
   const greeting = name ? `Hi ${name}` : 'Hi there';
   return `${greeting} — I'm Brad's assistant. Brad built me so he can come back to you with something real instead of a calendar link.
 
-I'll keep this short — five or so minutes — and Brad will follow up personally with a response that actually addresses your situation.
+I'll keep this short — five or so minutes — and Brad will follow up personally with a response that actually addresses your situation. If a screenshot says it faster — the scheduler, the spreadsheet, the whiteboard — attach or paste it and I'll read it on the spot. I don't keep images, so crop out customer info first.
 
 To get started: in a sentence or two, what kind of business do you run, and what pulled you to the site today?`;
 }

@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ClearPath Pricing — Plans That Pay for Themselves</title>
-  <meta name="description" content="ClearPath OS starts at $349/month. Our GM tier at $799/month replaces a $6,000+/month hire. No long-term contracts. No setup fees.">
+  <title>ClearPath Pricing — Starting Prices, Sized to Your Operation</title>
+  <meta name="description" content="ClearPath OS starts at $199/month. Every engagement begins with a $249 working session with the founder — credited toward your first month if you move forward. No long-term contracts.">
   <link rel="canonical" href="https://driveclearpath.com/pricing.html">
-  <meta property="og:title" content="ClearPath Pricing — Plans That Pay for Themselves">
-  <meta property="og:description" content="Starts at $349/month. The GM tier replaces a $6,000+/month hire. No contracts. No setup fees.">
+  <meta property="og:title" content="ClearPath Pricing — Starting Prices, Sized to Your Operation">
+  <meta property="og:description" content="ClearPath OS starts at $199/month. Every engagement begins with a $249 working session with the founder — credited toward your first month.">
   <meta property="og:url" content="https://driveclearpath.com/pricing.html">
   <meta property="og:image" content="https://driveclearpath.com/assets/clearpath-holdings.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/editorial.css">
 
   <script type="application/ld+json">
   {
@@ -22,249 +25,463 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is ClearPath Holdings?",
-        "acceptedAnswer": { "@type": "Answer", "text": "ClearPath Holdings is a parent company that owns and operates multiple businesses across software, events, and service industries. Our four product lines are ClearPath OS, ClearPath Experience, ClearPath Events, and ClearPath Voice Intelligence." }
+        "name": "How much does ClearPath OS cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "ClearPath OS starts at $199/month for Core and scales to $799/month for Portfolio (multi-location). Final pricing is sized to your operation in a working session before you sign anything. No long-term contracts. No setup fees on OS." }
       },
       {
         "@type": "Question",
-        "name": "How much does ClearPath OS cost?",
-        "acceptedAnswer": { "@type": "Answer", "text": "ClearPath OS starts at $349/month for Operator and scales to $1,299/month for Portfolio (multi-location). Our GM tier at $799/month replaces a $6,000+/month hire. No long-term contracts. No setup fees." }
+        "name": "What is the working session?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Every engagement starts with a $249 flat-fee working session with the founder. You bring how your operation runs today; we map your design plan, integrations, and first 30 days. If you move forward, the $249 is credited toward your first month." }
       },
       {
         "@type": "Question",
         "name": "How do I get started?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Reach out to us at info@driveclearpath.com. We're being very selective right now — only taking on clients we can fully commit to." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Book a working session by emailing info@driveclearpath.com, or start with our AI intake at driveclearpath.com/talk. We're selective — we only take on operators we can fully commit to." }
       }
     ]
   }
   </script>
+
+  <style>
+    /* Page-scoped pricing components, built on editorial tokens. */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .tier-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .tier-card-product {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-blue);
+    }
+    .tier-card-name {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-top: 0.4rem;
+    }
+    .tier-card-startingat {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: 1.25rem;
+    }
+    .tier-card-price {
+      font-family: var(--font-serif);
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--color-ink);
+    }
+    .tier-card-price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+      letter-spacing: 0;
+    }
+    .tier-card-features {
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0 0;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--color-border);
+      display: grid;
+      gap: 0.6rem;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--color-text);
+    }
+    .consult-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      padding: 2.5rem;
+      display: grid;
+      gap: 2.5rem;
+      grid-template-columns: 1fr;
+      margin-top: 3rem;
+    }
+    @media (min-width: 820px) {
+      .consult-card { grid-template-columns: auto 1fr; padding: 3rem; }
+    }
+    .consult-price {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 7vw, 4.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--color-ink);
+    }
+    .addon-grid {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-top: 3rem;
+    }
+  </style>
 </head>
 <body>
 
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
-  <div class="cursor-glow" id="cursor-glow"></div>
-
-  <!-- NAV -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo" aria-label="ClearPath">
-      <img src="assets/cp-icon-white.png" alt="CP" class="nav-logo-mark">
-      <div class="nav-logo-text"><span class="logo-main">ClearPath</span></div>
-    </a>
-    <div class="nav-links">
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Products <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
-        <div class="nav-dropdown-menu">
-          <a href="os.html">ClearPath OS</a>
-          <a href="experience.html">ClearPath Experience</a>
-          <a href="voice.html">ClearPath Voice</a>
-          <a href="events.html">ClearPath Events</a>
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="ClearPath Holdings home">
+        <span class="nav-logo-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+        <span class="nav-logo-text">ClearPath <span class="muted">Holdings</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html#products" class="nav-link">What we build</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true">Products
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <div class="nav-dropdown-heading">The ClearPath family</div>
+            <a href="os.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span><span><span class="nav-dropdown-item-name">ClearPath OS</span><span class="nav-dropdown-item-tag">Virtual COO for independent shops</span></span></a>
+            <a href="experience.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span><span><span class="nav-dropdown-item-name">ClearPath Experience</span><span class="nav-dropdown-item-tag">Shop TV displays</span></span></a>
+            <a href="events.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span><span><span class="nav-dropdown-item-name">ClearPath Events</span><span class="nav-dropdown-item-tag">Event operations</span></span></a>
+            <a href="practice.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dropdown-item-mark"><img src="assets/cp-icon-white.png" alt=""></span><span><span class="nav-dropdown-item-name">ClearPath Practice</span><span class="nav-dropdown-item-tag">Advisor practice management</span></span></a>
+          </div>
         </div>
+      </nav>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-signin">Sign in</a>
+        <a href="/talk" class="btn-primary-dark">Talk to us
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+        </a>
       </div>
-      <a href="pricing.html" class="active">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="login.html" class="nav-cta">Login</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </nav>
-  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-    <a href="os.html">ClearPath OS</a>
-    <a href="experience.html">ClearPath Experience</a>
-    <a href="voice.html">ClearPath Voice</a>
-    <a href="events.html">ClearPath Events</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html">Login</a>
-  </div>
-
-  <!-- HERO -->
-  <header class="hero hero--subpage">
-    <div class="hero-gradient" aria-hidden="true"></div>
-    <div class="hero-fade" aria-hidden="true"></div>
-    <div class="hero-content">
-      <div class="section-label section-label--centered">Pricing</div>
-      <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem);">Simple pricing.<br><span class="gradient-text">Real results.</span></h1>
-      <p class="hero-sub">If it doesn't pay for itself, you shouldn't be paying for it. Our GM tier replaces a $6,000+/month hire &mdash; it never calls in sick, never misses a number.</p>
     </div>
   </header>
 
-  <!-- PRICING GRID -->
-  <section id="pricing">
-    <div class="section-inner">
-      <div class="pricing-grid">
-        <div class="price-card fade-up fade-up-delay-1">
-          <div class="price-tier">ClearPath OS</div>
-          <h4>Core</h4>
-          <div class="price-amount">$199</div>
-          <div class="price-period">per month</div>
-          <ul class="price-features">
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Command Center</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Departments</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Team Scoreboards</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Setup & Configuration</li>
-          </ul>
-        </div>
-        <div class="price-card fade-up fade-up-delay-2">
-          <div class="price-tier">ClearPath OS</div>
-          <h4>Plus</h4>
-          <div class="price-amount">$349</div>
-          <div class="price-period">per month</div>
-          <ul class="price-features">
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Everything in Core</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> AI Coaching</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Reports & Audits</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Communication Integrations</li>
-          </ul>
-        </div>
-        <div class="price-card featured fade-up fade-up-delay-3">
-          <div class="popular-badge">Most Popular</div>
-          <div class="price-tier">ClearPath OS</div>
-          <h4>Pro</h4>
-          <div class="price-amount">$499</div>
-          <div class="price-period">per month</div>
-          <ul class="price-features">
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Everything in Plus</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Customer Pulse</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Team Messages</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Call Intelligence</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Revenue Leak Detection</li>
-          </ul>
-        </div>
-        <div class="price-card fade-up fade-up-delay-4">
-          <div class="price-tier">ClearPath OS</div>
-          <h4>Portfolio</h4>
-          <div class="price-amount">$799</div>
-          <div class="price-period">per month</div>
-          <ul class="price-features">
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Everything in Pro</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Multi-Location Roll-Up</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Cross-Shop Benchmarks</li>
-            <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Portfolio Dashboard</li>
-          </ul>
-        </div>
+  <!-- HERO -->
+  <section class="hero hero-subpage">
+    <div class="container-prose">
+      <div class="hero-eyebrow fade-up fade-up-1">
+        <span class="pulse-emerald" aria-hidden="true"></span>
+        Pricing
       </div>
-      <!-- Add-ons -->
-      <div style="margin-top: 3rem;">
-        <h3 class="section-title fade-up" style="font-size: 1.5rem;">Add-ons</h3>
-        <div class="grid-2" style="gap: 1.25rem; margin-top: 1.5rem;">
-          <div class="price-card fade-up">
-            <div class="price-tier">ClearPath Experience</div>
-            <h4>Shop TV Displays</h4>
-            <div style="display: flex; gap: 2rem; margin: 1rem 0;">
-              <div>
-                <div class="price-amount" style="font-size: 2rem;">$79</div>
-                <div class="price-period">per month &middot; BYO Screen</div>
-              </div>
-              <div>
-                <div class="price-amount" style="font-size: 2rem;">$69</div>
-                <div class="price-period">per month &middot; Firestick ($99 setup)</div>
-              </div>
-            </div>
-            <ul class="price-features">
-              <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Lobby, counter, floor, office screens</li>
-              <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Per location &middot; Requires ClearPath OS</li>
-              <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Zero maintenance &middot; Pair once, runs forever</li>
-            </ul>
+      <h1 class="hero-subpage-headline fade-up fade-up-2" style="margin-top:1.5rem;">
+        Starting prices.<br>
+        <span class="italic">Sized to your operation.</span>
+      </h1>
+      <p class="hero-subpage-sub fade-up fade-up-3" style="max-width: none;">
+        No two operations run the same, so we don't pretend one number fits everyone. Every tier below is a starting point — final pricing is scoped in a working session before you sign anything. No long-term contracts. No setup fees on OS.
+      </p>
+    </div>
+  </section>
+
+  <!-- WORKING SESSION -->
+  <section class="section-editorial" id="working-session" aria-labelledby="consult-headline">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div class="eyebrow">Step one — for every product</div>
+        <h2 id="consult-headline" class="section-headline font-serif">
+          Every engagement starts<br>
+          <span class="italic-emphasis">with a working session.</span>
+        </h2>
+      </div>
+
+      <div class="consult-card">
+        <div>
+          <div class="consult-price">$249</div>
+          <div style="font-size: 14px; color: var(--color-text-muted); margin-top: 0.5rem;">flat fee · one session</div>
+          <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); font-size: 14px; line-height: 1.5; color: var(--color-text-muted); max-width: 220px;">
+            <strong style="color: var(--color-emerald, #10B981);">Credited in full</strong> toward your first month if you move forward.
           </div>
-          <div class="price-card fade-up">
-            <div class="price-tier">ClearPath Voice</div>
-            <h4>AI Phone Receptionist</h4>
-            <div class="price-amount" style="font-size: 2rem;">$299</div>
-            <div class="price-period">per month &middot; flat rate</div>
-            <ul class="price-features" style="margin-top: 1rem;">
-              <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> 24/7 AI receptionist</li>
-              <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Missed call recovery & booking</li>
-              <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Works standalone or with OS</li>
-              <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Full onboarding &mdash; we train the AI on your shop</li>
-              <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Less than $10/day vs. a $3,500/mo employee</li>
-            </ul>
+        </div>
+        <div>
+          <p style="font-size: 17px; line-height: 1.65; color: var(--color-text); margin: 0;">
+            Before you pay for software, you sit down with the founder. Bring how your operation actually runs today — your systems, your bottlenecks, the thing that keeps eating your week. We'll work through your design plan together: which modules fit, what integrates with what you already use, and what your first 30 days inside ClearPath would look like.
+          </p>
+          <p style="font-size: 17px; line-height: 1.65; color: var(--color-text); margin: 1.25rem 0 0;">
+            If ClearPath isn't the right fit, we'll tell you on the call — and you'll still leave with a plan you can use. If it is, the $249 comes off your first month.
+          </p>
+          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+            <a href="mailto:info@driveclearpath.com?subject=Working%20Session%20—%20%24249" class="btn-primary-large">
+              Book a working session
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+            </a>
+            <span style="font-size: 13px; color: var(--color-text-muted);">or start with our <a href="/talk" style="color: var(--color-blue);">AI intake</a> — free, 5 minutes</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <!-- CLEARPATH OS TIERS -->
+  <section class="section-editorial" id="os-tiers" aria-labelledby="os-pricing-headline" style="background: var(--color-surface-soft);">
+    <div class="container-wide">
+      <div class="section-header">
+        <div class="eyebrow">ClearPath OS</div>
+        <h2 id="os-pricing-headline" class="section-headline font-serif">
+          A virtual COO,<br>
+          <span class="italic-emphasis">priced like software.</span>
+        </h2>
+        <p class="section-lead">
+          Four tiers, each a starting point. The working session determines where your shop actually lands — shop count, bay count, and integration depth all move the number.
+        </p>
+      </div>
+
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div class="tier-card-product">ClearPath OS</div>
+          <div class="tier-card-name">Core</div>
+          <div class="tier-card-startingat">starting at</div>
+          <div class="tier-card-price">$199<span> /mo</span></div>
+          <ul class="tier-card-features">
+            <li>· Command Center</li>
+            <li>· Departments</li>
+            <li>· Team Scoreboards</li>
+            <li>· Setup &amp; configuration</li>
+          </ul>
+        </div>
+        <div class="tier-card">
+          <div class="tier-card-product">ClearPath OS</div>
+          <div class="tier-card-name">Plus</div>
+          <div class="tier-card-startingat">starting at</div>
+          <div class="tier-card-price">$349<span> /mo</span></div>
+          <ul class="tier-card-features">
+            <li>· Everything in Core</li>
+            <li>· AI Coaching</li>
+            <li>· Reports &amp; Audits</li>
+            <li>· Communication integrations</li>
+          </ul>
+        </div>
+        <div class="tier-card">
+          <div class="tier-card-product">ClearPath OS</div>
+          <div class="tier-card-name">Pro</div>
+          <div class="tier-card-startingat">starting at</div>
+          <div class="tier-card-price">$499<span> /mo</span></div>
+          <ul class="tier-card-features">
+            <li>· Everything in Plus</li>
+            <li>· Customer Pulse</li>
+            <li>· Team Messages</li>
+            <li>· Call Intelligence</li>
+            <li>· Revenue leak detection</li>
+          </ul>
+        </div>
+        <div class="tier-card">
+          <div class="tier-card-product">ClearPath OS</div>
+          <div class="tier-card-name">Portfolio</div>
+          <div class="tier-card-startingat">starting at</div>
+          <div class="tier-card-price">$799<span> /mo</span></div>
+          <ul class="tier-card-features">
+            <li>· Everything in Pro</li>
+            <li>· Multi-location roll-up</li>
+            <li>· Cross-shop benchmarks</li>
+            <li>· Portfolio dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD-ONS & THE REST OF THE FAMILY -->
+  <section class="section-editorial" id="family-pricing" aria-labelledby="family-pricing-headline">
+    <div class="container-wide">
+      <div class="section-header">
+        <div class="eyebrow">The rest of the family</div>
+        <h2 id="family-pricing-headline" class="section-headline font-serif">
+          Add-ons and<br>
+          <span class="italic-emphasis">sibling products.</span>
+        </h2>
+      </div>
+
+      <div class="addon-grid">
+        <div class="tier-card">
+          <div class="tier-card-product">ClearPath Experience</div>
+          <div class="tier-card-name">Shop TV displays</div>
+          <div class="tier-card-startingat">starting at</div>
+          <div class="tier-card-price">$69<span> /mo per location</span></div>
+          <ul class="tier-card-features">
+            <li>· $79/mo bring-your-own screen, or $69/mo with a pre-configured Firestick ($99 one-time)</li>
+            <li>· Lobby, counter, floor, and owner-office screens</li>
+            <li>· Requires ClearPath OS · pair once, runs forever</li>
+          </ul>
+        </div>
+        <div class="tier-card">
+          <div class="tier-card-product">AI Phone — OS &amp; Practice add-on</div>
+          <div class="tier-card-name">Phone intelligence</div>
+          <div class="tier-card-startingat">starting at</div>
+          <div class="tier-card-price">$299<span> /mo</span></div>
+          <ul class="tier-card-features">
+            <li>· 24/7 AI receptionist on your business line</li>
+            <li>· Missed-call recovery and booking</li>
+            <li>· Every call graded · missed opportunities flagged</li>
+            <li>· Trained on your shop before it goes live</li>
+          </ul>
+        </div>
+        <div class="tier-card">
+          <div class="tier-card-product">ClearPath Practice</div>
+          <div class="tier-card-name">For advisor practices</div>
+          <div class="tier-card-startingat">priced at</div>
+          <div class="tier-card-price">$299<span> /advisor /mo</span></div>
+          <ul class="tier-card-features">
+            <li>· 500-minute AI pool shared across the practice</li>
+            <li>· $0.40/min overage beyond the pool</li>
+            <li>· Every advisor gets every capability — no tier games</li>
+            <li>· <a href="practice.html#pricing" style="color: var(--color-blue);">Full Practice pricing →</a></li>
+          </ul>
+        </div>
+        <div class="tier-card">
+          <div class="tier-card-product">ClearPath Events</div>
+          <div class="tier-card-name">For event operators</div>
+          <div class="tier-card-startingat">&nbsp;</div>
+          <div class="tier-card-price" style="font-size: 1.9rem; line-height: 1.3;">Sized to your event</div>
+          <ul class="tier-card-features">
+            <li>· A 200-car cruise and a 45,000-attendee show are different jobs</li>
+            <li>· No integration fees, no per-transaction skim</li>
+            <li>· <a href="events.html" style="color: var(--color-blue);">See ClearPath Events →</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- FAQ -->
-  <section class="faq" id="faq" itemscope itemtype="https://schema.org/FAQPage">
-    <div class="section-inner">
-      <div class="section-label fade-up">FAQ</div>
-      <h2 class="section-title fade-up">Frequently asked questions</h2>
-      <p class="section-subtitle fade-up">Everything you need to know about ClearPath and how we work.</p>
-      <div class="faq-list">
-        <div class="faq-item fade-up" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <button class="faq-question" itemprop="name">What is ClearPath Holdings?<span class="faq-icon">+</span></button>
-          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">ClearPath Holdings is a parent company that owns and operates multiple businesses across software, events, and service industries. We build operational intelligence platforms, run real events, and operate real businesses &mdash; all powered by our own technology. Our four product lines are ClearPath OS (shop management intelligence), ClearPath Experience (shop TV displays), ClearPath Events (event operations), and ClearPath Voice Intelligence (phone system &amp; coaching). Everything we build, we use. Everything we use, we improve.</div></div>
-        </div>
-        <div class="faq-item fade-up" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <button class="faq-question" itemprop="name">What is ClearPath OS?<span class="faq-icon">+</span></button>
-          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">ClearPath OS is a Virtual COO for automotive repair shops. It connects to your shop management system, syncs every five minutes, and gives each person on your team exactly what they need: advisors get daily game plans and recovery lists, techs see their performance scoreboard, and owners get an AI-powered morning briefing with dollar-specific actions. It has 10 modules, 12 diagnostic engines, 65+ KPI guardrails, and 25+ revenue leak types it detects automatically.</div></div>
-        </div>
-        <div class="faq-item fade-up" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <button class="faq-question" itemprop="name">What is ClearPath Experience?<span class="faq-icon">+</span></button>
-          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">ClearPath Experience is a TV display system for shops. Mini PCs mount behind TVs and show four different screen types: a lobby screen with live TV, news, stocks, and vehicle status for customers; a counter screen with staff bios and trust messaging; a floor screen with team ops data; and an owner office screen with the full business dashboard. Pair it with a QR code on first boot and it runs forever.</div></div>
-        </div>
-        <div class="faq-item fade-up" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <button class="faq-question" itemprop="name">What is ClearPath Events?<span class="faq-icon">+</span></button>
-          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">ClearPath Events is a complete event management platform with online registration, Stripe payments, sponsor &amp; vendor management, volunteer scheduling, merchandise sales, and a mobile staff app with POS. Built for a 45,000+ attendee car show. See it live at <a href="https://cruisingdowntownnh.com" style="color: var(--cyan-accent);">cruisingdowntownnh.com</a>.</div></div>
-        </div>
-        <div class="faq-item fade-up" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <button class="faq-question" itemprop="name">What about the AI phone system?<span class="faq-icon">+</span></button>
-          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Our AI receptionist answers your shop phone 24/7, handles appointment requests, routes calls, and manages emergencies. After every call, the system grades the conversation and flags missed booking opportunities. It feeds directly into ClearPath OS.</div></div>
-        </div>
-        <div class="faq-item fade-up" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <button class="faq-question" itemprop="name">Who is ClearPath for?<span class="faq-icon">+</span></button>
-          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">ClearPath OS is built for independent automotive repair shop owners and operators who want real-time visibility and control. ClearPath Experience is for any shop that wants ambient awareness on TVs. ClearPath Events serves event organizers who need a complete operations platform.</div></div>
-        </div>
-        <div class="faq-item fade-up" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <button class="faq-question" itemprop="name">How much does it cost?<span class="faq-icon">+</span></button>
-          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">ClearPath OS starts at $199/month for Core and scales to $799/month for Portfolio (multi-location). ClearPath Voice is $299/month flat &mdash; less than $10/day for a 24/7 employee that never calls in sick. ClearPath Experience is $79/month BYO or $69/month with a pre-configured Firestick ($99 one-time setup). No long-term contracts. No setup fees on OS. If it doesn't pay for itself, you shouldn't be paying for it.</div></div>
-        </div>
-        <div class="faq-item fade-up" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <button class="faq-question" itemprop="name">How do I get started?<span class="faq-icon">+</span></button>
-          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Reach out to us at <a href="mailto:info@driveclearpath.com" style="color: var(--cyan-accent);">info@driveclearpath.com</a>. We're being very selective right now &mdash; only taking on clients we can fully commit to. Fewer shops, but better results.</div></div>
-        </div>
+  <section class="section-editorial" style="background: var(--color-surface-soft);" aria-labelledby="faq-headline">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div class="eyebrow">Pricing questions</div>
+        <h2 id="faq-headline" class="section-headline font-serif">
+          Asked before.<br>
+          <span class="italic-emphasis">Answered straight.</span>
+        </h2>
+      </div>
+
+      <div style="margin-top:3rem;">
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">01</div>
+          <div>
+            <div class="faq-question">Why "starting at" instead of a fixed price?</div>
+            <p class="faq-answer">Because a two-bay independent and a five-location group shouldn't pay the same number, and pretending otherwise means one of them is overpaying. The tier prices are real floors, not bait — the working session is where we scope your actual number, and it's in writing before you commit to anything.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">02</div>
+          <div>
+            <div class="faq-question">What happens in the $249 working session?</div>
+            <p class="faq-answer">It's a real planning session with the founder, not a sales call. We map how your operation runs today, design which ClearPath pieces fit, walk your integration plan, and sketch your first 30 days. You leave with the plan either way — and if you sign, the $249 is credited to your first month.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">03</div>
+          <div>
+            <div class="faq-question">Are there contracts or setup fees?</div>
+            <p class="faq-answer">No long-term contracts — ClearPath earns its seat month to month. No setup fees on OS. Experience has a $99 one-time setup only if you take the pre-configured Firestick option.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">04</div>
+          <div>
+            <div class="faq-question">What does my data get used for?</div>
+            <p class="faq-answer">Running your business. Nothing else. We never sell customer data and we never train AI models on your operations — that's contract language, not a marketing line.</p>
+          </div>
+        </article>
+
+        <article class="faq-entry">
+          <div class="faq-numeral font-serif">05</div>
+          <div>
+            <div class="faq-question">How do I get started?</div>
+            <p class="faq-answer">Book the working session at <a href="mailto:info@driveclearpath.com?subject=Working%20Session%20—%20%24249" style="color: var(--color-blue);">info@driveclearpath.com</a>, or spend five minutes with our <a href="/talk" style="color: var(--color-blue);">AI intake</a> first and we'll come to the session already knowing your operation. We're selective — fewer operators, better results.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
   <!-- CTA -->
-  <section class="cta-section" aria-label="Call to action">
-    <div class="cta-glow" aria-hidden="true"></div>
-    <div class="cta-content fade-up">
-      <h2>Ready to stop the leaks?</h2>
-      <p>Pick a tier. Connect your shop. See results in the first week.</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
-        <a href="mailto:info@driveclearpath.com" class="btn-primary" style="font-size: 1.15rem; padding: 1.15rem 3rem;">Get Started &rarr;</a>
+  <section class="cta" aria-labelledby="cta-headline">
+    <div class="container-wide">
+      <div class="cta-card">
+        <div class="cta-eyebrow">
+          <span class="pulse-emerald" aria-hidden="true"></span>
+          Now accepting pilot operators
+        </div>
+        <h2 id="cta-headline" class="cta-headline font-serif">
+          One session.<br>
+          <span class="italic">A plan you keep either way.</span>
+        </h2>
+        <p class="cta-sub">
+          Book the $249 working session and bring how your operation runs today. You'll leave with a design plan, an integration map, and a real number — credited to your first month if you move forward.
+        </p>
+        <div class="cta-actions">
+          <a href="mailto:info@driveclearpath.com?subject=Working%20Session%20—%20%24249" class="btn-on-dark">
+            Book a working session
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+          </a>
+          <a href="/talk" class="btn-on-dark-outline">Start with the AI intake</a>
+        </div>
+        <div class="cta-trust">
+          <span>· No long-term contracts</span>
+          <span>· $249 credited if you sign</span>
+          <span>· We'll tell you if we're not the fit</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer role="contentinfo">
+  <footer class="footer" role="contentinfo">
     <div class="footer-inner">
-      <div class="footer-left">
-        <img src="assets/cp-icon-white.png" alt="ClearPath" style="height:28px;width:28px;object-fit:contain;opacity:0.7;filter:drop-shadow(0 0 8px rgba(30,136,229,0.2))">
-        <span>&copy; 2026 ClearPath Holdings, LLC. All rights reserved.</span>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-mark">
+            <span class="nav-logo-mark"><img src="assets/cp-icon-white.png" alt=""></span>
+            <span class="footer-brand-text">ClearPath <span class="muted">Holdings</span></span>
+          </div>
+          <p class="footer-brand-tagline">Operational sophistication for the small operator. Manchester, NH.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">ClearPath family</div>
+          <ul>
+            <li><a href="os.html">ClearPath OS</a></li>
+            <li><a href="experience.html">ClearPath Experience</a></li>
+            <li><a href="events.html">ClearPath Events</a></li>
+            <li><a href="practice.html">ClearPath Practice</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">Company</div>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Sign in</a></li>
+            <li><a href="mailto:info@driveclearpath.com">info@driveclearpath.com</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">Legal</div>
+          <ul>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="sms-terms.html">SMS terms</a></li>
+            <li><a href="mailto:info@driveclearpath.com">info@driveclearpath.com</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="mailto:info@driveclearpath.com">Contact</a>
-        <a href="about.html">About</a>
-        <a href="os.html">ClearPath OS</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="events.html">ClearPath Events</a>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
+      <div class="footer-fineprint">
+        <div>© 2026 ClearPath Holdings, LLC · Manchester, NH</div>
+        <div>Built for the operator who refuses to sell.</div>
       </div>
     </div>
   </footer>
-
-  <script src="js/shared.js" defer></script>
-  <script src="js/faq.js" defer></script>
 
 </body>
 </html>

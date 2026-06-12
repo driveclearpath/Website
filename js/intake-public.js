@@ -16,7 +16,53 @@ const state = {
   done: false,
   turnstileWidgetId: null,
   turnstileToken: null,
+  attachment: null, // { data, mediaType, previewUrl } — base64 JPEG, held in memory only
 };
+
+// -------- Session persistence --------
+// A refresh shouldn't eat a five-minute conversation. We keep the session token and a
+// text-only copy of the bubbles in localStorage (screenshot images are never persisted)
+// and restore on load. Cleared the moment the conversation ends, any way it can end.
+const STORAGE_KEY = 'cp_talk_session';
+const STORAGE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+const history = [];
+
+function saveSession() {
+  if (!state.sessionToken) return;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      token: state.sessionToken,
+      name: state.visitorName,
+      bubbles: history,
+      ts: Date.now(),
+    }));
+  } catch { /* storage unavailable — persistence is best-effort */ }
+}
+
+function clearSession() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch { /* noop */ }
+}
+
+function recordBubble(role, text, hadImage) {
+  history.push({ role, text, img: !!hadImage });
+  saveSession();
+}
+
+function restoreSession() {
+  let saved;
+  try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch { return false; }
+  if (!saved?.token || !Array.isArray(saved.bubbles) || !saved.bubbles.length) return false;
+  if (!saved.ts || Date.now() - saved.ts > STORAGE_MAX_AGE_MS) { clearSession(); return false; }
+  state.sessionToken = saved.token;
+  state.visitorName = saved.name || null;
+  for (const b of saved.bubbles) {
+    history.push(b);
+    const text = b.img ? (b.text ? `(screenshot sent)\n${b.text}` : '(screenshot sent)') : b.text;
+    addBubble(b.role, text);
+  }
+  go('chat');
+  return true;
+}
 
 function go(stateName) {
   document.querySelectorAll('.state').forEach((el) => {
@@ -33,6 +79,7 @@ function go(stateName) {
 function handleConfirmReturn() {
   const params = new URLSearchParams(window.location.search);
   if (!params.has('confirmed')) return false;
+  clearSession();
 
   if (params.get('confirmed') === '1') {
     go('confirmed');
@@ -176,6 +223,7 @@ entryForm?.addEventListener('submit', async (e) => {
     state.openingMessage = data.opening_message;
 
     addBubble('assistant', state.openingMessage);
+    recordBubble('assistant', state.openingMessage);
     go('chat');
   } catch (err) {
     console.error(err);
@@ -192,15 +240,103 @@ const chatForm = document.getElementById('chat-form');
 const chatInput = document.getElementById('chat-input');
 const chatSend = document.getElementById('chat-send');
 const chatEnd = document.getElementById('chat-end');
+const chatAttach = document.getElementById('chat-attach');
+const chatFile = document.getElementById('chat-file');
+const attachRow = document.getElementById('attach-row');
+const attachThumb = document.getElementById('attach-thumb');
+const attachName = document.getElementById('attach-name');
+const attachRemove = document.getElementById('attach-remove');
 
-function addBubble(role, text) {
+function addBubble(role, text, imageUrl) {
   const div = document.createElement('div');
   div.className = `bubble ${role}`;
-  div.textContent = text;
+  if (imageUrl) {
+    const img = document.createElement('img');
+    img.className = 'bubble-img';
+    img.src = imageUrl;
+    img.alt = 'Screenshot you sent';
+    div.appendChild(img);
+  }
+  if (text) div.appendChild(document.createTextNode(text));
   chatStream.appendChild(div);
   chatStream.scrollTop = chatStream.scrollHeight;
   return div;
 }
+
+// -------- Screenshot attachment --------
+// Images are downscaled and re-encoded to JPEG client-side before sending. The re-encode
+// strips EXIF/location metadata and keeps the payload small; the server passes the image
+// to the AI for one-turn analysis and never stores it.
+const MAX_IMAGE_EDGE = 1568;
+
+async function prepareImage(file) {
+  if (!/^image\/(png|jpeg|webp|gif)$/.test(file.type)) {
+    throw new Error('Use a PNG, JPG, WebP, or GIF screenshot.');
+  }
+  const objectUrl = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((resolve, reject) => {
+      const i = new Image();
+      i.onload = () => resolve(i);
+      i.onerror = () => reject(new Error("Couldn't read that image — try a different screenshot."));
+      i.src = objectUrl;
+    });
+    const scale = Math.min(1, MAX_IMAGE_EDGE / Math.max(img.naturalWidth, img.naturalHeight));
+    const w = Math.max(1, Math.round(img.naturalWidth * scale));
+    const h = Math.max(1, Math.round(img.naturalHeight * scale));
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(img, 0, 0, w, h);
+    let previewUrl = canvas.toDataURL('image/jpeg', 0.85);
+    if (previewUrl.length > 4_000_000) previewUrl = canvas.toDataURL('image/jpeg', 0.6);
+    if (previewUrl.length > 4_000_000) throw new Error('That image is too large — crop it down and try again.');
+    return { data: previewUrl.split(',')[1], mediaType: 'image/jpeg', previewUrl };
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
+
+function setAttachment(att, label) {
+  state.attachment = att;
+  if (att) {
+    attachThumb.src = att.previewUrl;
+    attachName.textContent = label || 'Screenshot ready — send when you are';
+    attachRow.hidden = false;
+  } else {
+    attachThumb.removeAttribute('src');
+    attachRow.hidden = true;
+  }
+}
+
+async function takeFile(file, label) {
+  if (!file || state.done) return;
+  try {
+    setAttachment(await prepareImage(file), label);
+  } catch (err) {
+    addBubble('assistant', err.message || "Couldn't read that image — try a different screenshot.");
+  }
+  chatInput.focus();
+}
+
+chatAttach?.addEventListener('click', () => chatFile.click());
+
+chatFile?.addEventListener('change', () => {
+  takeFile(chatFile.files?.[0], chatFile.files?.[0]?.name);
+  chatFile.value = '';
+});
+
+chatInput?.addEventListener('paste', (e) => {
+  const item = Array.from(e.clipboardData?.items || []).find((i) => i.type.startsWith('image/'));
+  if (!item) return;
+  e.preventDefault();
+  takeFile(item.getAsFile(), 'Pasted screenshot');
+});
+
+attachRemove?.addEventListener('click', () => setAttachment(null));
 
 function addTyping() {
   const div = document.createElement('div');
@@ -231,36 +367,59 @@ chatForm?.addEventListener('submit', async (e) => {
   if (state.sending || state.done) return;
 
   const text = chatInput.value.trim();
-  if (!text) return;
+  const attachment = state.attachment;
+  if (!text && !attachment) return;
 
   state.sending = true;
   chatSend.disabled = true;
   chatInput.value = '';
   autoGrow();
+  setAttachment(null);
 
-  addBubble('user', text);
+  addBubble('user', text, attachment?.previewUrl);
+  recordBubble('user', text, !!attachment);
   const typingEl = addTyping();
 
   try {
     const resp = await fetch(API.turn, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ session_token: state.sessionToken, user_message: text }),
+      body: JSON.stringify({
+        session_token: state.sessionToken,
+        user_message: text,
+        ...(attachment ? { image: { media_type: attachment.mediaType, data: attachment.data } } : {}),
+      }),
     });
     const data = await resp.json();
     typingEl.remove();
 
     if (!resp.ok) {
+      // Dead sessions (already finished, or expired/cleared server-side) are terminal —
+      // stop the composer and clear the saved copy so a refresh starts clean.
+      if (resp.status === 409 || resp.status === 404) {
+        state.done = true;
+        chatSend.disabled = true;
+        chatInput.disabled = true;
+        clearSession();
+        addBubble('assistant', resp.status === 409
+          ? 'This conversation already wrapped up. If you have more to add, email info@driveclearpath.com.'
+          : 'This session expired. Refresh the page to start a fresh conversation.');
+        return;
+      }
       addBubble('assistant', data.error || 'Something went wrong. Try again in a moment.');
       return;
     }
 
-    if (data.text) addBubble('assistant', data.text);
+    if (data.text) {
+      addBubble('assistant', data.text);
+      recordBubble('assistant', data.text);
+    }
 
     if (data.done) {
       state.done = true;
       chatSend.disabled = true;
       chatInput.disabled = true;
+      clearSession();
       // If a confirmation was sent, route to "check your email."
       // If silent_drop, just show the confirmed page (don't tell them they were dropped).
       const next = data.confirmation_required ? 'pending-confirm' : 'confirmed';
@@ -293,6 +452,7 @@ chatEnd?.addEventListener('click', async () => {
     console.error(err);
   }
   state.done = true;
+  clearSession();
   go(confirmationRequired ? 'pending-confirm' : 'confirmed');
 });
 
@@ -315,7 +475,10 @@ window.addEventListener('pagehide', () => beaconSubmit('window_closed'));
   // 1. If this is a magic-link return, show the right state and skip everything else.
   if (handleConfirmReturn()) return;
 
-  // 2. Otherwise we're on the entry page — mount Turnstile and focus the name field.
+  // 2. If there's a saved in-flight conversation, restore it and pick up where they left off.
+  if (restoreSession()) return;
+
+  // 3. Otherwise we're on the entry page — mount Turnstile and focus the name field.
   mountTurnstile();
   if (entryName) entryName.focus();
 })();

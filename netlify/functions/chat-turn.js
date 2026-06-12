@@ -3,6 +3,7 @@ import { supabase } from './_lib/supabase.js';
 import { buildSystemPrompt, buildOpeningMessage } from './_lib/prompt.js';
 import { TOOLS } from './_lib/tools.js';
 import { sendIntakeEmail } from './_lib/email.js';
+import { MODELS } from './_lib/aiModels.js';
 
 const MAX_TOOL_LOOPS = 5;
 const MAX_TURNS = Number(process.env.MAX_INTAKE_TURNS || 40);
@@ -172,7 +173,7 @@ export async function handler(event) {
     let claudeResp;
     try {
       claudeResp = await client.messages.create({
-        model: template.model_id || 'claude-opus-4-7',
+        model: template.model_id || MODELS.OPUS,
         max_tokens: 1024,
         system,
         tools: TOOLS,
@@ -180,7 +181,7 @@ export async function handler(event) {
       });
     } catch (err) {
       console.error('Claude API error:', err);
-      return json(502, { error: 'AI service error', detail: err.message });
+      return json(502, { error: 'AI service error' });
     }
 
     const contentBlocks = claudeResp.content || [];

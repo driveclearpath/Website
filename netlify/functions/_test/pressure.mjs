@@ -7,6 +7,7 @@
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { MODELS } from '../_lib/aiModels.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..', '..', '..');
@@ -73,7 +74,7 @@ const template = {
   id: 'expert-in-a-box-v1',
   name: 'Expert-in-a-Box — Prospect Intake v1',
   version: 1,
-  model_id: 'claude-opus-4-7',
+  model_id: MODELS.OPUS,
   sections: [
     { id: 'pain', title: 'What hurts today', required: true, order: 1, objectives: ['pain_top_timeconsumers', 'pain_repeat_questions'] },
     { id: 'pol', title: 'POL today', required: true, order: 2, objectives: ['pol_strengths', 'pol_gaps'] },

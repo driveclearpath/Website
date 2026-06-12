@@ -14,6 +14,24 @@ import { MODELS } from './_lib/aiModels.js';
 
 const MAX_TOOL_LOOPS = 5;
 const MAX_TURNS = Number(process.env.PUBLIC_MAX_INTAKE_TURNS || 30);
+const MAX_MESSAGE_CHARS = 8000;
+
+// Screenshot policy: images are passed to the AI for THIS turn only, then discarded.
+// Only a text placeholder is persisted — no image bytes ever reach Supabase or email.
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+const MAX_IMAGE_B64_CHARS = 5_000_000; // ~3.7MB binary; client downscales well below this
+
+function validImage(image) {
+  return (
+    image &&
+    typeof image === 'object' &&
+    ALLOWED_IMAGE_TYPES.includes(image.media_type) &&
+    typeof image.data === 'string' &&
+    image.data.length >= 100 &&
+    image.data.length <= MAX_IMAGE_B64_CHARS &&
+    /^[A-Za-z0-9+/]+={0,2}$/.test(image.data)
+  );
+}
 
 const json = (statusCode, body) => ({
   statusCode,
@@ -104,9 +122,17 @@ export async function handler(event) {
     return json(400, { error: 'Invalid JSON' });
   }
 
-  const { session_token, user_message } = payload;
+  const { session_token, user_message, image } = payload;
   if (!session_token) return json(400, { error: 'Missing session_token' });
-  if (!user_message || typeof user_message !== 'string') {
+
+  const userText = typeof user_message === 'string' ? user_message.trim() : '';
+  if (userText.length > MAX_MESSAGE_CHARS) {
+    return json(400, { error: 'Message too long' });
+  }
+  if (image != null && !validImage(image)) {
+    return json(400, { error: 'Invalid image' });
+  }
+  if (!userText && !image) {
     return json(400, { error: 'Missing user_message' });
   }
 
@@ -129,15 +155,43 @@ export async function handler(event) {
     return json(429, { error: 'Conversation length cap reached.' });
   }
 
-  // Build messages — seed opener if first turn
-  let messages = Array.isArray(row.messages) ? [...row.messages] : [];
-  if (messages.length === 0) {
-    messages.push({
+  // Per-session pacing: humans take seconds to read and reply; sustained
+  // faster-than-every-3s traffic on one session is automation burning API spend.
+  // Allows a burst of 6 turns, then caps the average pace at one turn per 3s.
+  const elapsedSec = Math.max(0, (Date.now() - new Date(row.started_at).getTime()) / 1000);
+  if ((row.turn_count || 0) >= 6 + elapsedSec / 3) {
+    return json(429, { error: "You're moving faster than I can read — give it a few seconds and try again." });
+  }
+
+  // Build messages — seed opener if first turn.
+  // Two parallel arrays: `apiMessages` is what Claude sees this turn (may contain the live
+  // image), `storedMessages` is what gets persisted (image replaced by a text placeholder,
+  // so screenshot bytes never touch the database). Assistant/tool turns are appended to both.
+  const storedMessages = Array.isArray(row.messages) ? [...row.messages] : [];
+  if (storedMessages.length === 0) {
+    storedMessages.push({
       role: 'assistant',
       content: buildPublicOpeningMessage(row.visitor_name),
     });
   }
-  messages.push({ role: 'user', content: user_message });
+
+  let apiUserContent;
+  let storedUserContent;
+  if (image) {
+    apiUserContent = [
+      { type: 'image', source: { type: 'base64', media_type: image.media_type, data: image.data } },
+      { type: 'text', text: userText || '(Visitor sent a screenshot with no caption.)' },
+    ];
+    storedUserContent =
+      '[Visitor attached a screenshot — analyzed in that turn, image not stored.]' +
+      (userText ? `\n${userText}` : '');
+  } else {
+    apiUserContent = userText;
+    storedUserContent = userText;
+  }
+
+  const apiMessages = [...storedMessages, { role: 'user', content: apiUserContent }];
+  storedMessages.push({ role: 'user', content: storedUserContent });
 
   const client = new Anthropic({ apiKey });
   const system = buildPublicSystemPrompt({ visitorName: row.visitor_name });
@@ -161,18 +215,19 @@ export async function handler(event) {
         max_tokens: 1024,
         system,
         tools: PUBLIC_TOOLS,
-        messages,
+        messages: apiMessages,
       });
     } catch (err) {
       console.error('Claude API error:', err);
-      return json(502, { error: 'AI service error', detail: err.message });
+      return json(502, { error: 'AI service error' });
     }
 
     const blocks = resp.content || [];
     const toolUses = extractToolUses(blocks);
     const text = extractText(blocks);
 
-    messages.push({ role: 'assistant', content: blocks });
+    apiMessages.push({ role: 'assistant', content: blocks });
+    storedMessages.push({ role: 'assistant', content: blocks });
     if (text) finalText += (finalText ? '\n\n' : '') + text;
 
     if (toolUses.length === 0) break;
@@ -188,15 +243,16 @@ export async function handler(event) {
       });
     }
 
-    messages.push({ role: 'user', content: toolResultBlocks });
+    apiMessages.push({ role: 'user', content: toolResultBlocks });
+    storedMessages.push({ role: 'user', content: toolResultBlocks });
     if (concluded) break;
   }
 
-  const transcript = buildTranscript(messages, row.visitor_name);
+  const transcript = buildTranscript(storedMessages, row.visitor_name);
   const nextTurnCount = (row.turn_count || 0) + 1;
 
   const patch = {
-    messages,
+    messages: storedMessages,
     answers: agg.answers,
     flags: agg.flags,
     skipped: agg.skipped,
