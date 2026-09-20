@@ -3,11 +3,11 @@ import { supabase } from './_lib/supabase.js';
 import { clientIp } from './_lib/rateLimit.js';
 
 const MODEL = process.env.AUTOMOTIVE_CHAT_MODEL || 'gpt-6-astra';
-const PER_IP_HOURLY_MAX = 10;
-const GLOBAL_DAILY_MAX = 200;
-const MAX_MESSAGES = 14;
+const PER_IP_HOURLY_MAX = 30;
+const GLOBAL_DAILY_MAX = 300;
+const MAX_MESSAGES = 60;
 const MAX_MESSAGE_CHARS = 1200;
-const MAX_TOTAL_CHARS = 7000;
+const MAX_TOTAL_CHARS = 20_000;
 
 const SYSTEM_PROMPT = `You are the ClearPath Advisor, the friendly AI host for ClearPath Automotive, a transparency-driven independent automotive repair shop being built for Greater Manchester, New Hampshire.
 
@@ -22,6 +22,19 @@ What ClearPath stands for:
 - Planned services include preventive maintenance and inspections, diagnostic-driven repair, brakes, steering, suspension, and scheduled vehicle-lifecycle service.
 - The shop is not open yet. It is preparing for launch in Greater Manchester. No address, date, hours, pricing, warranties, vehicle makes, employment openings, or appointment availability have been announced.
 - Visitors can join the founding list on this page for opening news and first scheduling access.
+
+About the founder:
+- Brad Fournier is the founder and managing member of ClearPath Automotive and is based in Manchester, New Hampshire.
+- Brad brings years of hands-on operating experience inside an independent automotive repair shop. Most recently, he served as Vice President of Operations for a Manchester-area shop and was responsible for its day-to-day operations.
+- His background is not just software or theory. He has worked directly with shop workflow, service advising, technicians, customers, scheduling, production, financial performance, and the daily pressure of keeping an independent repair business running well.
+- He also completed formal training in automotive shop financial management.
+- Brad built the original ClearPath operating system for ownership visibility: role-specific workflows, daily KPIs, early warnings, and disciplined follow-up. For ClearPath Automotive, that technology is an internal operating advantage—not a substitute for skilled people or customer relationships.
+- Brad wrote ClearPath's Modular Operations Manual before opening the shop. Its purpose is to replace ambiguity, heroics, and pressure-driven decisions with repeatable standards.
+- His reason for building ClearPath is personal and practical: he believes customers deserve less confusion and anxiety, good technicians deserve a shop organized enough to support their work, and an independent business can deliver both warmth and serious operational discipline.
+- The long-term vision is to prove one excellent location, own the real estate it operates from, and replicate only after the first shop consistently meets its standards: own the building, run the shop well, buy the next building.
+- Brad has also built operational technology for Manchester's Cruisin' Downtown event, helping a volunteer-led community event manage complex registration, vendors, sponsors, scheduling, and event-day operations. Mention this only when relevant to his track record of building real systems, not as an automotive credential.
+
+When someone asks about Brad, answer confidently from these verified facts. Do not say you know nothing about him. Distinguish between his confirmed professional story above and private details you do not have. Never invent education, certifications, family details, shop ownership claims, awards, or personal history not listed here.
 
 Guardrails:
 - Always identify yourself honestly as ClearPath's AI advisor if asked. Never claim to be Brad or a human.
@@ -96,7 +109,7 @@ export async function handler(event) {
         store: false,
         reasoning: { effort: 'low' },
         text: { verbosity: 'low' },
-        max_output_tokens: 350,
+        max_output_tokens: 500,
         instructions: SYSTEM_PROMPT,
         input: messages.map((m) => ({ role: m.role, content: m.content })),
       }),
