@@ -32,6 +32,9 @@
     el.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 55}ms`);
   });
 
+  const revealHeadings = [...document.querySelectorAll('.manifesto h2, .cinematic-copy h2, .intro h2, .process-heading h2, .services h2, .founder h2, .updates-card h2')];
+  revealHeadings.forEach((heading) => heading.classList.add('motion-heading'));
+
   if (!reduceMotion && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -43,6 +46,16 @@
     }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
     revealTargets.forEach((el) => observer.observe(el));
 
+    const headingObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-unmasked');
+          headingObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -5% 0px' });
+    revealHeadings.forEach((heading) => headingObserver.observe(heading));
+
     const panels = document.querySelectorAll('.cinematic-panel');
     const panelObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.target.classList.toggle('in-view', entry.isIntersecting));
@@ -50,7 +63,68 @@
     panels.forEach((panel) => panelObserver.observe(panel));
   } else {
     revealTargets.forEach((el) => el.classList.add('is-visible'));
+    revealHeadings.forEach((heading) => heading.classList.add('is-unmasked'));
   }
+
+  // Full-height navigation choreography with keyboard and focus support.
+  const menu = document.getElementById('site-menu');
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const menuVisual = document.getElementById('menu-visual');
+  const menuLinks = menu ? [...menu.querySelectorAll('.menu-nav a')] : [];
+  let returnFocus = null;
+
+  function setMenu(open) {
+    if (!menu || !menuToggle) return;
+    if (open) {
+      returnFocus = document.activeElement;
+      menu.hidden = false;
+      menu.setAttribute('aria-hidden', 'false');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        menu.classList.add('is-open');
+        menuClose?.focus();
+      }));
+    } else {
+      menu.classList.remove('is-open');
+      menu.classList.add('is-closing');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+      setTimeout(() => {
+        menu.hidden = true;
+        menu.classList.remove('is-closing');
+        menu.setAttribute('aria-hidden', 'true');
+        returnFocus?.focus?.();
+      }, reduceMotion ? 0 : 720);
+    }
+  }
+
+  menuToggle?.addEventListener('click', () => setMenu(true));
+  menuClose?.addEventListener('click', () => setMenu(false));
+  menu?.addEventListener('click', (event) => {
+    if (event.target === menu) setMenu(false);
+  });
+  menuLinks.forEach((link) => {
+    const activateScene = () => {
+      if (menuVisual) menuVisual.dataset.scene = link.dataset.scene || 'difference';
+      menuLinks.forEach((item) => item.classList.toggle('is-active', item === link));
+    };
+    link.addEventListener('mouseenter', activateScene);
+    link.addEventListener('focus', activateScene);
+    link.addEventListener('click', () => setMenu(false));
+  });
+  document.addEventListener('keydown', (event) => {
+    if (!menu || menu.hidden) return;
+    if (event.key === 'Escape') setMenu(false);
+    if (event.key === 'Tab') {
+      const focusable = [...menu.querySelectorAll('button:not([disabled]), a[href]')];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+  });
 
   // Scroll progress and active chapter indicator.
   const rail = document.getElementById('journey-rail');
