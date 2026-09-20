@@ -82,6 +82,50 @@
   status = 404
   force = true
 
+# Retire the older software-portfolio story so indexed links land on the
+# current ClearPath Automotive business instead of conflicting positioning.
+[[redirects]]
+  from = "/os.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/experience.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/events.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/practice.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pricing.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about.html"
+  to = "/#founder"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/#updates"
+  status = 301
+  force = true
+
 # ClearPath Voice was folded into OS and Practice as a capability,
 # rather than a standalone marketed product. Redirect any inbound
 # traffic for /voice or /voice.html (search results, old links,
