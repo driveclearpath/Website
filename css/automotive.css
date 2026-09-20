@@ -66,3 +66,33 @@ h1,h2,h3,p{font-kerning:normal}
 .updates-card h2{line-height:.87}
 .brand-intro-mark span{font-weight:400;letter-spacing:-.13em}
 @media(max-width:700px){.hero-cinematic h1{line-height:.86;letter-spacing:-.06em}.manifesto-copy h2,.cinematic-copy h2,.updates-card h2{letter-spacing:-.045em}.principle-strip p{font-size:1rem}.eyebrow,.section-label{font-size:.58rem;letter-spacing:.17em}}
+
+/* 10/10 finishing pass — stronger mark, founder, conversion, and close. */
+.brand-mark{width:46px;height:46px;overflow:hidden;flex:0 0 auto;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12)}
+.brand-mark img{width:280%;height:auto;max-width:none;object-fit:initial}
+.site-header .brand{gap:.85rem}.site-header .brand-name{font-size:1rem}
+.standards p,.process-list p{font-size:clamp(.94rem,1vw,1.02rem);line-height:1.75}
+.founder{grid-template-columns:minmax(320px,.72fr) minmax(0,1fr);align-items:start;position:relative;overflow:hidden}
+.founder:after{content:"BF";position:absolute;left:-.05em;bottom:-.25em;color:rgba(11,33,57,.035);font:400 clamp(15rem,28vw,31rem)/.7 var(--serif);pointer-events:none}
+.founder-quote{position:sticky;top:110px;padding-top:1.5rem;z-index:1}
+.founder-principle{display:block;margin-bottom:clamp(3rem,7vw,7rem);font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--orange)}
+.founder-quote p{margin:.8rem 0 1.5rem;font-size:clamp(2.9rem,4.8vw,5.1rem)}
+.founder-quote>small{display:block;padding-top:1.5rem;border-top:1px solid rgba(11,33,57,.18);font-size:.64rem;font-weight:700;line-height:1.65;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.founder-story{position:relative;z-index:1;padding:clamp(2rem,4vw,4.5rem);background:rgba(253,252,248,.66);border:1px solid rgba(11,33,57,.1);backdrop-filter:blur(8px)}
+.founder-story>p{color:#52636e}
+.updates{padding-top:clamp(4rem,7vw,7rem);padding-bottom:clamp(4rem,7vw,7rem);background:linear-gradient(180deg,var(--paper) 0%,#eef3f2 100%)}
+.updates-card{max-width:1500px;min-height:min(760px,76svh);display:flex;flex-direction:column;justify-content:center;border-radius:2px;box-shadow:0 30px 90px rgba(7,23,39,.14)}
+.updates-card h2{max-width:1050px;font-size:clamp(4rem,7.4vw,8rem)}
+.updates-card>p{max-width:760px}
+.opening-status{position:relative;z-index:2;width:max-content;max-width:100%;display:flex;align-items:center;gap:.7rem;margin-top:1.25rem;padding:.62rem .8rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:rgba(255,255,255,.68);font-size:.68rem}
+.opening-status i{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(103,181,147,.1)}
+.opening-status strong{margin-right:.55rem;color:#fff;font-size:.57rem;letter-spacing:.15em}
+.launch-form{max-width:1040px;margin-top:2.7rem}.launch-form input{min-height:56px}.launch-form .button{min-height:56px}
+footer{position:relative;overflow:hidden;padding-top:clamp(4rem,7vw,7rem)}
+.footer-masthead{display:flex;align-items:baseline;justify-content:space-between;gap:2rem;padding-bottom:clamp(2rem,5vw,5rem);border-bottom:1px solid rgba(255,255,255,.14)}
+.footer-masthead span{font:400 clamp(5rem,14vw,14rem)/.72 var(--serif);letter-spacing:-.075em;color:#fff}
+.footer-masthead small{font-size:clamp(.7rem,1vw,.9rem);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--orange)}
+.footer-brand{margin-top:3rem}.footer-brand .brand-mark{width:58px;height:58px}
+.footer-brand strong{font-size:1rem}.footer-links{justify-content:flex-end;margin:-2.9rem 0 4rem}.footer-links a{font-weight:600}.footer-links a:hover{color:#fff}
+@media(max-width:1000px){.founder{grid-template-columns:1fr}.founder-quote{position:relative;top:auto}.founder-principle{margin-bottom:2rem}.footer-links{justify-content:flex-start;margin:3rem 0}}
+@media(max-width:700px){.brand-mark{width:42px;height:42px}.site-header .brand{gap:.55rem}.site-header .brand-name{font-size:.86rem}.founder-story{padding:1.5rem}.founder-quote p{font-size:clamp(3rem,14vw,4.4rem)}.updates-card{min-height:auto;padding:4rem 1.5rem}.updates-card h2{font-size:clamp(4rem,17vw,5.8rem)}.opening-status{align-items:flex-start;font-size:.61rem;line-height:1.55}.opening-status strong{display:block;margin-bottom:.15rem}.footer-masthead{display:block}.footer-masthead span{font-size:clamp(4.5rem,23vw,7rem)}.footer-masthead small{display:block;margin-top:1rem}.footer-brand .brand-mark{width:52px;height:52px}}
