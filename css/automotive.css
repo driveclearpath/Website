@@ -68,8 +68,8 @@ h1,h2,h3,p{font-kerning:normal}
 @media(max-width:700px){.hero-cinematic h1{line-height:.86;letter-spacing:-.06em}.manifesto-copy h2,.cinematic-copy h2,.updates-card h2{letter-spacing:-.045em}.principle-strip p{font-size:1rem}.eyebrow,.section-label{font-size:.58rem;letter-spacing:.17em}}
 
 /* 10/10 finishing pass — stronger mark, founder, conversion, and close. */
-.brand-mark{width:46px;height:46px;overflow:hidden;flex:0 0 auto;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12)}
-.brand-mark img{width:280%;height:auto;max-width:none;object-fit:initial}
+.brand-mark{width:46px;height:46px;overflow:hidden;flex:0 0 auto;position:relative;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12)}
+.brand-mark img{position:absolute;left:50%;top:50%;width:280%;height:auto;max-width:none;object-fit:initial;transform:translate(-50%,-50%)}
 .site-header .brand{gap:.85rem}.site-header .brand-name{font-size:1rem}
 .standards p,.process-list p{font-size:clamp(.94rem,1vw,1.02rem);line-height:1.75}
 .founder{grid-template-columns:minmax(320px,.72fr) minmax(0,1fr);align-items:start;position:relative;overflow:hidden}
