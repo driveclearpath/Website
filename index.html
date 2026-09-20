@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;1,8..60,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/automotive.css">
+  <script src="/js/automotive-chat.js" defer></script>
   <meta property="og:type" content="website"><meta property="og:url" content="https://driveclearpath.com/">
   <meta property="og:title" content="ClearPath Automotive — Clear Answers. Confident Repairs.">
   <meta property="og:description" content="A transparency-driven automotive repair shop coming to the Manchester, NH area.">
@@ -95,5 +96,14 @@
   </main>
 
   <footer><div class="footer-brand"><span class="brand-mark"><img src="/assets/cp-icon-white.png" alt=""></span><div><strong>ClearPath Automotive</strong><small>Clear answers. Confident repairs.</small></div></div><div class="footer-links"><a href="#difference">Our difference</a><a href="#process">What to expect</a><a href="#founder">Our story</a><a href="privacy.html">Privacy</a><a href="mailto:info@driveclearpath.com">Contact</a></div><div class="footer-bottom"><span>© 2026 ClearPath Automotive, LLC</span><span>Greater Manchester, New Hampshire</span></div></footer>
+
+  <button class="advisor-launcher" id="advisor-launcher" type="button" aria-controls="advisor-panel" aria-expanded="false"><span class="advisor-orbit" aria-hidden="true"><i>CP</i></span><span><strong>Ask ClearPath</strong><small>AI advisor · online</small></span></button>
+  <aside class="advisor-panel" id="advisor-panel" aria-label="ClearPath AI advisor" hidden>
+    <header class="advisor-header"><div class="advisor-avatar">CP</div><div><strong>ClearPath Advisor</strong><span><i></i> AI-powered · ready to help</span></div><button id="advisor-close" type="button" aria-label="Close advisor">×</button></header>
+    <div class="advisor-stream" id="advisor-stream" aria-live="polite"><div class="advisor-bubble assistant">Hi—I’m ClearPath’s AI advisor. I can explain what we’re building, how the ClearPath process will work, or help you join us before the doors open. What are you curious about?</div></div>
+    <div class="advisor-suggestions" id="advisor-suggestions"><button type="button" data-question="What makes ClearPath different from other repair shops?">What makes you different?</button><button type="button" data-question="How will the inspection and approval process work?">How will service work?</button><button type="button" data-question="When and where are you opening?">Opening details</button></div>
+    <form class="advisor-form" id="advisor-form"><label class="sr-only" for="advisor-input">Ask ClearPath</label><input id="advisor-input" maxlength="1200" autocomplete="off" placeholder="Ask about ClearPath…"><button id="advisor-send" type="submit" aria-label="Send message">→</button></form>
+    <p class="advisor-disclosure">AI can make mistakes. No diagnosis, safety decision, estimate, or appointment is provided here.</p>
+  </aside>
 </body>
 </html>

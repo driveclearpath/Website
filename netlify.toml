@@ -60,6 +60,11 @@
   status = 200
 
 [[redirects]]
+  from = "/api/automotive-chat"
+  to = "/.netlify/functions/automotive-chat"
+  status = 200
+
+[[redirects]]
   from = "/intake"
   to = "/intake.html"
   status = 200
