@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { supabase } from './_lib/supabase.js';
 
 function escapeHtml(value = '') {
   return String(value)
@@ -42,6 +43,36 @@ export async function handler(event) {
   const from = process.env.FOUNDING_LIST_FROM || 'ClearPath Automotive <noreply@driveclearpath.com>';
   const notifyEmail = process.env.FOUNDING_LIST_NOTIFY_EMAIL || process.env.INTAKE_NOTIFY_EMAIL || 'info@driveclearpath.com';
   const submittedAt = payload.created_at || new Date().toISOString();
+  const emailNormalized = email.toLowerCase();
+  const submissionId = payload.id ? String(payload.id) : null;
+  const consentLanguage = 'Opening updates only. No spam. No sold lists. Just the build—and your place at the front of it.';
+
+  let foundingRecord = null;
+  try {
+    const db = supabase();
+    const { data: row, error } = await db
+      .from('automotive_founding_list')
+      .upsert({
+        email,
+        email_normalized: emailNormalized,
+        zip: zip || null,
+        status: 'subscribed',
+        source: 'website_opening_list',
+        marketing_email_opt_in: true,
+        consent_language: consentLanguage,
+        consented_at: submittedAt,
+        netlify_submission_id: submissionId,
+        last_signup_at: submittedAt,
+        updated_at: new Date().toISOString(),
+      }, { onConflict: 'email_normalized' })
+      .select('id, confirmation_sent_at')
+      .single();
+    if (error) throw error;
+    foundingRecord = row;
+  } catch (error) {
+    // Netlify Forms remains the durable fallback if Supabase is unavailable.
+    console.error('Could not sync founding-list signup to Supabase:', error);
+  }
 
   const subject = 'You’re on the ClearPath founding list';
   const text = `You’re in early.
@@ -89,14 +120,35 @@ https://driveclearpath.com
   </table>
 </body></html>`;
 
-  const visitorSend = await resend.emails.send({
-    from,
-    to: email,
-    replyTo: 'info@driveclearpath.com',
-    subject,
-    text,
-    html,
-  });
+  let visitorSend = null;
+  if (!foundingRecord?.confirmation_sent_at) {
+    visitorSend = await resend.emails.send({
+      from,
+      to: email,
+      replyTo: 'info@driveclearpath.com',
+      subject,
+      text,
+      html,
+    });
+    if (visitorSend?.error) throw new Error(visitorSend.error.message || 'Resend confirmation failed');
+
+    if (foundingRecord?.id) {
+      try {
+        const db = supabase();
+        const { error } = await db
+          .from('automotive_founding_list')
+          .update({
+            confirmation_sent_at: new Date().toISOString(),
+            resend_email_id: visitorSend?.data?.id || null,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', foundingRecord.id);
+        if (error) throw error;
+      } catch (error) {
+        console.error('Confirmation sent, but delivery metadata could not be saved:', error);
+      }
+    }
+  }
 
   const internalHtml = `<!doctype html><html><body style="font-family:Arial,Helvetica,sans-serif;color:#10202b;line-height:1.6">
     <h2 style="color:#0b2139">New ClearPath founding-list signup</h2>
@@ -106,17 +158,25 @@ https://driveclearpath.com
     <p style="color:#60707a;font-size:13px">The full submission is stored in Netlify Forms under <strong>opening-list</strong>.</p>
   </body></html>`;
 
-  try {
-    await resend.emails.send({
-      from,
-      to: notifyEmail,
-      replyTo: email,
-      subject: `New founding-list signup${zip ? ` — ${zip}` : ''}`,
-      html: internalHtml,
-    });
-  } catch (error) {
-    console.error('Visitor confirmation sent, but internal signup notification failed:', error);
+  if (visitorSend || !foundingRecord) {
+    try {
+      const notification = await resend.emails.send({
+        from,
+        to: notifyEmail,
+        replyTo: email,
+        subject: `New founding-list signup${zip ? ` — ${zip}` : ''}`,
+        html: internalHtml,
+      });
+      if (notification?.error) throw new Error(notification.error.message || 'Resend notification failed');
+    } catch (error) {
+      console.error('Visitor confirmation sent, but internal signup notification failed:', error);
+    }
   }
 
-  return response(200, { sent: true, id: visitorSend?.data?.id || null });
+  return response(200, {
+    sent: Boolean(visitorSend),
+    alreadyConfirmed: Boolean(foundingRecord?.confirmation_sent_at),
+    id: visitorSend?.data?.id || null,
+    storedInSupabase: Boolean(foundingRecord?.id),
+  });
 }
