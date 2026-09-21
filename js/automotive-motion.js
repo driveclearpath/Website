@@ -35,6 +35,19 @@
   const revealHeadings = [...document.querySelectorAll('.manifesto h2, .cinematic-copy h2, .intro h2, .process-heading h2, .services h2, .founder h2, .updates-card h2')];
   revealHeadings.forEach((heading) => heading.classList.add('motion-heading'));
 
+  // IntersectionObserver can miss elements during fast scrolling, history
+  // restoration, or a direct jump to an anchor. Never leave passed content
+  // hidden: the scroll loop below provides a position-based fallback.
+  const revealPassedContent = () => {
+    const revealLine = window.innerHeight * 0.98;
+    revealTargets.forEach((el) => {
+      if (el.getBoundingClientRect().top < revealLine) el.classList.add('is-visible');
+    });
+    revealHeadings.forEach((heading) => {
+      if (heading.getBoundingClientRect().top < revealLine) heading.classList.add('is-unmasked');
+    });
+  };
+
   if (!reduceMotion && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -55,12 +68,8 @@
       });
     }, { threshold: 0.05, rootMargin: '0px 0px -2% 0px' });
     revealHeadings.forEach((heading) => headingObserver.observe(heading));
-    const revealVisibleHeadings = () => revealHeadings.forEach((heading) => {
-      const rect = heading.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.98 && rect.bottom > 0) heading.classList.add('is-unmasked');
-    });
-    requestAnimationFrame(revealVisibleHeadings);
-    setTimeout(revealVisibleHeadings, 2600);
+    requestAnimationFrame(revealPassedContent);
+    setTimeout(revealPassedContent, 2600);
 
     const panels = document.querySelectorAll('.cinematic-panel');
     const panelObserver = new IntersectionObserver((entries) => {
@@ -141,6 +150,7 @@
   let ticking = false;
   function updateScrollEffects() {
     ticking = false;
+    revealPassedContent();
     const y = window.scrollY;
     const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     document.documentElement.style.setProperty('--page-progress', `${Math.min(100, y / max * 100)}%`);
@@ -168,6 +178,8 @@
   window.addEventListener('scroll', () => {
     if (!ticking) { ticking = true; requestAnimationFrame(updateScrollEffects); }
   }, { passive: true });
+  window.addEventListener('pageshow', revealPassedContent);
+  window.addEventListener('resize', revealPassedContent);
   updateScrollEffects();
 
   // Small pointer response on primary calls-to-action; never applied on touch.
