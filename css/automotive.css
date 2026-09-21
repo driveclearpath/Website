@@ -81,13 +81,13 @@ h1,h2,h3,p{font-kerning:normal}
 .founder-story{position:relative;z-index:1;padding:clamp(2rem,4vw,4.5rem);background:rgba(253,252,248,.66);border:1px solid rgba(11,33,57,.1);backdrop-filter:blur(8px)}
 .founder-story>p{color:#52636e}
 .updates{padding-top:clamp(4rem,7vw,7rem);padding-bottom:clamp(4rem,7vw,7rem);background:linear-gradient(180deg,var(--paper) 0%,#eef3f2 100%)}
-.updates-card{max-width:1500px;min-height:min(760px,76svh);display:flex;flex-direction:column;justify-content:center;border-radius:2px;box-shadow:0 30px 90px rgba(7,23,39,.14)}
+.updates-card{max-width:1500px;min-height:min(760px,76svh);display:flex;flex-direction:column;justify-content:center;border-radius:16px;box-shadow:0 30px 90px rgba(7,23,39,.14)}
 .updates-card h2{max-width:1050px;font-size:clamp(4rem,7.4vw,8rem)}
 .updates-card>p{max-width:760px}
-.opening-status{position:relative;z-index:2;width:max-content;max-width:100%;display:flex;align-items:center;gap:.7rem;margin-top:1.25rem;padding:.62rem .8rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:rgba(255,255,255,.68);font-size:.68rem}
+.opening-status{position:relative;z-index:2;width:max-content;max-width:100%;display:flex;align-items:center;gap:.7rem;margin-top:1.25rem;padding:.62rem .8rem;border:1px solid rgba(255,255,255,.14);border-radius:7px;background:rgba(255,255,255,.05);color:rgba(255,255,255,.68);font-size:.68rem}
 .opening-status i{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(103,181,147,.1)}
 .opening-status strong{margin-right:.55rem;color:#fff;font-size:.57rem;letter-spacing:.15em}
-.launch-form{max-width:1040px;margin-top:2.7rem}.launch-form input{min-height:56px}.launch-form .button{min-height:56px}
+.launch-form{max-width:1040px;margin-top:2.7rem}.launch-form input{min-height:56px;border-radius:7px}.launch-form .button{min-height:56px;border-radius:7px}
 footer{position:relative;overflow:hidden;padding-top:clamp(4rem,7vw,7rem)}
 .footer-masthead{display:flex;align-items:baseline;justify-content:space-between;gap:2rem;padding-bottom:clamp(2rem,5vw,5rem);border-bottom:1px solid rgba(255,255,255,.14)}
 .footer-masthead span{font:400 clamp(5rem,14vw,14rem)/.72 var(--serif);letter-spacing:-.075em;color:#fff}
