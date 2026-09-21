@@ -74,16 +74,20 @@ export async function handler(event) {
     console.error('Could not sync founding-list signup to Supabase:', error);
   }
 
-  const subject = 'You’re on the ClearPath founding list';
+  const subject = 'Thank you for believing in ClearPath';
   const text = `You’re in early.
 
-Thank you for joining the ClearPath Automotive founding list.
+I sincerely appreciate you joining the ClearPath Automotive founding list. Your support for this vision means more to me and my family than you may realize.
 
-We do not have an opening timeline to announce yet—and we will not manufacture one simply to create urgency. We are working deliberately toward the goal. The location, team, tools, systems, and timing all need to come together properly.
+Our family has faced an unexpected health setback that changed the pace of this journey. It has also reinforced why ClearPath needs to be built thoughtfully—with patience, strong standards, and the right foundation.
 
-Our standards are high because they need to be. We want every important detail to be right before the doors open.
+We hope to bring this vision together sooner rather than later, but I do not want to promise a date before the location, team, tools, systems, and timing are truly ready. We plan to do this right.
 
-We will send meaningful milestones as ClearPath takes shape, and you will be among the first to know when scheduling begins.
+Thank you for being here early and for supporting what we are working toward. We will share meaningful milestones as ClearPath takes shape, and you will be among the first to know when scheduling begins.
+
+With sincere appreciation,
+Brad Fournier
+Founder, ClearPath Automotive
 
 Clear answers. Confident repairs.
 Greater Manchester, New Hampshire
@@ -96,16 +100,16 @@ https://driveclearpath.com
     <tr><td align="center">
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#fdfcf8;border-radius:14px;overflow:hidden;border:1px solid rgba(11,33,57,.12)">
         <tr><td style="background:#0b2139;padding:30px 38px;color:#fff">
-          <div style="font-size:24px;font-weight:800;letter-spacing:.12em">CLEARPATH</div>
-          <div style="margin-top:5px;font-size:9px;font-weight:700;letter-spacing:.52em">AUTOMOTIVE</div>
+          <img src="https://driveclearpath.com/assets/clearpath-automotive-white.png?v=20260920-straight" width="250" alt="ClearPath Automotive" style="display:block;width:250px;max-width:100%;height:auto;border:0;color:#fff;font-size:18px;font-weight:700">
         </td></tr>
         <tr><td style="padding:42px 38px 20px">
-          <div style="color:#e9683b;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase">The road to opening</div>
+          <div style="color:#e9683b;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase">A personal note from Brad</div>
           <h1 style="margin:18px 0 22px;color:#0b2139;font-family:Georgia,'Times New Roman',serif;font-size:46px;line-height:1.02;font-weight:400">You’re in early.</h1>
-          <p style="margin:0 0 18px;font-size:16px;line-height:1.75">Thank you for joining the ClearPath Automotive founding list.</p>
-          <p style="margin:0 0 18px;font-size:16px;line-height:1.75">We do not have an opening timeline to announce yet—and we will not manufacture one simply to create urgency. We are working deliberately toward the goal. The location, team, tools, systems, and timing all need to come together properly.</p>
-          <p style="margin:0 0 18px;font-size:16px;line-height:1.75"><strong style="color:#0b2139">Our standards are high because they need to be.</strong> We want every important detail to be right before the doors open.</p>
-          <p style="margin:0;font-size:16px;line-height:1.75">We’ll send meaningful milestones as ClearPath takes shape, and you’ll be among the first to know when scheduling begins.</p>
+          <p style="margin:0 0 18px;font-size:16px;line-height:1.75">I sincerely appreciate you joining the ClearPath Automotive founding list. Your support for this vision means more to me and my family than you may realize.</p>
+          <p style="margin:0 0 18px;font-size:16px;line-height:1.75">Our family has faced an unexpected health setback that changed the pace of this journey. It has also reinforced why ClearPath needs to be built thoughtfully—with patience, strong standards, and the right foundation.</p>
+          <p style="margin:0 0 18px;font-size:16px;line-height:1.75">We hope to bring this vision together sooner rather than later, but I don’t want to promise a date before the location, team, tools, systems, and timing are truly ready. <strong style="color:#0b2139">We plan to do this right.</strong></p>
+          <p style="margin:0 0 24px;font-size:16px;line-height:1.75">Thank you for being here early and for supporting what we’re working toward. We’ll share meaningful milestones as ClearPath takes shape, and you’ll be among the first to know when scheduling begins.</p>
+          <p style="margin:0;color:#0b2139;font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.5"><em>With sincere appreciation,</em><br><strong>Brad Fournier</strong><br><span style="font-family:Arial,Helvetica,sans-serif;color:#60707a;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Founder, ClearPath Automotive</span></p>
         </td></tr>
         <tr><td style="padding:18px 38px 40px">
           <a href="https://driveclearpath.com" style="display:inline-block;background:#e9683b;color:#fff;text-decoration:none;border-radius:7px;padding:14px 20px;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase">Visit ClearPath &nbsp;→</a>
