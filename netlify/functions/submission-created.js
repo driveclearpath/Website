@@ -45,7 +45,7 @@ export async function handler(event) {
   const submittedAt = payload.created_at || new Date().toISOString();
   const emailNormalized = email.toLowerCase();
   const submissionId = payload.id ? String(payload.id) : null;
-  const consentLanguage = 'Opening updates only. No spam. No sold lists. Just the build—and your place at the front of it.';
+  const consentLanguage = 'Meaningful opening updates only. No spam. No sold lists. Unsubscribe anytime.';
 
   let foundingRecord = null;
   try {
@@ -65,7 +65,7 @@ export async function handler(event) {
         last_signup_at: submittedAt,
         updated_at: new Date().toISOString(),
       }, { onConflict: 'email_normalized' })
-      .select('id, confirmation_sent_at')
+      .select('id, confirmation_sent_at, unsubscribe_token')
       .single();
     if (error) throw error;
     foundingRecord = row;
@@ -74,6 +74,7 @@ export async function handler(event) {
     console.error('Could not sync founding-list signup to Supabase:', error);
   }
 
+  const unsubscribeUrl = foundingRecord?.unsubscribe_token ? `https://driveclearpath.com/founding-list/unsubscribe?token=${foundingRecord.unsubscribe_token}` : 'mailto:info@driveclearpath.com?subject=Unsubscribe%20from%20the%20ClearPath%20founding%20list';
   const subject = 'Thank you for believing in ClearPath';
   const text = `You’re in early.
 
@@ -92,6 +93,8 @@ Founder, ClearPath Automotive
 Clear answers. Confident repairs.
 Greater Manchester, New Hampshire
 https://driveclearpath.com
+
+Email preferences: ${unsubscribeUrl}
 `;
 
   const html = `<!doctype html>
@@ -117,7 +120,7 @@ https://driveclearpath.com
         <tr><td style="background:#071727;padding:24px 38px;color:rgba(255,255,255,.7);font-size:12px;line-height:1.6">
           <strong style="color:#fff">Clear answers. Confident repairs.</strong><br>
           Greater Manchester, New Hampshire<br>
-          <span style="color:rgba(255,255,255,.48)">You received this because you joined the founding list at driveclearpath.com.</span>
+          <span style="color:rgba(255,255,255,.48)">You received this because you joined the founding list at driveclearpath.com. <a href="${unsubscribeUrl}" style="color:#b4d4df">Unsubscribe</a>.</span>
         </td></tr>
       </table>
     </td></tr>

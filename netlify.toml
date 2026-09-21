@@ -131,6 +131,16 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/api/founding-list-admin"
+  to = "/.netlify/functions/founding-list-admin"
+  status = 200
+
+[[redirects]]
+  from = "/founding-list/unsubscribe"
+  to = "/.netlify/functions/founding-list-unsubscribe"
+  status = 200
+
 # ClearPath Voice was folded into OS and Practice as a capability,
 # rather than a standalone marketed product. Redirect any inbound
 # traffic for /voice or /voice.html (search results, old links,

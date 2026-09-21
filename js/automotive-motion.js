@@ -25,14 +25,14 @@
   }
 
   const revealTargets = [
-    ...document.querySelectorAll('.section-label, .intro h2, .intro-grid > div:last-child, .standards article, .process-heading > *, .process-list li, .services-copy, .service-list > div, .founder-quote, .founder-story, .updates-card'),
+    ...document.querySelectorAll('.section-label, .intro h2, .intro-grid > div:last-child, .standards article, .process-heading > *, .process-list li, .services-copy, .service-list > div, .founder-quote, .founder-story, .roadmap-intro, .roadmap-steps li, .updates-card'),
   ];
   revealTargets.forEach((el, index) => {
     el.classList.add('motion-reveal');
     el.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 55}ms`);
   });
 
-  const revealHeadings = [...document.querySelectorAll('.manifesto h2, .cinematic-copy h2, .intro h2, .process-heading h2, .services h2, .founder h2, .updates-card h2')];
+  const revealHeadings = [...document.querySelectorAll('.manifesto h2, .cinematic-copy h2, .intro h2, .process-heading h2, .services h2, .founder h2, .opening-roadmap h2, .updates-card h2')];
   revealHeadings.forEach((heading) => heading.classList.add('motion-heading'));
 
   // IntersectionObserver can miss elements during fast scrolling, history
