@@ -125,3 +125,14 @@ footer{position:relative;overflow:hidden;padding-top:clamp(4rem,7vw,7rem)}
 footer{padding:var(--section-space) var(--page-gutter) 2.5rem}.footer-masthead span{font-size:clamp(5rem,10.5vw,11rem)}
 @media(max-width:1000px){.intro-grid,.services{gap:clamp(3rem,6vw,5rem)}.intro-grid>div:last-child{padding-left:0}.services-copy{max-width:850px}.service-list{max-width:850px}.founder-story{max-width:none}}
 @media(max-width:700px){:root{--section-space:clamp(4.5rem,18vw,6rem)}.manifesto{gap:3rem}.cinematic-panel{padding-inline:1.5rem}.intro h2,.process-heading h2,.services h2,.founder h2{font-size:clamp(3.2rem,14vw,4.7rem)}.process-list li{grid-template-columns:2.4rem 1fr}.updates{padding-inline:1rem}.updates-card{padding:4rem 1.5rem}footer{padding-inline:1.5rem}}
+
+/* Official ClearPath Automotive identity — supplied brand lockups. */
+.brand-lockup{display:block;line-height:0}.brand-lockup>img{display:block;width:clamp(190px,16vw,248px);height:auto}
+.menu-logo{display:block;width:clamp(190px,17vw,250px);height:auto}
+.brand-intro-mark{height:190px}.brand-intro-mark>img{display:block;width:min(640px,78vw);height:auto;opacity:0;transform:translateY(18px) scale(.96)}
+.brand-intro.playing .brand-intro-mark>img{animation:intro-logo .8s .1s cubic-bezier(.22,1,.36,1) forwards}
+.brand-intro-mark i{top:62%}.brand-intro-mark small{bottom:4px}
+@keyframes intro-logo{to{opacity:1;transform:none}}
+.footer-masthead{align-items:center}.footer-masthead>img{display:block;width:min(900px,68vw);height:auto}
+.footer-brand{display:flex;align-items:center;gap:1.25rem}.footer-lockup{display:block;width:clamp(190px,18vw,265px);height:auto}.footer-brand>small{font-size:.68rem;letter-spacing:.01em;color:rgba(255,255,255,.55)}
+@media(max-width:700px){.brand-lockup>img{width:clamp(128px,36vw,158px)}.menu-logo{width:180px}.brand-intro-mark{height:150px}.brand-intro-mark>img{width:min(340px,82vw)}.footer-masthead>img{width:min(520px,100%)}.footer-brand{align-items:flex-start;flex-direction:column}.footer-lockup{width:220px}}
